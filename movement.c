@@ -1,4 +1,10 @@
-#include <ncurses>
+#include <ncurses.h>
+#include <state.h>
+
+void do_movement_action(STATE *st, int dx, int dy) {
+	st->playerX += dx;
+	st->playerY += dy;
+}
 
 void update(STATE *st) {
 	int key = getch();
