@@ -5,6 +5,6 @@ int main()
 {
     initscr();
     criawindow();
-    endwin;
+    endwin();
     return 0;
 }
