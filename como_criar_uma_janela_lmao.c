@@ -14,9 +14,8 @@
 */
 
 
-int main ()
+int criawindow ()
 {
-    initscr(); // isto inicia uma janela
     cbreak();
     noecho(); // remove os inputs
 
@@ -31,9 +30,6 @@ int main ()
     WINDOW * menu = newwin(10, (xmax -7), (ymax -44), 4);
     box(menu,0,0);
     refresh();
-
-
-    endwin();
 }
 
 // nodelay() //mesmo q nao carregarmos numa tecla o ciclo vai continuar (ou seja o jogo vai continuar mesmo sem premir teclas)
