@@ -48,6 +48,7 @@ void update(STATE *st) {
 int main() {
 	STATE st = {20,20};
 	WINDOW *wnd = initscr();
+	box (wnd, '|','-');
 	int ncols, nrows;
 	getmaxyx(wnd,nrows,ncols);
 
@@ -74,23 +75,30 @@ int main() {
 	 * deveria existir uma função chamada draw_light!
 	 *
 	 */
+	//int num=1;
 	while(1) {
-		move(nrows - 1, 0);
+		move(0,0);
+		box(wnd,'|','-');
+		move(1, 1);
 		attron(COLOR_PAIR(COLOR_BLUE));
 		printw("(%d, %d) %d %d", st.playerX, st.playerY, ncols, nrows);
+		/*move(1, 20);
+		whline(wnd,'=',num);num++;if (num>=ncols-22)num=1;*/
 		attroff(COLOR_PAIR(COLOR_BLUE));
 		attron(COLOR_PAIR(COLOR_WHITE));
+		move(2,1);
+		whline(wnd,'-', ncols-2);
 		mvaddch(st.playerX, st.playerY, '@' | A_BOLD);
 		attroff(COLOR_PAIR(COLOR_WHITE));
 		attron(COLOR_PAIR(COLOR_YELLOW));
-		mvaddch(st.playerX - 1, st.playerY - 1, '.' | A_BOLD);
-		mvaddch(st.playerX - 1, st.playerY + 0, '.' | A_BOLD);
-		mvaddch(st.playerX - 1, st.playerY + 1, '.' | A_BOLD);
-		mvaddch(st.playerX + 0, st.playerY - 1, '.' | A_BOLD);
-		mvaddch(st.playerX + 0, st.playerY + 1, '.' | A_BOLD);
-		mvaddch(st.playerX + 1, st.playerY - 1, '.' | A_BOLD);
-		mvaddch(st.playerX + 1, st.playerY + 0, '.' | A_BOLD);
-		mvaddch(st.playerX + 1, st.playerY + 1, '.' | A_BOLD);
+		mvaddch(st.playerX - 1, st.playerY - 1, '#' | A_BOLD);
+		mvaddch(st.playerX - 1, st.playerY + 0, '#' | A_BOLD);
+		mvaddch(st.playerX - 1, st.playerY + 1, '#' | A_BOLD);
+		mvaddch(st.playerX + 0, st.playerY - 1, '#' | A_BOLD);
+		mvaddch(st.playerX + 0, st.playerY + 1, '#' | A_BOLD);
+		mvaddch(st.playerX + 1, st.playerY - 1, '#' | A_BOLD);
+		mvaddch(st.playerX + 1, st.playerY + 0, '#' | A_BOLD);
+		mvaddch(st.playerX + 1, st.playerY + 1, '#' | A_BOLD);
                 attroff(COLOR_PAIR(COLOR_YELLOW));
 		move(st.playerX, st.playerY);
 		update(&st);
