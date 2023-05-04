@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <math.h>
+#include <time.h>
 #include "player.h"
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
+    srand(time(NULL));
     jogador->coorY = rand() % MaxY + 2;
     jogador->coorX = rand() % MaxX - 2;
 }
