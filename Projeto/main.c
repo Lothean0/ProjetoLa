@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include "player.h"
+#include "movimento.c"
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -22,7 +23,7 @@ int main()
     spawn(&jogador1,MaxY,MaxX);
     mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
     refresh();
-    getch();    
+    mudarstate(jogador1);
     endwin();
     return 0;
 }
