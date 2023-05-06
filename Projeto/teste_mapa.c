@@ -9,7 +9,27 @@
 
 int preenche_atoa() 
 {
+
+    int x = 20;
+    int y = 0;
+
+    // numero aleatorio de 40 a 60, para definir a probabilidade de hastags no mapa
+    srand(time(NULL));
     int numero_aleatorio = rand() % 20 + 40;
+
+    // preencher na matriz os hastags consoante a probabilidade
+    gera_mapa(x,y,numero_aleatorio);
+}
+
+void gera_mapa(x,y,random)
+{
+    int area = x * y;
+    int area_ocupada = area * (random/100);
+
+    for (i=0; i<area_ocupada; i++)
+    {
+        
+    }
 }
 
 
