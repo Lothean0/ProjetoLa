@@ -7,9 +7,12 @@
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
-    srand(time(NULL));
-    jogador->coorY = rand() % MaxY + 2;
-    jogador->coorX = rand() % MaxX - 2;
+    while(mvinch(jogador->coorY, jogador->coorX)=='#')
+    {
+        srand(time(NULL));
+        jogador->coorY = rand() % MaxY + 2;
+        jogador->coorX = rand() % MaxX + 2;
+    }
 }
 
 void mudarstate(Player *jogador);
