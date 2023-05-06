@@ -45,8 +45,8 @@ int main(void)
     {
         refresh();
         move(jogador1.coorY,jogador1.coorX);
-        mudarstate(&jogador1);
         mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
+        mudarstate(&jogador1);
     }
     endwin();
     return 0;
