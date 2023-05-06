@@ -43,9 +43,9 @@ int main(void)
     //ciclo while que corre enquanto a tecla q nao e premida
     while(1)
     {
-        mudarstate(&jogador1);
         refresh();
         move(jogador1.coorY,jogador1.coorX);
+        mudarstate(&jogador1);
         mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
     }
     endwin();
