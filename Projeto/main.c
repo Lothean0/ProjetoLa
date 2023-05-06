@@ -7,9 +7,12 @@
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
-    srand(time(NULL));
-    jogador->coorY = rand() % MaxY + 2;
-    jogador->coorX = rand() % MaxX - 2;
+    while(mvinch(jogador->coorY, jogador->coorX)=='#')
+    {
+        srand(time(NULL));
+        jogador->coorY = rand() % MaxY + 2;
+        jogador->coorX = rand() % MaxX + 2;
+    }
 }
 
 int main(void)
@@ -38,6 +41,7 @@ int main(void)
     //refresh();
     
     //coloca o jogador numa posicao random do ecra
+    mvaddch(0, 0, '#' | A_BOLD);
     spawn(&jogador1,MaxY,MaxX);
 
     //ciclo while que corre enquanto a tecla q nao e premida

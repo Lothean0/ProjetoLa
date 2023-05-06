@@ -8,8 +8,6 @@ typedef struct vetor
     int coorX;
 }Vetor;
 
-
-
 //func que define um vetor baseado na tecla premida
 Vetor calcvetor(void)
 {
