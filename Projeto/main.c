@@ -9,10 +9,8 @@
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
     srand(time(NULL));
-    //jogador->coorY = rand() % MaxY + 2;
-    //jogador->coorX = rand() % MaxX - 2;
-    jogador->coorY = (MaxY/2)+5;
-    jogador->coorX = (MaxX/2)+5;
+    jogador->coorY = rand() % MaxY + 2;
+    jogador->coorX = rand() % MaxX - 2;
 }
 
 int main(void)
@@ -38,7 +36,10 @@ int main(void)
     move(0,0);
     box(win, '|', '-');
     refresh();
-    int meioY = MaxY/2;
+    
+    
+    //cria uma box no meio do ecra
+    /*int meioY = MaxY/2;
     int meioX = MaxX/2;
     mvprintw(meioY,meioX,"################################################");
     mvprintw(meioY + 1,meioX,"#..............................................#");
@@ -47,11 +48,11 @@ int main(void)
     mvprintw(meioY + 4,meioX,"#.................................#............#");
     mvprintw(meioY + 5,meioX,"#.................................#............#");
     mvprintw(meioY + 6,meioX,"#..............................................#");
-    mvprintw(meioY + 7,meioX,"################################################");
+    mvprintw(meioY + 7,meioX,"################################################");*/
     
     //coloca o jogador numa posicao random do ecra
     spawn(&jogador1,MaxY,MaxX);
-    wmove(win,jogador1.coorY,jogador1.coorX);
+    move(jogador1.coorY,jogador1.coorX);
     
     //ciclo while que corre enquanto a tecla q nao e premida
     while(1)
