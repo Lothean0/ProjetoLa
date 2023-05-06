@@ -61,7 +61,7 @@ void mudarstate(Player *jogador)
     pTEMP.coorY=(jogador->coorY)+(direcao.coorY);
 
     //cenas rando
-    noecho();
+    
 
     //mvinch como o char para onde o player quer ir
     
