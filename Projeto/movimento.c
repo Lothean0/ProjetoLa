@@ -21,12 +21,12 @@ Vetor calcvetor(void)
     direcao.coorY=0;
 
     //input da tecla
-    char tecla=getch();
+    int tecla=getch();
 
     switch(tecla) {
         case KEY_A1:
 		case '7': direcao.coorX = -1; direcao.coorY = -1; break;
-        case KEY_UP:           
+        case KEY_UP:
 		case '8': direcao.coorX = +0; direcao.coorY = -1; break;
         case KEY_A3:
 		case '9': direcao.coorX = +1; direcao.coorY = -1; break;
