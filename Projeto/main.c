@@ -37,7 +37,7 @@ int main(void)
 
     //cria uma box à volta da window
     move(0,0);
-    box(win, '|', '-');
+    wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
     //refresh();
     
     //coloca o jogador numa posicao random do ecra
