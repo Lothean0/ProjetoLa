@@ -7,7 +7,7 @@
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
-    while(mvinch(jogador->coorY, jogador->coorX)=='#')
+    //while(mvinch(jogador->coorY, jogador->coorX)=='#')
     {
         srand(time(NULL));
         jogador->coorY = rand() % MaxY + 2;
@@ -46,6 +46,7 @@ int main(void)
     //ciclo while que corre enquanto a tecla q nao e premida
     while(1)
     {
+        nodelay(win,true);        
         mudarstate(&jogador1);
         refresh();
         move(jogador1.coorY,jogador1.coorX);
