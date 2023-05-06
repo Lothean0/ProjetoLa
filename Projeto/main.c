@@ -34,6 +34,7 @@ int main(void)
     curs_set(0);
     int MaxY,MaxX;
     getmaxyx(win,MaxY,MaxX);
+    nodelay(win,true); 
 
     //cria uma box à volta da window
     move(0,0);
@@ -46,7 +47,7 @@ int main(void)
     //ciclo while que corre enquanto a tecla q nao e premida
     while(1)
     {
-        nodelay(win,true);        
+               
         mudarstate(&jogador1);
         refresh();
         move(jogador1.coorY,jogador1.coorX);
