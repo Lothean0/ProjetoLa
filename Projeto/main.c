@@ -42,6 +42,7 @@ int main(void)
     //refresh();
     
     //coloca o jogador numa posicao random do ecra
+    mvaddch(0, 0, '#' | A_BOLD);
     spawn(&jogador1,MaxY,MaxX);
 
     //ciclo while que corre enquanto a tecla q nao e premida
