@@ -41,7 +41,7 @@ void gera_mapa(x,y,random)
 
 
 
-
+//denoise
 void conta_vizinhos()
 {
 
