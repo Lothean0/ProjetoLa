@@ -67,10 +67,7 @@ void mudarstate(Player *jogador)
     
     switch(mvinch(pTEMP.coorY, pTEMP.coorX)) {
         //casos em que queremos ir para uma parede ou algum local cujo nao podemos ir
-        case '#':
-        case '|':
-        case '-': break; // nestes casos o player nao mexe;
-        case '.':
-        case ' ': jogador->coorX=pTEMP.coorX; jogador->coorY=pTEMP.coorY; break;//neste caso a posiçao do player passa a ser a do pTEMP
+        case '#': break; // nestes casos o player nao mexe;
+        default: jogador->coorX=pTEMP.coorX; jogador->coorY=pTEMP.coorY; break;//neste caso a posiçao do player passa a ser a do pTEMP
     }
 }
