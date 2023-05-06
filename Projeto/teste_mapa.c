@@ -13,6 +13,7 @@ typedef struct mapa
 {
     char character;
     int luz; //??? ns
+    int distancia;
 }Mapa;
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
@@ -35,7 +36,7 @@ void gera_mapa(Mapa mapa[y][x])
             int chance = randomgen(); //sempre (0<=chance<100)
             if (chance<45)
             {
-                mapa[ys][xs].character 3= '#'; //45%de chance de os blocos serem # (45/100 blocos sao #)
+                mapa[ys][xs].character = '#'; //45%de chance de os blocos serem # (45/100 blocos sao #)
             } 
             else
             {

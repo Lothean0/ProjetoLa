@@ -5,11 +5,11 @@
 #include <time.h>
 #include "player.h"
 
-
 typedef struct mapa
 {
     char character;
     int luz; //??? ns
+    int distancia;
 }Mapa;
 
 void spawn(Player *jogador, int MaxY, int MaxX)
@@ -50,7 +50,7 @@ int main(void)
     //gerar mapa?
     Mapa mapa[MaxY][MaxX];
     gerar_mapa(mapa);
-    
+
     
     //coloca o jogador numa posicao random do ecra
     spawn(&jogador1,MaxY,MaxX);
