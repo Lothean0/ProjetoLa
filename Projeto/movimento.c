@@ -50,7 +50,7 @@ Vetor calcvetor(void)
 void mudarstate(Player *jogador)
 {
     //retorna a posicao onde o player estava a um espaço pe
-    mvaddch(jogador->coorY, jogador->coorX, '.');
+    mvaddch(jogador->coorY, jogador->coorX, ' ');
 
     //começa por pegar um vetor(input da tecla, etc...)
     Vetor direcao = calcvetor();
@@ -60,9 +60,6 @@ void mudarstate(Player *jogador)
     pTEMP.coorX=(jogador->coorX)+(direcao.coorX);
     pTEMP.coorY=(jogador->coorY)+(direcao.coorY);
 
-    //cenas rando
-    
-
     //mvinch como o char para onde o player quer ir
     
     switch(mvinch(pTEMP.coorY, pTEMP.coorX)) {
@@ -70,4 +67,5 @@ void mudarstate(Player *jogador)
         case '#': break; // nestes casos o player nao mexe;
         default: jogador->coorX=pTEMP.coorX; jogador->coorY=pTEMP.coorY; break;//neste caso a posiçao do player passa a ser a do pTEMP
     }
+    mvaddch(jogador->coorY, jogador->coorX, '@' | A_BOLD);
 }
