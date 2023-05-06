@@ -12,8 +12,6 @@ void spawn(Player *jogador, int MaxY, int MaxX)
     jogador->coorX = rand() % MaxX - 2;
 }
 
-void mudarstate(Player *jogador);
-
 int main(void)
 {
     //inicializa o jogoador
@@ -30,6 +28,7 @@ int main(void)
 
     //inicializa a window e calcula a "resoluçao do ecra"
     WINDOW *win = initscr();
+    curs_set(0);
     int MaxY,MaxX;
     getmaxyx(win,MaxY,MaxX);
 
@@ -48,6 +47,7 @@ int main(void)
         refresh();
         move(jogador1.coorY,jogador1.coorX);
         mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
+        
     }
     endwin();
     return 0;

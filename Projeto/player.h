@@ -9,5 +9,6 @@ typedef struct player
 }Player;
 
 void spawn(Player *jogador, int MaxY, int MaxX);
+void mudarstate(Player *jogador);
 
 #endif
