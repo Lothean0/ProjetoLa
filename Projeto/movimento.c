@@ -50,7 +50,7 @@ Vetor calcvetor(void)
 void mudarstate(Player *jogador)
 {
     //retorna a posicao onde o player estava a um espaço pe
-    mvaddch(jogador->coorY, jogador->coorX, '@');
+    mvaddch(jogador->coorY, jogador->coorX, '.');
 
     //começa por pegar um vetor(input da tecla, etc...)
     Vetor direcao = calcvetor();
