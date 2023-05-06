@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <stdlib.h>
 #include "player.h"
 
 typedef struct vetor
@@ -42,6 +43,7 @@ Vetor calcvetor(void)
 		case '2': direcao.coorX = +0; direcao.coorY = +1; break;
         case KEY_C3:
 		case '3': direcao.coorX = +1; direcao.coorY = +1; break;
+        case 'q': endwin(),exit(0);
 	}
     return direcao; 
 }

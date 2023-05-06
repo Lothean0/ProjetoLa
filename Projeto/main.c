@@ -4,7 +4,6 @@
 #include <math.h>
 #include <time.h>
 #include "player.h"
-#include "movimento.c"
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -12,6 +11,8 @@ void spawn(Player *jogador, int MaxY, int MaxX)
     jogador->coorY = rand() % MaxY + 2;
     jogador->coorX = rand() % MaxX - 2;
 }
+
+void mudarstate(Player *jogador);
 
 int main(void)
 {
@@ -43,10 +44,10 @@ int main(void)
     //ciclo while que corre enquanto a tecla q nao e premida
     while(1)
     {
+        mudarstate(&jogador1);
         refresh();
         move(jogador1.coorY,jogador1.coorX);
         mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
-        mudarstate(&jogador1);
     }
     endwin();
     return 0;
