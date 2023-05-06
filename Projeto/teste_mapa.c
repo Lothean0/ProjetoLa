@@ -5,8 +5,17 @@
 #include <time.h>
 #include "player.h"
 
-// fazer funcao para preecnher o mapa com hastags with probabilidade definida
+#define x = 500;
+#define y = 500;
 
+//repetido da main mas yau
+typedef struct mapa
+{
+    char character;
+    int luz; //??? ns
+}Mapa;
+
+// fazer funcao para preecnher o mapa com hastags with probabilidade definida
 int preenche_atoa() 
 {
     // numero aleatoreo.
@@ -14,7 +23,7 @@ int preenche_atoa()
     int numero_aleatorio = rand() % 100;
 }
 
-void gera_mapa(matriz[int x,int y])
+void gera_mapa(Mapa mapa[y][x])
 {
     int rowinicial = 0; //temporario ns as cenas do hud
     int colinicial = 0; //mm cena
@@ -26,11 +35,11 @@ void gera_mapa(matriz[int x,int y])
             int chance = randomgen(); //sempre (0<=chance<100)
             if (chance<45)
             {
-                matriz[ys,xs].charact = '#'; //45%de chance de os blocos serem # (45/100 blocos sao #)
+                mapa[ys][xs].character 3= '#'; //45%de chance de os blocos serem # (45/100 blocos sao #)
             } 
             else
             {
-                matriz[ys,xs].charact = '.'; //55%  
+                mapa[ys][xs].character = '.'; //55%  
             }
         }
     }
@@ -59,10 +68,19 @@ int conta_vizinhos()
     return vizinhos;
 }
 
-void espeta_Hastag (int vizinhos, xs, ys)
+void espeta_Hastag (int vizinhos,int ys,int xs, )
 {
-    if(vizinhos == 0) // faz_parede (xs,ys);
-
+    int vizinhos = contavizinhos(ys, xs);
+    if(vizinhos == 0 || vizinhos >5)// faz_parede (xs,ys);
+    {
+        matriz[ys, xs].charact='#';
+    } else
     if(vizinhos > 4) // faz_vazio (xs,ys);
+    {
+        matriz[ys, xs].charact='.';
+    } else
     if(vizinhos > 5) // faz_parede (xs,ys);
+    {
+        matriz[ys, xs].charact='#';
+    }
 }

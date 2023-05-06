@@ -5,6 +5,13 @@
 #include <time.h>
 #include "player.h"
 
+
+typedef struct mapa
+{
+    char character;
+    int luz; //??? ns
+}Mapa;
+
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
     //while(mvinch(jogador->coorY, jogador->coorX)=='#')
@@ -39,6 +46,11 @@ int main(void)
     //cria uma box à volta da window
     move(0,0);
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
+
+    //gerar mapa?
+    Mapa mapa[MaxY][MaxX];
+    gerar_mapa(mapa);
+    
     
     //coloca o jogador numa posicao random do ecra
     spawn(&jogador1,MaxY,MaxX);
