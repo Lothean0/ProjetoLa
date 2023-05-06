@@ -13,17 +13,33 @@ void spawn(Player *jogador, int MaxY, int MaxX)
     jogador->coorX = rand() % MaxX - 2;
 }
 
-int main()
+int main(void)
 {
-    Player jogador1 = {0,0};
+    //inicializa o jogoador
+    Player jogador1;
+    jogador1.coorX=0;
+    jogador1.coorY=0;
+    
+    //inicializa a window e calcula a "resoluçao do ecra"
     WINDOW *win = initscr();
     int MaxY,MaxX;
     getmaxyx(win,MaxY,MaxX);
+
+    //cria uma box à volta da window
+    move(0,0);
+    box(win, '|', '-');
     refresh();
+    
+    //coloca o jogador numa posicao random do ecra
     spawn(&jogador1,MaxY,MaxX);
-    mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
-    refresh();
-    mudarstate(jogador1);
+    
+    //ciclo while que corre enquanto a tecla q nao e premida
+    while(1)
+    {
+        mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
+        //refresh();
+        mudarstate(&jogador1);
+    }
     endwin();
     return 0;
 }
