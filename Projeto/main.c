@@ -39,20 +39,27 @@ int main(void)
     //cria uma box à volta da window
     move(0,0);
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
-    //refresh();
     
     //coloca o jogador numa posicao random do ecra
     spawn(&jogador1,MaxY,MaxX);
+    mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
+
+    int w=0; //parte do timer
 
     //ciclo while que corre enquanto a tecla q nao e premida
     while(1)
     {
-               
+        //pequeno timer
+        move( 2, 2);
+        printw("(%d)",w);
+        w++;
+
+        //updates ao jogador
         mudarstate(&jogador1);
-        refresh();
         move(jogador1.coorY,jogador1.coorX);
         mvaddch(jogador1.coorY,jogador1.coorX,'@' | A_BOLD);
-        
+        refresh();
+
     }
     endwin();
     return 0;
