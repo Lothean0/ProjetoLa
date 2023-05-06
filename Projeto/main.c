@@ -17,7 +17,7 @@ void spawn(Player *jogador, int MaxY, int MaxX)
 
 int main(void)
 {
-    //inicializa o jogoador
+    //inicializa o jogador
     Player jogador1;
     jogador1.coorX=0;
     jogador1.coorY=0;
