@@ -48,8 +48,8 @@ int main(void)
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
 
     //gerar mapa?
-    Mapa mapa[MaxY][MaxX];
-    gerar_mapa(mapa);
+    //Mapa mapa[MaxY][MaxX];
+    //gerar_mapa(mapa);
 
     
     //coloca o jogador numa posicao random do ecra
