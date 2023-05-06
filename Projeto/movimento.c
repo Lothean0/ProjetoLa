@@ -24,16 +24,24 @@ Vetor calcvetor(void)
     char tecla=getch();
 
     switch(tecla) {
-		case '7': direcao.coorX = -1; direcao.coorY = -1; break;            
-		case '8': direcao.coorX = +0; direcao.coorY = -1; break;            
-		case '9': direcao.coorX = +1; direcao.coorY = -1; break;            
+        case KEY_A1:
+		case '7': direcao.coorX = -1; direcao.coorY = -1; break;
+        case KEY_UP:           
+		case '8': direcao.coorX = +0; direcao.coorY = -1; break;
+        case KEY_A3:
+		case '9': direcao.coorX = +1; direcao.coorY = -1; break;
+        case KEY_LEFT:
 		case '4': direcao.coorX = -1; direcao.coorY = +0; break;
+        case KEY_B2:
 		case '5': break;
+        case KEY_RIGHT:
 		case '6': direcao.coorX = +1; direcao.coorY = +0; break;
+        case KEY_C1:
 		case '1': direcao.coorX = -1; direcao.coorY = +1; break;
+        case KEY_DOWN:
 		case '2': direcao.coorX = +0; direcao.coorY = +1; break;
+        case KEY_C3:
 		case '3': direcao.coorX = +1; direcao.coorY = +1; break;
-		case 'q': endwin(); exit(0); break;
 	}
     return direcao; 
 }
