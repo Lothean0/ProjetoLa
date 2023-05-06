@@ -5,8 +5,9 @@ typedef struct vetor
 {
     int coorY;
     int coorX;
-
 }Vetor;
+
+
 
 //func que define um vetor baseado na tecla premida
 Vetor calcvetor(void)
@@ -21,11 +22,11 @@ Vetor calcvetor(void)
 
     switch(tecla) {
 		//case KEY_A1:
-		case '7': direcao.coorX = -1; direcao.coorY = -1; break;
+		case '7': direcao.coorX = -1; direcao.coorY = -1; break;            
 		//case KEY_UP:
-		case '8': direcao.coorX = +0; direcao.coorY = -1; break;
-		//case KEY_A3:
-		case '9': direcao.coorX = +1; direcao.coorY = -1; break;
+		case '8': direcao.coorX = +0; direcao.coorY = -1; break;            
+		//case KEY_A3:  
+		case '9': direcao.coorX = +1; direcao.coorY = -1; break;            
 		//case KEY_LEFT:
 		case '4': direcao.coorX = -1; direcao.coorY = +0; break;
 		//case KEY_B2:
@@ -54,21 +55,18 @@ void mudarstate(Player *jogador)
     pTEMP.coorX=(jogador->coorX)+(direcao.coorX);
     pTEMP.coorY=(jogador->coorY)+(direcao.coorY);
 
-    //define c como o char para onde o player quer ir
-    //char c = mvinch(pTEMP.coorY, pTEMP.coorX);
-    char c = mvinch((jogador->coorY)+(direcao.coorY),(jogador->coorX)+(direcao.coorX));
+    //cenas rando
+    noecho();
 
-    mvaddch(jogador->coorY, jogador->coorX, ' ');
+    //mvinch como o char para onde o player quer ir
+    mvaddch(jogador->coorY, jogador->coorX, '.');
     
-    switch(c) {
+    switch(mvinch(pTEMP.coorY, pTEMP.coorX)) {
         //casos em que queremos ir para uma parede ou algum local cujo nao podemos ir
-        //case '└':
-        //case '┘':
-        //case '┌':
-        //case '┐':
+        case '#':
         case '|':
         case '-': break; // nestes casos o player nao mexe;
-        case '*': jogador->coorX=pTEMP.coorX; jogador->coorY=pTEMP.coorY; break;//neste caso a posiçao do player passa a ser a do pTEMP
+        case '.':
+        case ' ': jogador->coorX=pTEMP.coorX; jogador->coorY=pTEMP.coorY; break;//neste caso a posiçao do player passa a ser a do pTEMP
     }
-
 }
