@@ -41,7 +41,7 @@ int main(void)
     curs_set(0);
     int MaxY,MaxX;
     getmaxyx(win,MaxY,MaxX);
-    nodelay(win,true); 
+    //nodelay(win,true); 
 
     //cria uma box à volta da window
     move(0,0);
