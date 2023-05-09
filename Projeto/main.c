@@ -35,7 +35,6 @@ int main(void)
 	nonl();
 	intrflush(stdscr, false);
 	keypad(stdscr, true);
-
     //inicializa a window e calcula a "resoluçao do ecra"
     WINDOW *win = initscr();
     curs_set(0);
