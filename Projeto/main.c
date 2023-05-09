@@ -65,11 +65,16 @@ int main(void)
                     mapa[i][j].distancia = 0;
                 }
                 seed -= 42;
+
+                if(i==0||j==0||i==MaxY||j==MaxX){
+                    mapa[i][j].character = '#';
+                }
             }
         }
+        
 
         // DENOISER
-        //for (int reps = 0; reps < 10000; reps++)
+        for (int reps = 0; reps < 10; reps++)
         {
             for (int ys = 1; ys < MaxY - 1; ys++)
             {
