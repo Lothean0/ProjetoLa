@@ -110,7 +110,7 @@ void denoiser(Mapa **matriz, int ys, int xs, int MaxY, int MaxX)
 void geracao(Mapa **mapa, int MaxY, int MaxX)
 {
     gera_mapa(mapa, MaxY, MaxX);
-    /*for (int reps = 0; reps < 1; reps++)
+    for (int reps = 0; reps < 1; reps++)
     {
         for (int ys = 0; ys < MaxY; ys++)
         {
@@ -119,5 +119,5 @@ void geracao(Mapa **mapa, int MaxY, int MaxX)
                 denoiser(mapa, ys, xs, MaxY, MaxX);
             }
         }
-    }*/
+    }
 }

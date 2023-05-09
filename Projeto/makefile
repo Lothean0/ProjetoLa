@@ -1,8 +1,8 @@
-CFLAGS=-Wall -Wextra -pedantic -O2
+CFLAGS=-Wall -Wextra -pedantic -O2 -g
 LIBS=-lm -lcurses
 
 jogo: main.o movimento.o iluminacao.o mapa.o
-	$(CC) $(CFLAGS) -o -g $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) -o  $@ $^ $(LIBS)
 
 clean:
 	rm jogo *.o
