@@ -6,12 +6,6 @@
 #include "player.h"
 #include "mapa.h"
 
-typedef struct mapa
-{
-    char character;
-    int luz; //??? ns
-    int distancia;
-}Mapa;
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -29,6 +23,7 @@ int main(void)
     Player jogador1;
     jogador1.coorX=0;
     jogador1.coorY=0;
+    
 
     //cenas do stor
     cbreak();
@@ -39,6 +34,8 @@ int main(void)
 
     //inicializa a window e calcula a "resoluçao do ecra"
     WINDOW *win = initscr();
+    inicializar_cor(); 
+    colorir(&jogador1);
     curs_set(0);
     int MaxY,MaxX;
     getmaxyx(win,MaxY,MaxX);
