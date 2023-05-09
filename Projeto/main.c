@@ -8,11 +8,11 @@
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
-    // while(mvinch(jogador->coorY, jogador->coorX)=='#')
+    while (mvinch(jogador->coorY, jogador->coorX) == '#')
     {
         srand(time(NULL));
-        jogador->coorY = rand() % MaxY + 2;
-        jogador->coorX = rand() % MaxX + 2;
+        jogador->coorY = rand() % MaxY - 1;
+        jogador->coorX = rand() % MaxX - 1;
     }
 }
 
@@ -39,10 +39,6 @@ int main(void)
     getmaxyx(win, MaxY, MaxX);
     nodelay(win, true);
 
-    // cria uma box à volta da window
-    // move(0, 0);
-    // wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
-
     // gerar mapa?
     {
         Mapa mapa[MaxY][MaxX];
@@ -54,7 +50,7 @@ int main(void)
             for (j = 0; j < MaxX; j++)
             {
                 int chance = randomgen(seed); // sempre (0<=chance<100)
-                if (chance < 45)
+                if (chance < 46)
                 {
                     mapa[i][j].character = '#';
                     mapa[i][j].distancia = 0;
@@ -66,15 +62,16 @@ int main(void)
                 }
                 seed -= 42;
 
-                if(i==0||j==0||i==MaxY||j==MaxX){
+                if (i == 0 || j == 0 || i == (MaxY - 1) || j == (MaxX - 1) || i == 1 || j == 1)
+                {
                     mapa[i][j].character = '#';
                 }
             }
         }
-        
 
         // DENOISER
-        for (int reps = 0; reps < 10; reps++)
+        int maxreps = 7;
+        for (int reps = 0; reps < maxreps; reps++)
         {
             for (int ys = 1; ys < MaxY - 1; ys++)
             {
@@ -121,17 +118,26 @@ int main(void)
                     }
 
                     // TIPO MINESWEEPER
-                    if (vizinhos == 0 || vizinhos > 5) // faz_parede (xs,ys);
+                    if (vizinhos == 0 || vizinhos > 4) // faz_parede (xs,ys);
                     {
                         mapa[ys][xs].character = '#';
                     }
-                    else if (vizinhos > 4) // faz_vazio (xs,ys);
+                    else if (vizinhos < 4) // faz_vazio (xs,ys);
                     {
                         mapa[ys][xs].character = '.';
                     }
-                    else if (vizinhos > 5) // faz_parede (xs,ys);
+
+                    // Na ultima repetiçao esta parte limpa os #'s inuteis no meio do mapa
+                    if (reps == maxreps - 1)
                     {
-                        mapa[ys][xs].character = '.';
+                        if (vizinhos == 0) // faz_parede (xs,ys);
+                        {
+                            mapa[ys][xs].character = '.';
+                        }
+                        else if (vizinhos == 8)
+                        {
+                            mapa[ys][xs].character = '#';
+                        }
                     }
                 }
             }
