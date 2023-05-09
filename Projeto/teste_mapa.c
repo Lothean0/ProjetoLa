@@ -4,17 +4,12 @@
 #include <math.h>
 #include <time.h>
 #include "player.h"
+#include "mapa.h"
 
 #define x 500
 #define y 500
 
 //repetido da main mas yau
-typedef struct mapa
-{
-    char character;
-    int luz; //??? ns
-    int distancia;
-}Mapa;
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
 int preenche_atoa() 
