@@ -3,4 +3,5 @@
 movimento.o
 jogo
 main.o
-mapa.o
+mapa.o 
+iluminacao.o
