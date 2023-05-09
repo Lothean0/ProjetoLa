@@ -5,8 +5,8 @@
 #include <time.h>
 #include "player.h"
 
-#define x 500;
-#define y 500;
+#define x 500
+#define y 500
 
 //repetido da main mas yau
 typedef struct mapa
@@ -47,7 +47,7 @@ void gera_mapa(Mapa **mapa)
 }
 
 //denoise
-int conta_vizinhos(Mapa *matriz, int ys, int xs)
+int conta_vizinhos(Mapa **matriz, int ys, int xs)
 {
     //Contador
     int vizinhos=0;
@@ -89,19 +89,19 @@ int conta_vizinhos(Mapa *matriz, int ys, int xs)
     return vizinhos;
 }
 
-void espeta_Hastag (Mapa mapa[y][x], int ys,int xs,)
+void espeta_Hastag (Mapa **matriz, int ys,int xs)
 {
     int vizinhos = contavizinhos(ys, xs);
     if(vizinhos == 0 || vizinhos >5)// faz_parede (xs,ys);
     {
-        matriz[ys, xs].character='#';
+        matriz[ys][xs].character='#';
     } else
     if(vizinhos > 4) // faz_vazio (xs,ys);
     {
-        matriz[ys, xs].character='.';
+        matriz[ys][xs].character='.';
     } else
     if(vizinhos > 5) // faz_parede (xs,ys);
     {
-        matriz[ys, xs].character='#';
+        matriz[ys][xs].character='#';
     }
 }
