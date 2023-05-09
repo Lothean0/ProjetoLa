@@ -5,6 +5,6 @@ typedef struct mapa
     char character;
     int luz; //??? ns
     int distancia;
-}Mapa;
+} Mapa;
 
 #endif
