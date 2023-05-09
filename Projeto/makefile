@@ -1,7 +1,7 @@
 CFLAGS=-Wall -Wextra -pedantic -O2
 LIBS=-lm -lcurses
 
-jogo: main.o movimento.o testemapa.o
+jogo: main.o movimento.o iluminacao.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 clean:
