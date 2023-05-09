@@ -9,10 +9,24 @@
 #define x 500
 #define y 500
 
-//repetido da main mas yau
+// funcao que junta tudo
+geracao(Mapa **mapa, int MaxY, int MaxX)
+{
+    gerar_mapa(**mapa);
+    for (int reps = 0; reps < 2; reps++)
+    {
+        for (int ys = 0; ys <= MaxY; ys++)
+        {
+            for (int xs = 0; xs <= MaxX; xs++)
+            {
+                denoiser(mapa, ys, xs);
+            }
+        }
+    }
+}
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
-int preenche_atoa() 
+int randomgen()
 {
     // numero aleatoreo.
     srand(time(NULL));
@@ -21,62 +35,62 @@ int preenche_atoa()
 
 void gera_mapa(Mapa **mapa)
 {
-    int rowinicial = 0; //temporario ns as cenas do hud
-    int colinicial = 0; //mm cena
+    int rowinicial = 0; // temporario ns as cenas do hud
+    int colinicial = 0; // mm cena
 
-    for (int ys=rowinicial; ys<y ; ys++)// dois for's que percorrem o mapa todo coluna a coluna
+    for (int ys = rowinicial; ys < y; ys++) // dois for's que percorrem o mapa todo coluna a coluna
     {
-        for(int xs=colinicial; xs<x ; xs++)
+        for (int xs = colinicial; xs < x; xs++)
         {
-            int chance = randomgen(); //sempre (0<=chance<100)
-            if (chance<45)
+            int chance = randomgen(); // sempre (0<=chance<100)
+            if (chance < 45)
             {
-                mapa[ys][xs].character = '#'; //45%de chance de os blocos serem # (45/100 blocos sao #)
-            } 
+                mapa[ys][xs].character = '#'; // 45%de chance de os blocos serem # (45/100 blocos sao #)
+            }
             else
             {
-                mapa[ys][xs].character = '.'; //55%  
+                mapa[ys][xs].character = '.'; // 55%
             }
         }
     }
 }
 
-//denoise
+// denoise
 int conta_vizinhos(Mapa **matriz, int ys, int xs)
 {
-    //Contador
-    int vizinhos=0;
-    
-    //verifica quantas das posiçoes à volta da y,x sao #'s 
-    if ((matriz[ys+1][xs].character)=='#')
+    // Contador
+    int vizinhos = 0;
+
+    // verifica quantas das posiçoes à volta da y,x sao #'s
+    if ((matriz[ys + 1][xs].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys-1][xs].character)=='#')
+    if ((matriz[ys - 1][xs].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys][xs+1].character)=='#')
+    if ((matriz[ys][xs + 1].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys][xs-1].character)=='#')
+    if ((matriz[ys][xs - 1].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys+1][xs+1].character)=='#')
+    if ((matriz[ys + 1][xs + 1].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys-1][xs-1].character)=='#')
+    if ((matriz[ys - 1][xs - 1].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys+1][xs-1].character)=='#')
+    if ((matriz[ys + 1][xs - 1].character) == '#')
     {
         vizinhos++;
     }
-    if ((matriz[ys-1][xs+1].character)=='#')
+    if ((matriz[ys - 1][xs + 1].character) == '#')
     {
         vizinhos++;
     }
@@ -84,19 +98,19 @@ int conta_vizinhos(Mapa **matriz, int ys, int xs)
     return vizinhos;
 }
 
-void espeta_Hastag (Mapa **matriz, int ys,int xs)
+void denoiser(Mapa **matriz, int ys, int xs)
 {
     int vizinhos = contavizinhos(ys, xs);
-    if(vizinhos == 0 || vizinhos >5)// faz_parede (xs,ys);
+    if (vizinhos == 0 || vizinhos > 5) // faz_parede (xs,ys);
     {
-        matriz[ys][xs].character='#';
-    } else
-    if(vizinhos > 4) // faz_vazio (xs,ys);
+        matriz[ys][xs].character = '#';
+    }
+    else if (vizinhos > 4) // faz_vazio (xs,ys);
     {
-        matriz[ys][xs].character='.';
-    } else
-    if(vizinhos > 5) // faz_parede (xs,ys);
+        matriz[ys][xs].character = '.';
+    }
+    else if (vizinhos > 5) // faz_parede (xs,ys);
     {
-        matriz[ys][xs].character='#';
+        matriz[ys][xs].character = '#';
     }
 }

@@ -36,6 +36,7 @@ int main(void)
 	nonl();
 	intrflush(stdscr, false);
 	keypad(stdscr, true);
+
     //inicializa a window e calcula a "resoluçao do ecra"
     WINDOW *win = initscr();
     curs_set(0);
@@ -48,8 +49,8 @@ int main(void)
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
 
     //gerar mapa?
-    //Mapa mapa[MaxY][MaxX];
-    //gerar_mapa(mapa);
+    Mapa mapa[MaxY][MaxX];
+    gerarcao(mapa);
 
     
     //coloca o jogador numa posicao random do ecra
