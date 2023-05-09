@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include "player.h"
+#include "mapa.h"
 
 typedef struct mapa
 {
