@@ -5,8 +5,8 @@
 #include <time.h>
 #include "player.h"
 
-#define x = 500;
-#define y = 500;
+#define x 500;
+#define y 500;
 
 //repetido da main mas yau
 typedef struct mapa
@@ -24,14 +24,14 @@ int preenche_atoa()
     int numero_aleatorio = rand() % 100;
 }
 
-void gera_mapa(Mapa mapa[y][x])
+void gera_mapa(Mapa **mapa)
 {
     int rowinicial = 0; //temporario ns as cenas do hud
     int colinicial = 0; //mm cena
 
-    for (int ys=rowinicial; ys<y; ys++)// dois for's que percorrem o mapa todo coluna a coluna
+    for (int ys=rowinicial; ys<y ; ys++)// dois for's que percorrem o mapa todo coluna a coluna
     {
-        for(int xs=colinicial; xs<x; xs++)
+        for(int xs=colinicial; xs<x ; xs++)
         {
             int chance = randomgen(); //sempre (0<=chance<100)
             if (chance<45)
@@ -47,7 +47,7 @@ void gera_mapa(Mapa mapa[y][x])
 }
 
 //denoise
-int conta_vizinhos(Mapa mapa[y][x], int ys, int xs)
+int conta_vizinhos(Mapa *matriz, int ys, int xs)
 {
     //Contador
     int vizinhos=0;
