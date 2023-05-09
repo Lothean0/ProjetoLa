@@ -6,11 +6,11 @@
 #include "player.h"
 #include "mapa.h"
 
-#define x 500
-#define y 500
+//#define x 1000
+//#define y 1000
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
-int randomgen()
+int randomgen(void)
 {
     // numero aleatoreo.
     srand(time(NULL));
@@ -18,14 +18,18 @@ int randomgen()
     return numero_aleatorio;
 }
 
-void gera_mapa(Mapa **mapa)
+void gera_mapa(Mapa **mapa, int MaxY, int MaxX)
 {
     int rowinicial = 0; // temporario ns as cenas do hud
     int colinicial = 0; // mm cena
 
-    for (int ys = rowinicial; ys < y; ys++) // dois for's que percorrem o mapa todo coluna a coluna
+    //ns
+    //int y=MaxY;
+    //int x=MaxX;
+
+    for (int ys = rowinicial; ys < MaxY; ys++) // dois for's que percorrem o mapa todo coluna a coluna
     {
-        for (int xs = colinicial; xs < x; xs++)
+        for (int xs = colinicial; xs < MaxX; xs++)
         {
             int chance = randomgen(); // sempre (0<=chance<100)
             if (chance < 45)
@@ -41,51 +45,53 @@ void gera_mapa(Mapa **mapa)
 }
 
 // denoise
-int conta_vizinhos(Mapa **matriz, int ys, int xs)
+int conta_vizinhos(Mapa **matriz, int ys, int xs, int MaxY, int MaxX)
 {
     // Contador
     int vizinhos = 0;
 
-    // verifica quantas das posiçoes à volta da y,x sao #'s
-    if ((matriz[ys + 1][xs].character) == '#')
+    if (ys > 1 && ys < (MaxY - 1) && xs > 1 && xs < (MaxX - 1))
     {
-        vizinhos++;
+        // verifica quantas das posiçoes à volta da y,x sao #'s
+        if ((matriz[ys + 1][xs].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys - 1][xs].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys][xs + 1].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys][xs - 1].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys + 1][xs + 1].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys - 1][xs - 1].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys + 1][xs - 1].character) == '#')
+        {
+            vizinhos++;
+        }
+        if ((matriz[ys - 1][xs + 1].character) == '#')
+        {
+            vizinhos++;
+        }
     }
-    if ((matriz[ys - 1][xs].character) == '#')
-    {
-        vizinhos++;
-    }
-    if ((matriz[ys][xs + 1].character) == '#')
-    {
-        vizinhos++;
-    }
-    if ((matriz[ys][xs - 1].character) == '#')
-    {
-        vizinhos++;
-    }
-    if ((matriz[ys + 1][xs + 1].character) == '#')
-    {
-        vizinhos++;
-    }
-    if ((matriz[ys - 1][xs - 1].character) == '#')
-    {
-        vizinhos++;
-    }
-    if ((matriz[ys + 1][xs - 1].character) == '#')
-    {
-        vizinhos++;
-    }
-    if ((matriz[ys - 1][xs + 1].character) == '#')
-    {
-        vizinhos++;
-    }
-
     return vizinhos;
 }
 
-void denoiser(Mapa **matriz, int ys, int xs)
+void denoiser(Mapa **matriz, int ys, int xs, int MaxY, int MaxX)
 {
-    int vizinhos = conta_vizinhos(matriz, ys, xs);
+    int vizinhos = conta_vizinhos(matriz, ys, xs, MaxY, MaxX);
     if (vizinhos == 0 || vizinhos > 5) // faz_parede (xs,ys);
     {
         matriz[ys][xs].character = '#';
@@ -103,15 +109,15 @@ void denoiser(Mapa **matriz, int ys, int xs)
 // funcao que junta tudo
 void geracao(Mapa **mapa, int MaxY, int MaxX)
 {
-    gera_mapa(mapa);
-    for (int reps = 0; reps < 2; reps++)
+    gera_mapa(mapa, MaxY, MaxX);
+    /*for (int reps = 0; reps < 1; reps++)
     {
         for (int ys = 0; ys < MaxY; ys++)
         {
             for (int xs = 0; xs < MaxX; xs++)
             {
-                denoiser(mapa, ys, xs);
+                denoiser(mapa, ys, xs, MaxY, MaxX);
             }
         }
-    }
+    }*/
 }

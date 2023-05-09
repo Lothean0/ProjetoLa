@@ -8,7 +8,7 @@
 #define Visivel 1
 #define Nao_Visivel 2
 
-void inicializar_cor()
+void inicializar_cor(void)
 {
     if (has_colors())
     {

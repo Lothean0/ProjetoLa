@@ -3,8 +3,7 @@
 typedef struct mapa
 {
     char character;
-    //int luz; //??? ns
-    //int distancia;
+    int distancia;
 } Mapa;
 
 int randomgen(void);

@@ -45,12 +45,21 @@ int main(void)
 
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
+    
+    int i, j;
+    for(i = 0; i < MaxY; i++) {
+        for(j = 0; j < MaxX; j++) {
+            mapa[i][j].character = '#'; //inicializa todo o mapa com paredes
+            mapa[i][j].distancia = 0;
+        }
+    }
+
     geracao(mapa, MaxY, MaxX);
     for (int ys = 0; ys < MaxY; ys++)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            mvprintw(ys, xs, "%c", mapa[ys][xs].character);
+            mvwprintw( win, ys, xs, "%c", mapa[ys][xs].character);
         }
     }
 
