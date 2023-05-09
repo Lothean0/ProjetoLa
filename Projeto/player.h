@@ -7,7 +7,7 @@ typedef struct player
     int coorX;
     int cor;
 
-}Player;
+} Player;
 
 void spawn(Player *jogador, int MaxY, int MaxX);
 void mudarstate(Player *jogador);
