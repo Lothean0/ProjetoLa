@@ -10,10 +10,10 @@
 //#define y 1000
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
-int randomgen(void)
+int randomgen(int timer)
 {
     // numero aleatoreo.
-    srand(time(NULL));
+    srand(timer);
     int numero_aleatorio = rand() % 100;
     return numero_aleatorio;
 }
@@ -31,7 +31,7 @@ void gera_mapa(Mapa **mapa, int MaxY, int MaxX)
     {
         for (int xs = colinicial; xs < MaxX; xs++)
         {
-            int chance = randomgen(); // sempre (0<=chance<100)
+            int chance = randomgen(time(NULL)); // sempre (0<=chance<100)
             if (chance < 45)
             {
                 mapa[ys][xs].character = ' '; // 45%de chance de os blocos serem # (45/100 blocos sao #)

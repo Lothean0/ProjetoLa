@@ -37,39 +37,108 @@ int main(void)
     curs_set(0);
     int MaxY, MaxX;
     getmaxyx(win, MaxY, MaxX);
-    // nodelay(win,true);
+    nodelay(win, true);
 
     // cria uma box à volta da window
-    //move(0, 0);
-    //wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
+    // move(0, 0);
+    // wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
 
     // gerar mapa?
-    Mapa mapa[MaxY][MaxX];
-    
-    int i, j;
-    for(i = 0; i < MaxY; i++) {
-        for(j = 0; j < MaxX; j++) {
-            int chance = randomgen(); // sempre (0<=chance<100)
-            if (chance < 45)
-            {
-                mapa[i][j].character = '#';
-                mapa[i][j].distancia = 0;
-            }
-            else
-            {
-                mapa[i][j].character = '.';  // 55%
-                mapa[i][j].distancia = 0;
-            }
-            /*mapa[i][j].character = '#'; //inicializa todo o mapa com paredes
-            mapa[i][j].distancia = 0;*/
-        }
-    }
-    //geracao(mapa, MaxY, MaxX);
-    for (int ys = 0; ys < MaxY; ys++)
     {
-        for (int xs = 0; xs < MaxX; xs++)
+        Mapa mapa[MaxY][MaxX];
+
+        int i, j, seed;
+        seed = (time(NULL));
+        for (i = 0; i < MaxY; i++)
         {
-            mvwprintw( win, ys, xs, "%c", mapa[ys][xs].character);
+            for (j = 0; j < MaxX; j++)
+            {
+                int chance = randomgen(seed); // sempre (0<=chance<100)
+                if (chance < 45)
+                {
+                    mapa[i][j].character = '#';
+                    mapa[i][j].distancia = 0;
+                }
+                else
+                {
+                    mapa[i][j].character = '.'; // 55%
+                    mapa[i][j].distancia = 0;
+                }
+                seed -= 42;
+            }
+        }
+
+        // DENOISER
+        //for (int reps = 0; reps < 10000; reps++)
+        {
+            for (int ys = 1; ys < MaxY - 1; ys++)
+            {
+                for (int xs = 1; xs < MaxX - 1; xs++)
+                {
+                    // Contador
+                    int vizinhos = 0;
+
+                    if ((ys > 1 && ys < (MaxY - 1)) && (xs > 1 && xs < (MaxX - 1)))
+                    {
+                        // verifica quantas das posiçoes à volta da y,x sao #'s
+                        if ((mapa[ys + 1][xs].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys - 1][xs].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys][xs + 1].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys][xs - 1].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys + 1][xs + 1].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys - 1][xs - 1].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys + 1][xs - 1].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                        if ((mapa[ys - 1][xs + 1].character) == '#')
+                        {
+                            vizinhos++;
+                        }
+                    }
+
+                    // TIPO MINESWEEPER
+                    if (vizinhos == 0 || vizinhos > 5) // faz_parede (xs,ys);
+                    {
+                        mapa[ys][xs].character = '#';
+                    }
+                    else if (vizinhos > 4) // faz_vazio (xs,ys);
+                    {
+                        mapa[ys][xs].character = '.';
+                    }
+                    else if (vizinhos > 5) // faz_parede (xs,ys);
+                    {
+                        mapa[ys][xs].character = '.';
+                    }
+                }
+            }
+        }
+
+        // PRINT
+        for (int ys = 0; ys < MaxY; ys++)
+        {
+            for (int xs = 0; xs < MaxX; xs++)
+            {
+                mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
+            }
         }
     }
 
@@ -77,15 +146,15 @@ int main(void)
     spawn(&jogador1, MaxY, MaxX);
     mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
 
-    int w = 0; // parte do timer
+    int timer = 0; // parte do timer
 
     // ciclo while que corre enquanto a tecla q nao e premida
     while (1)
     {
         // pequeno timer
         move(2, 2);
-        printw("(%d)", w);
-        w++;
+        printw("(%d)", timer);
+        timer++;
 
         // updates ao jogador
         mudarstate(&jogador1);
