@@ -6,12 +6,6 @@
 #include "player.h"
 #include "mapa.h"
 
-typedef struct mapa
-{
-    char character;
-    int luz; //??? ns
-    int distancia;
-}Mapa;
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
