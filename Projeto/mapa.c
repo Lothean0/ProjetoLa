@@ -34,11 +34,11 @@ void gera_mapa(Mapa **mapa, int MaxY, int MaxX)
             int chance = randomgen(); // sempre (0<=chance<100)
             if (chance < 45)
             {
-                mapa[ys][xs].character = '#'; // 45%de chance de os blocos serem # (45/100 blocos sao #)
+                mapa[ys][xs].character = ' '; // 45%de chance de os blocos serem # (45/100 blocos sao #)
             }
             else
             {
-                mapa[ys][xs].character = '.'; // 55%
+                mapa[ys][xs].character = ' '; // 55%
             }
         }
     }

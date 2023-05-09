@@ -49,12 +49,22 @@ int main(void)
     int i, j;
     for(i = 0; i < MaxY; i++) {
         for(j = 0; j < MaxX; j++) {
-            mapa[i][j].character = '#'; //inicializa todo o mapa com paredes
-            mapa[i][j].distancia = 0;
+            int chance = randomgen(); // sempre (0<=chance<100)
+            if (chance < 45)
+            {
+                mapa[i][j].character = '#';
+                mapa[i][j].distancia = 0;
+            }
+            else
+            {
+                mapa[i][j].character = '.';  // 55%
+                mapa[i][j].distancia = 0;
+            }
+            /*mapa[i][j].character = '#'; //inicializa todo o mapa com paredes
+            mapa[i][j].distancia = 0;*/
         }
     }
-
-    geracao(mapa, MaxY, MaxX);
+    //geracao(mapa, MaxY, MaxX);
     for (int ys = 0; ys < MaxY; ys++)
     {
         for (int xs = 0; xs < MaxX; xs++)
