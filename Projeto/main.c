@@ -40,12 +40,19 @@ int main(void)
     // nodelay(win,true);
 
     // cria uma box à volta da window
-    move(0, 0);
-    wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
+    //move(0, 0);
+    //wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
 
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
-    gerarcao(mapa);
+    geracao(mapa, MaxY, MaxX);
+    for (int ys = 0; ys < MaxY; ys++)
+    {
+        for (int xs = 0; xs < MaxX; xs++)
+        {
+            mvprintw(ys, xs, "%c", mapa[ys][xs].character);
+        }
+    }
 
     // coloca o jogador numa posicao random do ecra
     spawn(&jogador1, MaxY, MaxX);

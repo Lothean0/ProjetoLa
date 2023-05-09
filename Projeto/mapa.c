@@ -9,28 +9,13 @@
 #define x 500
 #define y 500
 
-// funcao que junta tudo
-geracao(Mapa **mapa, int MaxY, int MaxX)
-{
-    gerar_mapa(**mapa);
-    for (int reps = 0; reps < 2; reps++)
-    {
-        for (int ys = 0; ys <= MaxY; ys++)
-        {
-            for (int xs = 0; xs <= MaxX; xs++)
-            {
-                denoiser(mapa, ys, xs);
-            }
-        }
-    }
-}
-
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
 int randomgen()
 {
     // numero aleatoreo.
     srand(time(NULL));
     int numero_aleatorio = rand() % 100;
+    return numero_aleatorio;
 }
 
 void gera_mapa(Mapa **mapa)
@@ -100,7 +85,7 @@ int conta_vizinhos(Mapa **matriz, int ys, int xs)
 
 void denoiser(Mapa **matriz, int ys, int xs)
 {
-    int vizinhos = contavizinhos(ys, xs);
+    int vizinhos = conta_vizinhos(matriz, ys, xs);
     if (vizinhos == 0 || vizinhos > 5) // faz_parede (xs,ys);
     {
         matriz[ys][xs].character = '#';
@@ -112,5 +97,21 @@ void denoiser(Mapa **matriz, int ys, int xs)
     else if (vizinhos > 5) // faz_parede (xs,ys);
     {
         matriz[ys][xs].character = '#';
+    }
+}
+
+// funcao que junta tudo
+void geracao(Mapa **mapa, int MaxY, int MaxX)
+{
+    gera_mapa(mapa);
+    for (int reps = 0; reps < 2; reps++)
+    {
+        for (int ys = 0; ys < MaxY; ys++)
+        {
+            for (int xs = 0; xs < MaxX; xs++)
+            {
+                denoiser(mapa, ys, xs);
+            }
+        }
     }
 }

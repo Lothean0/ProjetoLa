@@ -6,5 +6,4 @@ typedef struct mapa
     int luz; //??? ns
     int distancia;
 } Mapa;
-
 #endif
