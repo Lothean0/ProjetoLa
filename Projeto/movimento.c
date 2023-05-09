@@ -83,7 +83,7 @@ void mudarstate(Player *jogador)
     Vetor direcao = calcvetor();
 
     // define pTEMP como o "bloco" para onde o player quer ir
-    Player pTEMP = {0, 0};
+    Player pTEMP = {0, 0, 0};
     pTEMP.coorX = (jogador->coorX) + (direcao.coorX);
     pTEMP.coorY = (jogador->coorY) + (direcao.coorY);
 
