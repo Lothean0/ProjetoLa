@@ -123,18 +123,4 @@ void denoiser(Mapa **mapa, int MaxY, int MaxX)
     }
 }
 
-// funcao que junta tudo
-/*void geracao(Mapa **mapa, int MaxY, int MaxX)
-{
-    gera_mapa(mapa, MaxY, MaxX);
-    for (int reps = 0; reps < 1; reps++)
-    {
-        for (int ys = 0; ys < MaxY; ys++)
-        {
-            for (int xs = 0; xs < MaxX; xs++)
-            {
-                denoiser(mapa, ys, xs, MaxY, MaxX);
-            }
-        }
-    }
-}*/
+
