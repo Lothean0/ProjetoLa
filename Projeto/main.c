@@ -160,7 +160,7 @@ int main(void)
     // coloca o jogador numa posicao random do ecra
     spawn(&jogador1, MaxY, MaxX);
     mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
-
+    
     int timer = 0; // parte do timer
 
     // ciclo while que corre enquanto a tecla q nao e premida
@@ -168,7 +168,7 @@ int main(void)
     {
         // pequeno timer
         move(2, 2);
-        printw("(%d)", timer);
+        //printw("(%d)", timer);
         timer++;
 
         // updates ao jogador
