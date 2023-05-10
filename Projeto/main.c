@@ -42,7 +42,7 @@ int main(void)
     // gerar mapa?
     {
         Mapa mapa[MaxY][MaxX];
-
+        //gera_mapa(mapa,MaxY,MaxX);
         int i, j, seed;
         seed = (time(NULL));
         for (i = 0; i < MaxY; i++)
@@ -68,7 +68,7 @@ int main(void)
                 }
             }
         }
-
+        //denoiser(mapa,MaxY,MaxX);
         // DENOISER
         int maxreps = 7;
         for (int reps = 0; reps < maxreps; reps++)

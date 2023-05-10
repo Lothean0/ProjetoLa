@@ -6,8 +6,8 @@
 #include "player.h"
 #include "mapa.h"
 
-//#define x 1000
-//#define y 1000
+// #define x 1000
+// #define y 1000
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
 int randomgen(int timer)
@@ -20,94 +20,111 @@ int randomgen(int timer)
 
 void gera_mapa(Mapa **mapa, int MaxY, int MaxX)
 {
-    int rowinicial = 0; // temporario ns as cenas do hud
-    int colinicial = 0; // mm cena
-
-    //ns
-    //int y=MaxY;
-    //int x=MaxX;
-
-    for (int ys = rowinicial; ys < MaxY; ys++) // dois for's que percorrem o mapa todo coluna a coluna
+    int i, j, seed;
+    seed = (time(NULL));
+    for (i = 0; i < MaxY; i++)
     {
-        for (int xs = colinicial; xs < MaxX; xs++)
+        for (j = 0; j < MaxX; j++)
         {
-            int chance = randomgen(time(NULL)); // sempre (0<=chance<100)
-            if (chance < 45)
+            int chance = randomgen(seed); // sempre (0<=chance<100)
+            if (chance < 46)
             {
-                mapa[ys][xs].character = ' '; // 45%de chance de os blocos serem # (45/100 blocos sao #)
+                mapa[i][j].character = '#';
+                mapa[i][j].distancia = 0;
             }
             else
             {
-                mapa[ys][xs].character = ' '; // 55%
+                mapa[i][j].character = '.'; // 55%
+                mapa[i][j].distancia = 0;
+            }
+            seed -= 42;
+
+            if (i == 0 || j == 0 || i == (MaxY - 1) || j == (MaxX - 1) || i == 1 || j == 1)
+            {
+                mapa[i][j].character = '#';
             }
         }
     }
 }
 
-// denoise
-int conta_vizinhos(Mapa **matriz, int ys, int xs, int MaxY, int MaxX)
+void denoiser(Mapa **mapa, int MaxY, int MaxX)
 {
-    // Contador
-    int vizinhos = 0;
+    int maxreps = 7;
+    for (int reps = 0; reps < maxreps; reps++)
+    {
+        for (int ys = 1; ys < MaxY - 1; ys++)
+        {
+            for (int xs = 1; xs < MaxX - 1; xs++)
+            {
+                // Contador
+                int vizinhos = 0;
 
-    if (ys > 1 && ys < (MaxY - 1) && xs > 1 && xs < (MaxX - 1))
-    {
-        // verifica quantas das posiçoes à volta da y,x sao #'s
-        if ((matriz[ys + 1][xs].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys - 1][xs].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys][xs + 1].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys][xs - 1].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys + 1][xs + 1].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys - 1][xs - 1].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys + 1][xs - 1].character) == '#')
-        {
-            vizinhos++;
-        }
-        if ((matriz[ys - 1][xs + 1].character) == '#')
-        {
-            vizinhos++;
-        }
-    }
-    return vizinhos;
-}
+                if ((ys > 1 && ys < (MaxY - 1)) && (xs > 1 && xs < (MaxX - 1)))
+                {
+                    // verifica quantas das posiçoes à volta da y,x sao #'s
+                    if ((mapa[ys + 1][xs].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys - 1][xs].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys][xs + 1].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys][xs - 1].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys + 1][xs + 1].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys - 1][xs - 1].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys + 1][xs - 1].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                    if ((mapa[ys - 1][xs + 1].character) == '#')
+                    {
+                        vizinhos++;
+                    }
+                }
 
-void denoiser(Mapa **matriz, int ys, int xs, int MaxY, int MaxX)
-{
-    int vizinhos = conta_vizinhos(matriz, ys, xs, MaxY, MaxX);
-    if (vizinhos == 0 || vizinhos > 5) // faz_parede (xs,ys);
-    {
-        matriz[ys][xs].character = '#';
-    }
-    else if (vizinhos > 4) // faz_vazio (xs,ys);
-    {
-        matriz[ys][xs].character = '.';
-    }
-    else if (vizinhos > 5) // faz_parede (xs,ys);
-    {
-        matriz[ys][xs].character = '#';
+                // TIPO MINESWEEPER
+                if (vizinhos == 0 || vizinhos > 4) // faz_parede (xs,ys);
+                {
+                    mapa[ys][xs].character = '#';
+                }
+                else if (vizinhos < 4) // faz_vazio (xs,ys);
+                {
+                    mapa[ys][xs].character = '.';
+                }
+
+                // Na ultima repetiçao esta parte limpa os #'s inuteis no meio do mapa
+                if (reps == maxreps - 1)
+                {
+                    if (vizinhos == 0) // faz_parede (xs,ys);
+                    {
+                        mapa[ys][xs].character = '.';
+                    }
+                    else if (vizinhos == 8)
+                    {
+                        mapa[ys][xs].character = '#';
+                    }
+                }
+            }
+        }
     }
 }
 
 // funcao que junta tudo
-void geracao(Mapa **mapa, int MaxY, int MaxX)
+/*void geracao(Mapa **mapa, int MaxY, int MaxX)
 {
     gera_mapa(mapa, MaxY, MaxX);
     for (int reps = 0; reps < 1; reps++)
@@ -120,4 +137,4 @@ void geracao(Mapa **mapa, int MaxY, int MaxX)
             }
         }
     }
-}
+}*/
