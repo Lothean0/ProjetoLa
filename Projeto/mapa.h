@@ -4,6 +4,7 @@ typedef struct mapa
 {
     char character;
     int distancia;
+    bool visao;
 } Mapa;
 
 int randomgen(int timer);
