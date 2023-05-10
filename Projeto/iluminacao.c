@@ -10,12 +10,9 @@
 
 void inicializar_cor(void)
 {
-    if (has_colors())
-    {
-        start_color();
-        init_pair(Visivel, COLOR_RED, COLOR_BLACK);
-        init_pair(Nao_Visivel, COLOR_BLACK, COLOR_BLACK);
-    }
+    start_color();
+    init_pair(Visivel, COLOR_RED, COLOR_BLACK);
+    init_pair(Nao_Visivel, COLOR_BLACK, COLOR_BLACK);
 }
 
 void colorir(Player *jogador)

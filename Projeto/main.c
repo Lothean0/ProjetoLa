@@ -5,6 +5,8 @@
 #include <time.h>
 #include "player.h"
 #include "mapa.h"
+#define Visivel 1
+#define Nao_Visivel 2
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -42,7 +44,7 @@ int main(void)
     // gerar mapa?
     {
         Mapa mapa[MaxY][MaxX];
-        //gera_mapa(mapa,MaxY,MaxX);
+        // gera_mapa(mapa,MaxY,MaxX);
         int i, j, seed;
         seed = (time(NULL));
         for (i = 0; i < MaxY; i++)
@@ -68,8 +70,8 @@ int main(void)
                 }
             }
         }
-        //denoiser(mapa,MaxY,MaxX);
-        // DENOISER
+        // denoiser(mapa,MaxY,MaxX);
+        //  DENOISER
         int maxreps = 7;
         for (int reps = 0; reps < maxreps; reps++)
         {
@@ -147,8 +149,10 @@ int main(void)
         for (int ys = 0; ys < MaxY; ys++)
         {
             for (int xs = 0; xs < MaxX; xs++)
-            {
+            {   
+                attron(COLOR_PAIR(Nao_Visivel));
                 mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
+                attroff(COLOR_PAIR(Nao_Visivel));
             }
         }
     }
