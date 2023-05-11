@@ -178,7 +178,7 @@ int main(void)
     {
         // pequeno timer
         move(2, 2);
-        printw("(%d)", timer);
+        //printw("(%d)", timer);
         timer++;
 
         // updates ao jogador
