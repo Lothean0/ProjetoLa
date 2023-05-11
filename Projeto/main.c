@@ -39,7 +39,7 @@ int main(void)
     curs_set(0);
     int MaxY, MaxX;
     getmaxyx(win, MaxY, MaxX);
-    nodelay(win, true);
+    halfdelay(5);
 
     // gerar mapa?
     {
@@ -150,16 +150,26 @@ int main(void)
         {
             for (int xs = 0; xs < MaxX; xs++)
             {   
+                //attron(COLOR_PAIR(Nao_Visivel));
+                mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
+                //attroff(COLOR_PAIR(Nao_Visivel));
+            }
+        }
+        spawn(&jogador1, MaxY, MaxX);
+        mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
+        for (int ys = 0; ys < MaxY; ys++)
+        {
+            for (int xs = 0; xs < MaxX; xs++)
+            {   
                 attron(COLOR_PAIR(Nao_Visivel));
                 mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
                 attroff(COLOR_PAIR(Nao_Visivel));
             }
         }
+    
     }
 
     // coloca o jogador numa posicao random do ecra
-    spawn(&jogador1, MaxY, MaxX);
-    mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
     
     int timer = 0; // parte do timer
 
@@ -168,7 +178,7 @@ int main(void)
     {
         // pequeno timer
         move(2, 2);
-        //printw("(%d)", timer);
+        printw("(%d)", timer);
         timer++;
 
         // updates ao jogador
