@@ -4,7 +4,7 @@ typedef struct mapa
 {
     char character;
     int distancia;
-    bool visao;
+    int visao;
     int cor;
 } Mapa;
 

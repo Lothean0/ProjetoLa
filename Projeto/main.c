@@ -7,6 +7,7 @@
 #include "mapa.h"
 #define Visivel 1
 #define Nao_Visivel 2
+#define Visto 3
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -42,7 +43,7 @@ int main(void)
     halfdelay(5);
 
     // gerar mapa?
-    {
+    
         Mapa mapa[MaxY][MaxX];
         // gera_mapa(mapa,MaxY,MaxX);
         int i, j, seed;
@@ -75,9 +76,9 @@ int main(void)
         int maxreps = 7;
         for (int reps = 0; reps < maxreps; reps++)
         {
-            for (int ys = 1; ys < MaxY - 1; ys++)
+            for (int ys = 2; ys < MaxY - 1; ys++)
             {
-                for (int xs = 1; xs < MaxX - 1; xs++)
+                for (int xs = 2; xs < MaxX - 1; xs++)
                 {
                     // Contador
                     int vizinhos = 0;
@@ -167,7 +168,7 @@ int main(void)
             }
         }
     
-    }
+    
 
     // coloca o jogador numa posicao random do ecra
     
@@ -182,10 +183,15 @@ int main(void)
         timer++;
 
         // updates ao jogador
+        colorir(&jogador1);
         mudarstate(&jogador1);
         move(jogador1.coorY, jogador1.coorX);
+        attron(jogador1.cor);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
+        attroff(jogador1.cor);
         refresh();
+
+        //colorirm(&mapa[jogador1.coorY][jogador1.coorX]);
     }
     endwin();
     return 0;
