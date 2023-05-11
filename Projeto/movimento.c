@@ -96,7 +96,6 @@ void mudarstate(Player *jogador)
         break; // nestes casos o player nao mexe;
     default:
         // Fazer uma trail dos movimentos do jogador, ou seja, adicionar um . as posiçoes previas
-        mvaddch(jogador->coorY, jogador->coorX, '.');
         jogador->coorX = pTEMP.coorX;
         jogador->coorY = pTEMP.coorY;
         break; // neste caso a posiçao do player passa a ser a do pTEMP
