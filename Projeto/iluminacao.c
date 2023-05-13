@@ -112,7 +112,7 @@ void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
             {
                 attron(Nao_Visivel);
             }
-            else attro(Visto);
+            else attron(Visto);
 
             mvaddch(i,j,mapa[i][j].character);
             attroff(Visivel);
