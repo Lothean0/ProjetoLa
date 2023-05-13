@@ -50,10 +50,10 @@ int main(void)
     int MaxHudY = MaxY - 1;
     int MaxHudX = HudX + 24;
 
-    mvhline(0, HudX, '#', 24);        // linha de cima
-    mvhline(MaxY - 1, HudX, '#', 24); // linha de baixo
-    mvvline(0, HudX, '#', MaxY);      // linha da esquerda
-    mvvline(0, MaxHudX, '#', MaxY);   // linha da direita
+    mvhline(0, HudX, '_', 24);        // linha de cima
+    mvhline(MaxY - 1, HudX, '_', 24); // linha de baixo
+    mvvline(0, HudX, '|', MaxY);      // linha da esquerda
+    mvvline(0, MaxHudX, '|', MaxY);   // linha da direita
 
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
