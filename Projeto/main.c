@@ -42,9 +42,13 @@ int main(void)
     getmaxyx(win, MaxY, MaxX);
     halfdelay(5);
 
-    // gerar mapa?
 
+    //HUD
+    MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
+
+    // gerar mapa?
     Mapa mapa[MaxY][MaxX];
+
     // gera_mapa(mapa,MaxY,MaxX);
     int i, j, seed;
     seed = (time(NULL));
@@ -160,29 +164,20 @@ int main(void)
             // attroff(COLOR_PAIR(Nao_Visivel));
         }
     }
-    spawn(&jogador1, MaxY, MaxX);
-    mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
-    for (int ys = 0; ys < MaxY; ys++)
-    {
-        for (int xs = 0; xs < MaxX; xs++)
-        {
-            attron(COLOR_PAIR(Nao_Visivel));
-            mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-            attroff(COLOR_PAIR(Nao_Visivel));
-        }
-    }
 
     // coloca o jogador numa posicao random do ecra
+    spawn(&jogador1, MaxY, MaxX);
+    mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
 
-    int timer = 0; // parte do timer
+    // int timer = 0; //inicia o timer
 
     // ciclo while que corre enquanto a tecla q nao e premida
     while (1)
     {
-        // pequeno timer
-        move(2, 2);
-        // printw("(%d)", timer);
-        timer++;
+        // Timer
+        // move(2, 2);
+        //  printw("(%d)", timer);
+        // timer++;
 
         // updates ao jogador
         colorir(&jogador1);
@@ -203,13 +198,14 @@ int main(void)
                     }
                     else
                     {
-                        attron(mapa[ys][xs].cor);
+                        // attron(mapa[ys][xs].cor);
                         mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-                        attroff(mapa[ys][xs].cor);
+                        // attroff(mapa[ys][xs].cor);
                     }
                 }
             }
         }
+        refresh();
     }
     endwin();
     return 0;
