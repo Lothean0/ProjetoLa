@@ -54,7 +54,7 @@ int main(void)
     mvhline(MaxY - 1, HudX, '#', 24); // linha de baixo
     mvvline(0, HudX, '#', MaxY);      // linha da esquerda
     mvvline(0, MaxHudX, '#', MaxY);   // linha da direita
-
+            
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
 
@@ -196,6 +196,9 @@ int main(void)
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         attroff(jogador1.cor);
         refresh();
+
+        // Teste de bomba 
+        BOMBAAAAAAAAAAAAAAAAAAA(Mapa **mapa, jogador1.coorY, jogador1.coorX);
 
         // Updates do hud #####
         // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
