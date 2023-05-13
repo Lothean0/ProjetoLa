@@ -98,4 +98,27 @@ void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
             }
         }
     }
+
+    //Novos loops sobre o mapa. O objetivo aqui e inicializar as cores de acordo com aquilo que conseguimos previamente no algoritmo de shadowcasting
+    for(int i=0;i<MaxY;i++)
+    {
+        for(int j=0;j<MaxX;j++)
+        {
+            if(mapa[i][j].visao == true)
+            {
+                attron(Visivel);
+            }
+            else if(mapa[i][j].visao == false)
+            {
+                attron(Nao_Visivel);
+            }
+            else attro(Visto);
+
+            mvaddch(i,j,mapa[i][j].character);
+            attroff(Visivel);
+            attroff(Nao_Visivel);
+            attroff(Visto);           
+        }
+    }
+    refresh();
 }
