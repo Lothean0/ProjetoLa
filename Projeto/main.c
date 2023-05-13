@@ -42,9 +42,15 @@ int main(void)
     getmaxyx(win, MaxY, MaxX);
     halfdelay(5);
 
-
-    //HUD
+    // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
+    move(0, MaxX);
+    vline('|', MaxY); // linha que separa mapa do hud
+
+    mvvline(0, MaxX + 1, '#', MaxY);      // linha da esquerda
+    mvhline(0, MaxX + 1, '#', 24);        // linha de cima
+    mvvline(0, MaxX + 24, '#', MaxY);     // linha da direita
+    mvhline(MaxY - 1, MaxX + 1, '#', 24); // linha de baixo
 
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
