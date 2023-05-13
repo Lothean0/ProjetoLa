@@ -44,13 +44,16 @@ int main(void)
 
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
-    move(0, MaxX);
-    vline('|', MaxY); // linha que separa mapa do hud
 
-    mvvline(0, MaxX + 1, '#', MaxY);      // linha da esquerda
-    mvhline(0, MaxX + 1, '#', 24);        // linha de cima
-    mvvline(0, MaxX + 24, '#', MaxY);     // linha da direita
-    mvhline(MaxY - 1, MaxX + 1, '#', 24); // linha de baixo
+    int HudY = 0; // posiçoes do hud (canto sup esquerdo)
+    int HudX = MaxX;
+    int MaxHudY = MaxY - 1;
+    int MaxHudX = HudX + 24;
+
+    mvhline(0, HudX, '#', 24);        // linha de cima
+    mvhline(MaxY - 1, HudX, '#', 24); // linha de baixo
+    mvvline(0, HudX, '#', MaxY);      // linha da esquerda
+    mvvline(0, MaxHudX, '#', MaxY);   // linha da direita
 
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
@@ -193,6 +196,13 @@ int main(void)
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         attroff(jogador1.cor);
         refresh();
+
+        // Updates do hud #####
+        // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
+
+        mvprintw(4, HudX + 7, "JOGADOR 1");
+        mvprintw(7, HudX + 4, "POS : ( %d , %d )", jogador1.coorX, jogador1.coorY);
+
         // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
         {
             for (int ys = 0; ys < MaxY; ys++)
