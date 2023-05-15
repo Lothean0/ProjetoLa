@@ -197,6 +197,8 @@ int main(void)
 
         // updates ao jogador
         colorir(&jogador1);
+
+        //bomba 
         if ((tecla = getch()) == 'e')
         {
             int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
