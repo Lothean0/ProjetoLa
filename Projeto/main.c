@@ -199,12 +199,28 @@ int main(void)
         colorir(&jogador1);
         if ((tecla = getch()) == 'e')
         {
-            for (int ys = jogador1.coorY - 2; ys <= jogador1.coorY + 2; ys++)
+            int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
+
+            mapa[Ytemp][Xtemp].character = '0';
+            refresh();
+            
+            while(timerB<=3)
             {
-                for (int xs = jogador1.coorX - 2; xs <= jogador1.coorX + 2; xs++)
+
+            //timer da explosão
+            timerB++;
+
+            // Explosão
+            if(timerB >= 3){
+                for (int ys = Ytemp - 2; ys <= Ytemp + 2; ys++)
                 {
-                    mapa[ys][xs].character='.';
+                    for (int xs = Xtemp - 2; xs <= Xtemp + 2; xs++)
+                    {
+                        mapa[ys][xs].character='.';
+                    }
                 }
+            }
+            
             }
         }
         else
