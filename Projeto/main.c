@@ -40,7 +40,7 @@ int main(void)
     curs_set(0);
     int MaxY, MaxX;
     getmaxyx(win, MaxY, MaxX);
-    halfdelay(5);
+    halfdelay(100);
 
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
@@ -54,7 +54,7 @@ int main(void)
     mvhline(MaxY - 1, HudX, '#', 24); // linha de baixo
     mvvline(0, HudX, '#', MaxY);      // linha da esquerda
     mvvline(0, MaxHudX, '#', MaxY);   // linha da direita
-            
+
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
 
@@ -198,31 +198,31 @@ int main(void)
         // updates ao jogador
         colorir(&jogador1);
 
-        //bomba 
+        // bomba
         if ((tecla = getch()) == 'e')
         {
             int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
 
             mapa[Ytemp][Xtemp].character = '0';
             refresh();
-            
-            while(timerB<=3)
+
+            // timer da explosão
+            while (timerB < 5)
             {
+                timerB++;
+                mvprintw(8, HudX + 7, "timerB=%d", timerB);
 
-            //timer da explosão
-            timerB++;
-
-            // Explosão
-            if(timerB >= 3){
-                for (int ys = Ytemp - 2; ys <= Ytemp + 2; ys++)
+                // Explosão
+                if (timerB == 5)
                 {
-                    for (int xs = Xtemp - 2; xs <= Xtemp + 2; xs++)
+                    for (int ys = Ytemp - 2; ys <= Ytemp + 2; ys++)
                     {
-                        mapa[ys][xs].character='.';
+                        for (int xs = Xtemp - 2; xs <= Xtemp + 2; xs++)
+                        {
+                            mapa[ys][xs].character = '.';
+                        }
                     }
                 }
-            }
-            
             }
         }
         else
@@ -235,8 +235,6 @@ int main(void)
         attroff(jogador1.cor);
         refresh();
 
-
-
         // Updates do hud #####
         // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
 
@@ -244,6 +242,7 @@ int main(void)
         mvprintw(7, HudX + 4, "POS : ( %d , %d )", jogador1.coorX, jogador1.coorY);
 
         // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
+
         {
             for (int ys = 0; ys < MaxY; ys++)
             {
