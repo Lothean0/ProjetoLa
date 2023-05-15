@@ -9,7 +9,7 @@ typedef struct vetor
 } Vetor;
 
 // func que define um vetor baseado na tecla premida
-Vetor calcvetor(void)
+Vetor calcvetor(int tecla)
 {
     // nao imprimir na tela o input
     // ativar o keypad para podermos tambem usar as setas
@@ -22,7 +22,7 @@ Vetor calcvetor(void)
     direcao.coorY = 0;
 
     // input da tecla
-    int tecla = getch();
+    //int tecla = getch();
 
     switch (tecla)
     {
@@ -76,11 +76,11 @@ Vetor calcvetor(void)
 }
 
 // func que soma o vetor de ''calcvetor'' à posiçao do player depois de verificar se esta é valida
-void mudarstate(Player *jogador)
+void mudarstate(Player *jogador,int tecla)
 {
 
     // começa por pegar um vetor(input da tecla, etc...)
-    Vetor direcao = calcvetor();
+    Vetor direcao = calcvetor(tecla);
 
     // define pTEMP como o "bloco" para onde o player quer ir
     Player pTEMP = {0, 0, 0};

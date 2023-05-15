@@ -180,13 +180,13 @@ int main(void)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            //attron(COLOR_PAIR(Nao_Visivel));
+            // attron(COLOR_PAIR(Nao_Visivel));
             mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-            //attroff(COLOR_PAIR(Nao_Visivel));
+            // attroff(COLOR_PAIR(Nao_Visivel));
         }
     }
     // int timer = 0; //inicia o timer
-
+    int tecla;
     // ciclo while que corre enquanto a tecla q nao e premida
     while (1)
     {
@@ -197,7 +197,20 @@ int main(void)
 
         // updates ao jogador
         colorir(&jogador1);
-        mudarstate(&jogador1);
+        if ((tecla = getch()) == 'e')
+        {
+            for (int ys = jogador1.coorY - 2; ys <= jogador1.coorY + 2; ys++)
+            {
+                for (int xs = jogador1.coorX - 2; xs <= jogador1.coorX + 2; xs++)
+                {
+                    mapa[ys][xs].character='.';
+                }
+            }
+        }
+        else
+        {
+            mudarstate(&jogador1, tecla);
+        }
         move(jogador1.coorY, jogador1.coorX);
         attron(jogador1.cor);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
@@ -221,9 +234,9 @@ int main(void)
                     }
                     else
                     {
-                        //attron(mapa[ys][xs].cor);
+                        // attron(mapa[ys][xs].cor);
                         mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-                        //attroff(mapa[ys][xs].cor);
+                        // attroff(mapa[ys][xs].cor);
                     }
                 }
             }

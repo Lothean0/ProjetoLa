@@ -10,8 +10,8 @@ typedef struct player
 } Player;
 
 void spawn(Player *jogador, int MaxY, int MaxX);
-void mudarstate(Player *jogador);
+void mudarstate(Player *jogador,int tecla);
 void colorir(Player *jogador);
-void inicializar_cor(void);
+void inicializar_cor();
 
 #endif
