@@ -217,8 +217,7 @@ int main(void)
         attroff(jogador1.cor);
         refresh();
 
-        // Teste de bomba 
-        BOMBAAAAAAAAAAAAAAAAAAA(Mapa **mapa, jogador1.coorY, jogador1.coorX);
+
 
         // Updates do hud #####
         // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)

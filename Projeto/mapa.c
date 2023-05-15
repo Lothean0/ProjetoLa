@@ -122,21 +122,3 @@ void denoiser(Mapa **mapa, int MaxY, int MaxX)
         }
     }
 }
-
-// Tecnicamente bomba é uma alteração no mapa, mas dps criamos um gadjets.c ou algo do genero
-
-void BOMBAAAAAAAAAAAAAAAAAAA(Mapa **mapa, int yr, int xr)
-{
-    int bombastic = getch();
-    if (bombastic == 'Z')
-    {
-        mapa[yr-1][xr].character = '.';
-        mapa[yr][xr-1].character = '.';
-        mapa[yr-1][xr-1].character = '.';
-        mapa[yr+1][xr].character = '.';
-        mapa[yr][xr+1].character = '.';
-        mapa[yr+1][xr+1].character = '.';
-        mapa[yr+1][xr-1].character = '.';
-        mapa[yr-1][xr+1].character = '.';
-    } 
-}
