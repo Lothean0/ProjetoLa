@@ -40,7 +40,7 @@ int main(void)
     curs_set(0);
     int MaxY, MaxX;
     getmaxyx(win, MaxY, MaxX);
-    halfdelay(100);
+    halfdelay(5);
 
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
