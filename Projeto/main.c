@@ -155,7 +155,7 @@ int main(void)
                     {
                         attron(mapa[ys][xs].cor);
                         mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-                         attroff(mapa[ys][xs].cor);
+                        attroff(mapa[ys][xs].cor);
                     }
                 }
             }

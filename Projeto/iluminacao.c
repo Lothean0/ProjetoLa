@@ -80,7 +80,7 @@ void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX], WINDO
                     }
 
                     //Marcar a visibilidade da celula.
-                    mapa[verY][verX].visao = mapa[verY][verX].visao || visivel;
+                    mapa[verY][verX].visao = (mapa[verY][verX].visao || visivel);
 
                     //Se a visiblidade da celula e nula, entao podemos interromper o raio de visao
                     if(!visivel)
