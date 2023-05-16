@@ -128,7 +128,6 @@ int main(void)
             // timer da explosão
             while (timerB < 5)
             {
-                halfdelay(5);
                 timerB++;
                 mvprintw(8, HudX + 7, "timerB=%d", timerB);
 
