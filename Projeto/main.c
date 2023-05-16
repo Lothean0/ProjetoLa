@@ -65,10 +65,9 @@ int main(void)
 
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
-
-    //int HudY = 0; // posiçoes do hud (canto sup esquerdo)
+    // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
     int HudX = MaxX;
-    //int MaxHudY = MaxY - 1;
+    // int MaxHudY = MaxY - 1;
     int MaxHudX = HudX + 24;
 
     mvhline(0, HudX, '#', 24);        // linha de cima
@@ -139,7 +138,13 @@ int main(void)
                     {
                         for (int xs = Xtemp - 2; xs <= Xtemp + 2; xs++)
                         {
-                            mapa[ys][xs].character = '.';
+                            if (ys == 0 || xs == 0 || ys == MaxY-1 || xs == MaxX)
+                            {
+                            }
+                            else
+                            {
+                                mapa[ys][xs].character = '.';
+                            }
                         }
                     }
                 }
