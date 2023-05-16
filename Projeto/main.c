@@ -153,7 +153,7 @@ int main(void)
         attron(jogador1.cor);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         attroff(jogador1.cor);
-        FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, win);
+        FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa);
         refresh();
 
         // Updates do hud #####
