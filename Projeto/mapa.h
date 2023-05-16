@@ -10,5 +10,5 @@ typedef struct mapa
 
 int randomgen(int timer);
 void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX]);
-void denoiser(Mapa **mapa, int MaxY, int MaxX);
+void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX]);
 #endif

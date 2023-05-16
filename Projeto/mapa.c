@@ -61,14 +61,14 @@ void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX])
     }
 }
 
-void denoiser(Mapa **mapa, int MaxY, int MaxX)
+void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX])
 {
     int maxreps = 7;
     for (int reps = 0; reps < maxreps; reps++)
     {
-        for (int ys = 1; ys < MaxY - 1; ys++)
+        for (int ys = 2; ys < MaxY - 1; ys++)
         {
-            for (int xs = 1; xs < MaxX - 1; xs++)
+            for (int xs = 2; xs < MaxX - 1; xs++)
             {
                 // Contador
                 int vizinhos = 0;

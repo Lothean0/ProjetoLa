@@ -88,9 +88,9 @@ int main(void)
             }
         }
     }*/
-    // denoiser(mapa,MaxY,MaxX);
+    denoiser(MaxY,MaxX, mapa);
     //  DENOISER
-    int maxreps = 7;
+    /*int maxreps = 7;
     for (int reps = 0; reps < maxreps; reps++)
     {
         for (int ys = 2; ys < MaxY - 1; ys++)
@@ -161,7 +161,7 @@ int main(void)
                 }
             }
         }
-    }
+    }*/
 
     // PRINT
     for (int ys = 0; ys < MaxY; ys++)
