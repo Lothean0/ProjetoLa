@@ -42,6 +42,27 @@ int main(void)
     getmaxyx(win, MaxY, MaxX);
     halfdelay(5);
 
+    // start screen
+    int intermitente = 0;
+    while (getch() != ' ')
+    {
+        noecho();
+        box(win, '|', '-');
+        // ascii art
+
+        if (intermitente % 2 == 0)
+        {
+            mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "PRESS SPACE TO CONTINUE");
+        }
+        else
+        {
+            mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "                       ");
+        }
+        refresh();
+    }
+
+    clear();
+
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
 
@@ -58,9 +79,9 @@ int main(void)
     // geracao de mapa
     Mapa mapa[MaxY][MaxX];
 
-    gera_mapa(MaxY,MaxX, mapa);
-    denoiser(MaxY,MaxX, mapa);
-    
+    gera_mapa(MaxY, MaxX, mapa);
+    denoiser(MaxY, MaxX, mapa);
+
     // PRINT
     for (int ys = 0; ys < MaxY; ys++)
     {
@@ -78,9 +99,9 @@ int main(void)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-             attron(COLOR_PAIR(Nao_Visivel));
+            attron(COLOR_PAIR(Nao_Visivel));
             mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-             attroff(COLOR_PAIR(Nao_Visivel));
+            attroff(COLOR_PAIR(Nao_Visivel));
         }
     }
     // int timer = 0; //inicia o timer
@@ -127,13 +148,12 @@ int main(void)
         else
         {
             mudarstate(&jogador1, tecla);
-            
         }
         move(jogador1.coorY, jogador1.coorX);
         attron(jogador1.cor);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         attroff(jogador1.cor);
-        FOV(jogador1.coorY, jogador1.coorX,MaxY, MaxX, mapa,win);
+        FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, win);
         refresh();
 
         // Updates do hud #####
