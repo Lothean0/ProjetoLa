@@ -10,7 +10,6 @@
 #define Visivel 1
 #define Nao_Visivel 2
 
-
 void inicializar_cor(void)
 {
     start_color();
@@ -38,6 +37,11 @@ void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX])
             int dy = j - player_y;
             int dx = i - player_x;
             int distancia = dx * dx + dy * dy;
+
+            if(mapa[j][i].cor == 1)
+            {
+                mapa[j][i].cor = 3;
+            }
             
             //verificar se a distancia calculada esta dentro do nosso raio de visao
             if(distancia <= raio * raio)
@@ -80,8 +84,7 @@ void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX])
                     oy += sin(angulo);
                     ox += cos(angulo);
 
-                }
-                
+                }   
             }
         }
     }
