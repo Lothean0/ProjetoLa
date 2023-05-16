@@ -42,14 +42,12 @@ void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX])
                 mapa[i][j].character = '#';
                 mapa[i][j].distancia = 0;
                 mapa[i][j].cor = COLOR_PAIR(Nao_Visivel);
-                mapa[i][j].visao = 0;
             }
             else
             {
                 mapa[i][j].character = '.'; // 55%
                 mapa[i][j].distancia = 0;
                 mapa[i][j].cor = COLOR_PAIR(Nao_Visivel);
-                mapa[i][j].visao = 0;
             }
             seed -= 42;
 
