@@ -115,7 +115,7 @@ void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX], WINDO
             else 
                 mapa[i][j].cor = Visto;
 
-            mvwprintw(win, i, j, "%c", mapa[i][j].character);
+            //mvwprintw(win, i, j, "%c", mapa[i][j].character);
                     
         }
     }

@@ -58,9 +58,9 @@ int main(void)
     // geracao de mapa
     Mapa mapa[MaxY][MaxX];
 
-    gera_mapa(MaxY,MaxX, mapa);
-    denoiser(MaxY,MaxX, mapa);
-    
+    gera_mapa(MaxY, MaxX, mapa);
+    denoiser(MaxY, MaxX, mapa);
+
     // PRINT
     for (int ys = 0; ys < MaxY; ys++)
     {
@@ -78,16 +78,18 @@ int main(void)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            // attron(COLOR_PAIR(Nao_Visivel));
+            attron(COLOR_PAIR(Nao_Visivel));
             mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-            // attroff(COLOR_PAIR(Nao_Visivel));
+            attroff(COLOR_PAIR(Nao_Visivel));
         }
     }
     // int timer = 0; //inicia o timer
     int tecla;
     // ciclo while que corre enquanto a tecla q nao e premida
+    clear();
     while (1)
     {
+
         // Timer
         // move(2, 2);
         //  printw("(%d)", timer);
@@ -126,13 +128,12 @@ int main(void)
         else
         {
             mudarstate(&jogador1, tecla);
-            
         }
         move(jogador1.coorY, jogador1.coorX);
         attron(jogador1.cor);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         attroff(jogador1.cor);
-        FOV(jogador1.coorY, jogador1.coorX,MaxY, MaxX, mapa,win);
+        FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, win);
         refresh();
 
         // Updates do hud #####
