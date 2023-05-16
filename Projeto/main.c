@@ -58,8 +58,8 @@ int main(void)
     // gerar mapa?
     Mapa mapa[MaxY][MaxX];
 
-    // gera_mapa(mapa,MaxY,MaxX);
-    int i, j, seed;
+    gera_mapa(MaxY,MaxX, mapa);
+    /*int i, j, seed;
     seed = (time(NULL));
     for (i = 0; i < MaxY; i++)
     {
@@ -87,7 +87,7 @@ int main(void)
                 mapa[i][j].character = '#';
             }
         }
-    }
+    }*/
     // denoiser(mapa,MaxY,MaxX);
     //  DENOISER
     int maxreps = 7;

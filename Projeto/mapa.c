@@ -5,6 +5,9 @@
 #include <time.h>
 #include "player.h"
 #include "mapa.h"
+#define Visivel 1
+#define Nao_Visivel 2
+#define Visto 3
 
 // #define x 1000
 // #define y 1000
@@ -18,8 +21,15 @@ int randomgen(int timer)
     return numero_aleatorio;
 }
 
-void gera_mapa(Mapa **mapa, int MaxY, int MaxX)
+void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX])
 {
+    /*for(int teste1 = 0; teste1<MaxY;teste1++)
+    {
+        for(int teste2 = 0; teste2<MaxX; teste2++)
+        {
+            mapa[teste1][teste2].character = ' ';
+        }
+    }*/
     int i, j, seed;
     seed = (time(NULL));
     for (i = 0; i < MaxY; i++)
@@ -31,11 +41,15 @@ void gera_mapa(Mapa **mapa, int MaxY, int MaxX)
             {
                 mapa[i][j].character = '#';
                 mapa[i][j].distancia = 0;
+                mapa[i][j].cor = COLOR_PAIR(Nao_Visivel);
+                mapa[i][j].visao = 0;
             }
             else
             {
                 mapa[i][j].character = '.'; // 55%
                 mapa[i][j].distancia = 0;
+                mapa[i][j].cor = COLOR_PAIR(Nao_Visivel);
+                mapa[i][j].visao = 0;
             }
             seed -= 42;
 
