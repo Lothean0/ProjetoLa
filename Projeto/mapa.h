@@ -10,5 +10,5 @@ typedef struct mapa
 int randomgen(int timer);
 void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX]);
 void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX]);
-void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win);
+void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX]);
 #endif

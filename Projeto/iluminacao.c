@@ -26,7 +26,7 @@ void colorir(Player *jogador)
 
 
 //Visualizaçao feita com um algoritmo de shadowcasting. Basicamente a ideia e ir vendo tudo a volta do player num raio e se encontrarmos parede metemos sombra para tudo que esteja depois dela
-void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
+void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     //raio de visao. esta a MaxX para que em teoria se possa ver o mapa todo
     int raio = MaxX;
