@@ -128,6 +128,7 @@ int main(void)
             // timer da explosão
             while (timerB < 5)
             {
+                halfdelay(5);
                 timerB++;
                 mvprintw(8, HudX + 7, "timerB=%d", timerB);
 
@@ -138,7 +139,7 @@ int main(void)
                     {
                         for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
                         {
-                            if (ys > 2 && xs > 2 && ys < MaxY-2 && xs < MaxX-2)
+                            if (ys > 0 && xs > 0 && ys < MaxY-1 && xs < MaxX-1)
                             {
                                 mapa[ys][xs].character = '.';
                             }
@@ -171,30 +172,30 @@ int main(void)
         // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
 
         {
-            start_color();
+            
             for (int ys = 0; ys < MaxY; ys++)
             {
                 for (int xs = 0; xs < MaxX; xs++)
                 {
                     if (ys != jogador1.coorY || xs != jogador1.coorX)
                     {
-                        if(mapa[ys][xs].cor==1) //visivel
+                        if(mapa[ys][xs].cor==Visivel) //visivel
                         {
-                            attron(COLOR_PAIR(1));
+                            attron(COLOR_PAIR(Visivel));
                             mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(1));
+                            attroff(COLOR_PAIR(Visivel));
                         }
-                        else if(mapa[ys][xs].cor==2) //Nao Visivel
+                        else if(mapa[ys][xs].cor==Nao_Visivel) //Nao Visivel
                         {
-                            attron(COLOR_PAIR(2));
+                            attron(COLOR_PAIR(Nao_Visivel));
                             mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(2));
+                            attroff(COLOR_PAIR(Nao_Visivel));
                         }
                         else                        // Ja visto
                         {
-                            attron(COLOR_PAIR(3));
+                            attron(COLOR_PAIR(Visto));
                             mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(3));
+                            attroff(COLOR_PAIR(Visto));
                         }
                     }
                 }
