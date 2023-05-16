@@ -15,7 +15,7 @@ void inicializar_cor(void)
     start_color();
     init_pair(Visivel, COLOR_WHITE, COLOR_BLACK);
     init_pair(Nao_Visivel, COLOR_BLACK, COLOR_BLACK);
-    init_pair(3,COLOR_CYAN, COLOR_BLACK);
+    init_pair(3,COLOR_BLUE, COLOR_BLACK);
 }
 
 void colorir(Player *jogador)
