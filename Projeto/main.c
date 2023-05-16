@@ -134,9 +134,9 @@ int main(void)
                 // Explosão
                 if (timerB == 5)
                 {
-                    for (int ys = Ytemp - 2; ys <= Ytemp + 2; ys++)
+                    for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
                     {
-                        for (int xs = Xtemp - 2; xs <= Xtemp + 2; xs++)
+                        for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
                         {
                             if (ys == 0 || xs == 0 || ys == MaxY-1 || xs == MaxX)
                             {
