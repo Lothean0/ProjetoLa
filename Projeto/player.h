@@ -13,6 +13,6 @@ typedef struct player
 void spawn(Player *jogador, int MaxY, int MaxX);
 void mudarstate(Player *jogador,int MaxX, int tecla, Mapa mapa[][MaxX]);
 void colorir(Player *jogador);
-void inicializar_cor();
+void inicializar_cor(void);
 
 #endif
