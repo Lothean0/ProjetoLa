@@ -138,13 +138,14 @@ int main(void)
                     {
                         for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
                         {
-                            if (ys == 0 || xs == 0 || ys == MaxY-1 || xs == MaxX)
-                            {
-                            }
-                            else
+                            if (ys > 2 && xs > 2 && ys < MaxY-2 && xs < MaxX-2)
                             {
                                 mapa[ys][xs].character = '.';
                             }
+                            //else
+                            //{
+                            //    mapa[ys][xs].character = '.';
+                            //}
                         }
                     }
                 }
@@ -152,7 +153,7 @@ int main(void)
         }
         else
         {
-            mudarstate(&jogador1, tecla);
+            mudarstate(&jogador1, MaxX, tecla, mapa);
         }
         move(jogador1.coorY, jogador1.coorX);
         attron(jogador1.cor);
@@ -170,15 +171,31 @@ int main(void)
         // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
 
         {
+            start_color();
             for (int ys = 0; ys < MaxY; ys++)
             {
                 for (int xs = 0; xs < MaxX; xs++)
                 {
-                    if (ys != jogador1.coorY && xs != jogador1.coorX)
+                    if (ys != jogador1.coorY || xs != jogador1.coorX)
                     {
-                         attron(mapa[ys][xs].cor);
-                        mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-                        attroff(mapa[ys][xs].cor);
+                        if(mapa[ys][xs].cor==1) //visivel
+                        {
+                            attron(COLOR_PAIR(1));
+                            mvaddch(ys, xs, mapa[ys][xs].character);
+                            attroff(COLOR_PAIR(1));
+                        }
+                        else if(mapa[ys][xs].cor==2) //Nao Visivel
+                        {
+                            attron(COLOR_PAIR(2));
+                            mvaddch(ys, xs, mapa[ys][xs].character);
+                            attroff(COLOR_PAIR(2));
+                        }
+                        else                        // Ja visto
+                        {
+                            attron(COLOR_PAIR(3));
+                            mvaddch(ys, xs, mapa[ys][xs].character);
+                            attroff(COLOR_PAIR(3));
+                        }
                     }
                 }
             }

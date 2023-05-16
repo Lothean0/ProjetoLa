@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include "player.h"
+#include "mapa.h"
 
 typedef struct vetor
 {
@@ -22,7 +23,7 @@ Vetor calcvetor(int tecla)
     direcao.coorY = 0;
 
     // input da tecla
-    //int tecla = getch();
+    // int tecla = getch();
 
     switch (tecla)
     {
@@ -76,9 +77,8 @@ Vetor calcvetor(int tecla)
 }
 
 // func que soma o vetor de ''calcvetor'' à posiçao do player depois de verificar se esta é valida
-void mudarstate(Player *jogador,int tecla)
+void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX])
 {
-
     // começa por pegar um vetor(input da tecla, etc...)
     Vetor direcao = calcvetor(tecla);
 
@@ -88,8 +88,8 @@ void mudarstate(Player *jogador,int tecla)
     pTEMP.coorY = (jogador->coorY) + (direcao.coorY);
 
     // mvinch como o char para onde o player quer ir. Isto e a condiçao para verificar e o movimento e possivel ou nao
-
-    switch (mvinch(pTEMP.coorY, pTEMP.coorX))
+    // mvinch nao funciona com cor, logo usamos .character na matriz mapa
+    switch (mapa[pTEMP.coorY][pTEMP.coorX].character)
     {
     // casos em que queremos ir para uma parede ou algum local cujo nao podemos ir
     case '#':

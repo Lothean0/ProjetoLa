@@ -1,5 +1,6 @@
 #ifndef ___PLAYER___
 #define ___PLAYER___
+#include "mapa.h"
 
 typedef struct player
 {
@@ -10,7 +11,7 @@ typedef struct player
 } Player;
 
 void spawn(Player *jogador, int MaxY, int MaxX);
-void mudarstate(Player *jogador,int tecla);
+void mudarstate(Player *jogador,int MaxX, int tecla, Mapa mapa[][MaxX]);
 void colorir(Player *jogador);
 void inicializar_cor();
 
