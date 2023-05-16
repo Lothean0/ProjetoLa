@@ -4,11 +4,11 @@ typedef struct mapa
 {
     char character;
     int distancia;
-    bool visao;
     int cor;
 } Mapa;
 
 int randomgen(int timer);
-void gera_mapa(Mapa **mapa, int MaxY, int MaxX);
-void denoiser(Mapa **mapa, int MaxY, int MaxX);
+void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX]);
+void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX]);
+void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX]);
 #endif

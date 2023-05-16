@@ -9,39 +9,24 @@
 // o ncurses usa ints para fazer pares de cores lolmao
 #define Visivel 1
 #define Nao_Visivel 2
-#define Visto 3
+
 
 void inicializar_cor(void)
 {
     start_color();
     init_pair(Visivel, COLOR_WHITE, COLOR_BLACK);
     init_pair(Nao_Visivel, COLOR_BLACK, COLOR_BLACK);
-    init_pair(Visto, COLOR_CYAN, COLOR_BLACK);
+    init_pair(3,COLOR_CYAN, COLOR_BLACK);
 }
 
 void colorir(Player *jogador)
 {
-    jogador->cor = COLOR_PAIR(Visto);
+    jogador->cor = COLOR_PAIR(3);
 }
 
-void colorirm(Mapa *mapa)
-{
-    if (mapa->visao == 1)
-    {
-        mapa->cor = COLOR_PAIR(Visivel);
-    }
-    else if (mapa->visao == 0)
-    {
-        mapa->cor = COLOR_PAIR(Nao_Visivel);
-    }
-    else
-    {
-        mapa->cor = COLOR_PAIR(Visto);
-    }
-}
 
 //Visualizaçao feita com um algoritmo de shadowcasting. Basicamente a ideia e ir vendo tudo a volta do player num raio e se encontrarmos parede metemos sombra para tudo que esteja depois dela
-void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
+void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     //raio de visao. esta a MaxX para que em teoria se possa ver o mapa todo
     int raio = MaxX;
@@ -64,7 +49,6 @@ void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
                 //este vai ser o raio de luz a ser lancado pelo player. usamos + 0.5 para conseguirmos atingir todas as celulas que estejam no caminho, incluindo as diagonais
                 float oy = player_y + 0.5;
                 float ox = player_x + 0.5;
-                bool visivel = true;
 
                 //ciclo while que vai percorrer o nosso mapa. vamos parar o ciclo quando ja tivermos percorrido o mapa todo
                 while (oy >= 0 && ox >= 0 && oy < MaxY && ox < MaxX)
@@ -76,14 +60,16 @@ void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
                     //se encontrarmos uma parede, marcamos esse local como nao visivel
                     if(mapa[verY][verX].character == '#')
                     {
-                        visivel = false;
+                        mapa[verY][verX].cor = Nao_Visivel;
+                    }
+                    else
+                    {
+                        mapa[verY][verX].cor = Visivel;
                     }
 
-                    //Marcar a visibilidade da celula.
-                    mapa[verY][verX].visao = mapa[verY][verX].visao || visivel;
 
                     //Se a visiblidade da celula e nula, entao podemos interromper o raio de visao
-                    if(!visivel)
+                    if(mapa[verY][verX].cor == Nao_Visivel)
                     {
                         break;
                     }
@@ -99,26 +85,5 @@ void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
         }
     }
 
-    //Novos loops sobre o mapa. O objetivo aqui e inicializar as cores de acordo com aquilo que conseguimos previamente no algoritmo de shadowcasting
-    for(int i=0;i<MaxY;i++)
-    {
-        for(int j=0;j<MaxX;j++)
-        {
-            if(mapa[i][j].visao == true)
-            {
-                attron(Visivel);
-            }
-            else if(mapa[i][j].visao == false)
-            {
-                attron(Nao_Visivel);
-            }
-            else attron(Visto);
-
-            mvaddch(i,j,mapa[i][j].character);
-            attroff(Visivel);
-            attroff(Nao_Visivel);
-            attroff(Visto);           
-        }
-    }
     refresh();
 }
