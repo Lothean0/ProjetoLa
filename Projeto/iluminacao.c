@@ -41,7 +41,7 @@ void colorirm(Mapa *mapa)
 }
 
 //Visualizaçao feita com um algoritmo de shadowcasting. Basicamente a ideia e ir vendo tudo a volta do player num raio e se encontrarmos parede metemos sombra para tudo que esteja depois dela
-void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
+void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
 {
     //raio de visao. esta a MaxX para que em teoria se possa ver o mapa todo
     int raio = MaxX;
@@ -106,18 +106,17 @@ void FOV(int player_y, int player_x, Mapa **mapa, int MaxY, int MaxX)
         {
             if(mapa[i][j].visao == true)
             {
-                attron(Visivel);
+                mapa[i][j].cor =  Visivel;
             }
             else if(mapa[i][j].visao == false)
             {
-                attron(Nao_Visivel);
+                mapa[i][j].cor = Nao_Visivel;   
             }
-            else attron(Visto);
+            else 
+                mapa[i][j].cor = Visto;
 
-            mvaddch(i,j,mapa[i][j].character);
-            attroff(Visivel);
-            attroff(Nao_Visivel);
-            attroff(Visto);           
+            mvwprintw(win, i, j, "%c", mapa[i][j].character);
+                    
         }
     }
     refresh();

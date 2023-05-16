@@ -126,11 +126,13 @@ int main(void)
         else
         {
             mudarstate(&jogador1, tecla);
+            
         }
         move(jogador1.coorY, jogador1.coorX);
         attron(jogador1.cor);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         attroff(jogador1.cor);
+        FOV(jogador1.coorY, jogador1.coorX,MaxY, MaxX, mapa,win);
         refresh();
 
         // Updates do hud #####
@@ -151,9 +153,9 @@ int main(void)
                     }
                     else
                     {
-                        // attron(mapa[ys][xs].cor);
+                        attron(mapa[ys][xs].cor);
                         mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-                        // attroff(mapa[ys][xs].cor);
+                         attroff(mapa[ys][xs].cor);
                     }
                 }
             }
