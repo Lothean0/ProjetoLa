@@ -3,11 +3,20 @@
 #include <ncurses.h>
 #include <math.h>
 #include <time.h>
+// #include <SDL2/SDL.h>
 #include "player.h"
 #include "mapa.h"
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3
+
+#define Visivel 1
+#define Nao_Visivel 2
+#define Visto 3
+
+/*SDL_AudioSpec wavSpec;
+Uint32 wavLength;
+Uint8 *wavBuffer;*/
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -21,6 +30,31 @@ void spawn(Player *jogador, int MaxY, int MaxX)
 
 int main(void)
 {
+    /*SDL_Init(SDL_INIT_AUDIO); // Inicia o som
+
+    if (SDL_LoadWAV("AHHH.wav", &wavSpec, &wavBuffer, &wavLength) == NULL)
+    {
+    }
+
+    SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+    if (deviceId == 0)
+    {
+    }
+    while (true)
+    {
+        int bomba_SOM = getch();
+
+        if (bomba_SOM == 'i')
+        {
+            SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+            SDL_PauseAudioDevice(deviceId, 0);
+        }
+    }
+
+    SDL_CloseAudioDevice(deviceId);
+    SDL_FreeWAV(wavBuffer);
+    SDL_Quit();*/
+
     // inicializa o jogador
     Player jogador1;
     jogador1.coorX = 0;
@@ -99,6 +133,7 @@ int main(void)
 
     gera_mapa(MaxY, MaxX, mapa);
     denoiser(MaxY, MaxX, mapa);
+    gerahole(MaxY, MaxX, mapa);
 
     // PRINT
     for (int ys = 0; ys < MaxY; ys++)
@@ -158,14 +193,14 @@ int main(void)
                     {
                         for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
                         {
-                            if (ys > 0 && xs > 0 && ys < MaxY-1 && xs < MaxX-1)
+                            if (ys > 0 && xs > 0 && ys < MaxY - 1 && xs < MaxX - 1)
                             {
                                 mapa[ys][xs].character = '.';
                             }
-                            //else
+                            // else
                             //{
-                            //    mapa[ys][xs].character = '.';
-                            //}
+                            //     mapa[ys][xs].character = '.';
+                            // }
                         }
                     }
                 }
@@ -191,31 +226,16 @@ int main(void)
         // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
 
         {
-            
+
             for (int ys = 0; ys < MaxY; ys++)
             {
                 for (int xs = 0; xs < MaxX; xs++)
                 {
                     if (ys != jogador1.coorY || xs != jogador1.coorX)
                     {
-                        if(mapa[ys][xs].cor==Visivel) //visivel
-                        {
-                            attron(COLOR_PAIR(Visivel));
-                            mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(Visivel));
-                        }
-                        else if(mapa[ys][xs].cor==Nao_Visivel) //Nao Visivel
-                        {
-                            attron(COLOR_PAIR(Nao_Visivel));
-                            mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(Nao_Visivel));
-                        }
-                        else                        // Ja visto
-                        {
-                            attron(COLOR_PAIR(Visto));
-                            mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(Visto));
-                        }
+                        attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
+                        mvaddch(ys, xs, mapa[ys][xs].character);
+                        attroff(COLOR_PAIR(mapa[ys][xs].cor));
                     }
                 }
             }

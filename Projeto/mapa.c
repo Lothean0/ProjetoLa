@@ -10,15 +10,15 @@
 #define Visto 3
 
 // fazer funcao para preecnher o mapa com hastags with probabilidade definida
-int randomgen(int timer)
+int randomgen(int seed)
 {
     // numero aleatoreo.
-    srand(timer);
+    srand(seed);
     int numero_aleatorio = rand() % 100;
     return numero_aleatorio;
 }
 
-void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX])
+void gera_mapa(int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     int i, j, seed;
     seed = (time(NULL));
@@ -49,7 +49,7 @@ void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX])
     }
 }
 
-void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX])
+void denoiser(int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     int maxreps = 7;
     for (int reps = 0; reps < maxreps; reps++)
@@ -121,6 +121,27 @@ void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX])
                     }
                 }
             }
+        }
+    }
+}
+
+void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
+{
+    int posx = 0;
+    int posy = 0;
+    while (mapa[posy][posx].character == '#')
+    {
+        srand(time(NULL));
+        posx = rand() % MaxX;
+        posy = rand() % MaxY;
+    }
+    for (int i = (posy - 1); i <= (posy + 1); i++)
+    {
+        for (int l = (posx - 1); l <= (posx + 1); l++)
+        {
+            mapa[i][l].character = 'X';
+            mapa[i][l].cor = 1;
+            mapa[i][l].distancia = 0;
         }
     }
 }
