@@ -4,8 +4,6 @@
 #include <math.h>
 #include <time.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
 #include "player.h"
 #include "mapa.h"
 #define Visivel 1
@@ -32,7 +30,7 @@ void spawn(Player *jogador, int MaxY, int MaxX)
 
 int main(void)
 {
-    SDL_Init(SDL_INIT_AUDIO); // Inicia o som
+    /*SDL_Init(SDL_INIT_AUDIO); // Inicia o som
 
     if (SDL_LoadWAV("AHHH.wav", &wavSpec, &wavBuffer, &wavLength) == NULL)
     {
@@ -55,7 +53,8 @@ int main(void)
 
     SDL_CloseAudioDevice(deviceId);
     SDL_FreeWAV(wavBuffer);
-    SDL_Quit();
+    SDL_Quit();*/
+    
     // inicializa o jogador
     Player jogador1;
     jogador1.coorX = 0;
