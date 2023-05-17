@@ -53,15 +53,15 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX])
                 float angulo = atan2(j - player_y, i - player_x);
 
                 // este vai ser o raio de luz a ser lancado pelo player. usamos + 0.5 para conseguirmos atingir todas as celulas que estejam no caminho, incluindo as diagonais
-                float oy = player_y + 0.5;
-                float ox = player_x + 0.5;
+                float origem_y = player_y + 0.5;
+                float origem_x = player_x + 0.5;
 
                 // ciclo while que vai percorrer o nosso mapa. vamos parar o ciclo quando ja tivermos percorrido o mapa todo
-                while (oy >= 0 && ox >= 0 && oy < MaxY && ox < MaxX)
+                while (origem_y >= 0 && origem_x >= 0 && origem_y < MaxY && origem_x < MaxX)
                 {
                     // como a matriz nao trabalha com floats, temos de fazer um cast de float para int das coordenadas a verificar para que o possamos fazer
-                    int verY = (int)oy;
-                    int verX = (int)ox;
+                    int verY = (int)origem_y;
+                    int verX = (int)origem_x;
 
                     // se encontrarmos uma parede, marcamos esse local como nao visivel
                     if (mapa[verY][verX].character == '#')
@@ -82,8 +82,8 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX])
 
                     // Caso seja visivel, avançar com o raio de visao. incrementamos os ox e oy por sin e cos do angulo porque temos de ver tudo a nossa volta
                     // e podemos pensar em coordenadas trigonometricas, em que o x e o cosseno e o y e o seno
-                    oy += sin(angulo);
-                    ox += cos(angulo);
+                    origem_y += sin(angulo);
+                    origem_x += cos(angulo);
                 }
             }
         }
