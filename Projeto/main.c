@@ -5,36 +5,9 @@
 #include <time.h>
 #include "player.h"
 #include "mapa.h"
-// biblioteca do som
-#include <SDL2/SDL.h>
-
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3
-
-SDL_AudioSpec wavSpec;
-Uint32 wavLength;
-Uint8 *wavBuffer;
-
-SDL_Init(SDL_INIT_AUDIO);  // Inicia o som
-
-if (SDL_LoadWAV("AHHH.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {}
-
-SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
-if (deviceId == 0) {}
-while (true) 
-{
-    int bomba_SOM = getch();
-
-    if (bomba_SOM == 'q') {
-        SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-        SDL_PauseAudioDevice(deviceId, 0);
-    }
-}
-
-SDL_CloseAudioDevice(deviceId);  
-SDL_FreeWAV(wavBuffer);
-SDL_Quit();
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -90,6 +63,25 @@ int main(void)
 
     clear();
 
+/*
+    typedef struct raio_distancia{
+        char g;
+        int monstro;
+    }Raio_Dist;
+
+    void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
+    {
+        //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
+        //Condicoes- Paredes, outros circulos e atingir a distancia maxima
+        
+        if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
+        if(g->mapa[R][C].character = '#') return;                       // se for parede
+        if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
+        g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
+
+        printw("%d", mapa[R][C].distancia);
+    }
+*/
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
     // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
@@ -143,6 +135,7 @@ int main(void)
 
         // updates ao jogador
         colorir(&jogador1);
+//                                  distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);
 
         // bomba
         if ((tecla = getch()) == 'e')
