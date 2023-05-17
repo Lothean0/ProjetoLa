@@ -3,7 +3,7 @@
 #include <ncurses.h>
 #include <math.h>
 #include <time.h>
-#include <SDL2/SDL.h>
+// #include <SDL2/SDL.h>
 #include "player.h"
 #include "mapa.h"
 #define Visivel 1
@@ -14,9 +14,9 @@
 #define Nao_Visivel 2
 #define Visto 3
 
-SDL_AudioSpec wavSpec;
+/*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
-Uint8 *wavBuffer;
+Uint8 *wavBuffer;*/
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
@@ -54,7 +54,7 @@ int main(void)
     SDL_CloseAudioDevice(deviceId);
     SDL_FreeWAV(wavBuffer);
     SDL_Quit();*/
-    
+
     // inicializa o jogador
     Player jogador1;
     jogador1.coorX = 0;
@@ -212,24 +212,9 @@ int main(void)
                 {
                     if (ys != jogador1.coorY || xs != jogador1.coorX)
                     {
-                        if (mapa[ys][xs].cor == Visivel) // visivel
-                        {
-                            attron(COLOR_PAIR(Visivel));
-                            mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(Visivel));
-                        }
-                        else if (mapa[ys][xs].cor == Nao_Visivel) // Nao Visivel
-                        {
-                            attron(COLOR_PAIR(Nao_Visivel));
-                            mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(Nao_Visivel));
-                        }
-                        else // Ja visto
-                        {
-                            attron(COLOR_PAIR(Visto));
-                            mvaddch(ys, xs, mapa[ys][xs].character);
-                            attroff(COLOR_PAIR(Visto));
-                        }
+                        attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
+                        mvaddch(ys, xs, mapa[ys][xs].character);
+                        attroff(COLOR_PAIR(mapa[ys][xs].cor));
                     }
                 }
             }
