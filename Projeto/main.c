@@ -96,7 +96,25 @@ int main(void)
     }
 
     clear();
+/*
+    typedef struct raio_distancia{
+        char g;
+        int monstro;
+    }Raio_Dist;
 
+    void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
+    {
+        //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
+        //Condicoes- Paredes, outros circulos e atingir a distancia maxima
+        
+        if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
+        if(g->mapa[R][C].character = '#') return;                       // se for parede
+        if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
+        g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
+
+        printw("%d", mapa[R][C].distancia);
+    }
+*/
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
     // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
@@ -150,8 +168,9 @@ int main(void)
         // timer++;
 
         // updates ao jogador
-        colorir(&jogador1);
-
+        colorir(&jogador1); 
+                 //           distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);     ////////////////////////////////////////funcao distancia de jogador aqui///////////////////////////////////
+ 
         // bomba
         if ((tecla = getch()) == 'e')
         {
