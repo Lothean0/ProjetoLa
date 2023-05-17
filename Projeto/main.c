@@ -3,6 +3,9 @@
 #include <ncurses.h>
 #include <math.h>
 #include <time.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_timer.h>
 #include "player.h"
 #include "mapa.h"
 #define Visivel 1

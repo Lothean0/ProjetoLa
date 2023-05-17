@@ -3,6 +3,8 @@
         "ncurses.h": "c",
         "state.h": "c",
         "stdio.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "player.h": "c",
+        "sdl_timer.h": "c"
     }
 }
