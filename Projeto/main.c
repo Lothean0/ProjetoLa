@@ -5,9 +5,36 @@
 #include <time.h>
 #include "player.h"
 #include "mapa.h"
+// biblioteca do som
+#include <SDL2/SDL.h>
+
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3
+
+SDL_AudioSpec wavSpec;
+Uint32 wavLength;
+Uint8 *wavBuffer;
+
+SDL_Init(SDL_INIT_AUDIO);  // Inicia o som
+
+if (SDL_LoadWAV("AHHH.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {}
+
+SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+if (deviceId == 0) {}
+while (true) 
+{
+    int bomba_SOM = getch();
+
+    if (bomba_SOM == 'q') {
+        SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+        SDL_PauseAudioDevice(deviceId, 0);
+    }
+}
+
+SDL_CloseAudioDevice(deviceId);  
+SDL_FreeWAV(wavBuffer);
+SDL_Quit();
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
