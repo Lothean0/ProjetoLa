@@ -114,6 +114,7 @@ int main(void)
 
     gera_mapa(MaxY, MaxX, mapa);
     denoiser(MaxY, MaxX, mapa);
+    gerahole(MaxY, MaxX, mapa);
 
     // PRINT
     for (int ys = 0; ys < MaxY; ys++)
