@@ -156,33 +156,9 @@ int main(void)
             // bomba
             if ((tecla = getch()) == 'e')
             {
-                int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
-
-                mapa[Ytemp][Xtemp].character = '0';
-                refresh();
-
-                // timer da explosão
-                while (timerB < 5)
-                {
-                    timerB++;
-                    mvprintw(8, HudX + 7, "timerB=%d", timerB);
-
-                    // Explosão
-                    if (timerB == 5)
-                    {
-                        for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
-                        {
-                            for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
-                            {
-                                if (ys > 0 && xs > 0 && ys < MaxY - 1 && xs < MaxX - 1 && mapa[ys][xs].character != 'X')
-                                {
-                                    mapa[ys][xs].character = '.';
-                                }
-                            }
-                        }
-                    }
-                }
+                bomba(MaxY, MaxX, mapa, jogador1, HudX, win);
             }
+            // ou movimento
             else
             {
                 mudarstate(&jogador1, MaxX, tecla, mapa);

@@ -28,7 +28,6 @@ void spawn(Player *jogador, int MaxY, int MaxX)
     }
 }
 
-
 void gera_mapa(int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     int i, j, seed;
@@ -159,11 +158,41 @@ void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
 
 void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
 {
-     for (int ys = 0; ys < MaxY; ys++)
+    for (int ys = 0; ys < MaxY; ys++)
+    {
+        for (int xs = 0; xs < MaxX; xs++)
         {
-            for (int xs = 0; xs < MaxX; xs++)
+            mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
+        }
+    }
+}
+
+void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX, WINDOW *win)
+{
+    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
+
+    mapa[Ytemp][Xtemp].character = '0';
+    refresh();
+
+    // timer da explosão
+    while (timerB < 5)
+    {
+        timerB++;
+        mvprintw(8, HudX + 7, "timerB=%d", timerB);
+
+        // Explosão
+        if (timerB == 5)
+        {
+            for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
             {
-                mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
+                for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
+                {
+                    if (ys > 0 && xs > 0 && ys < MaxY - 1 && xs < MaxX - 1 && mapa[ys][xs].character != 'X')
+                    {
+                        mapa[ys][xs].character = '.';
+                    }
+                }
             }
         }
+    }
 }
