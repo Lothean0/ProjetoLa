@@ -6,7 +6,7 @@
 // #include <SDL2/SDL.h>
 #include "player.h"
 #include "mapa.h"
-#include "startscreen.h"
+#include "menuhud.h"
 
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
@@ -43,6 +43,7 @@ int main(void)
     Player jogador1;
     jogador1.coorX = 0;
     jogador1.coorY = 0;
+    colorir(&jogador1);
 
     // cenas do stor
     cbreak();
@@ -54,7 +55,6 @@ int main(void)
     // inicializa a window e calcula a "resoluçao do ecra"
     WINDOW *win = initscr();
     inicializar_cor();
-    colorir(&jogador1);
     curs_set(0);
     int MaxY, MaxX;
     getmaxyx(win, MaxY, MaxX);
@@ -84,26 +84,13 @@ int main(void)
         }
     */
 
-    // while para refazer mapa chegando a um 'X';
-
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
 
     while (1)
     {
-
-        // HUD
-        MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
-        // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
-        int HudX = MaxX;
-        int MaxHudY = MaxY - 1;
-        int MaxHudX = HudX + 24;
-
-        mvhline(0, HudX, '_', 24);        // linha de cima
-        mvhline(MaxY - 1, HudX, '_', 24); // linha de baixo
-        mvvline(0, HudX, '|', MaxY);      // linha da esquerda
-        mvvline(0, MaxHudX, '|', MaxY);   // linha da direita
-
+        MaxX -= 25; // Faz com que o mapa tenha -25 casas que a win (25 casas para o hud )
+        
         // geracao de mapa
         Mapa mapa[MaxY][MaxX];
         gera_mapa(MaxY, MaxX, mapa);
@@ -116,20 +103,22 @@ int main(void)
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         int tecla;
 
+        //HUD
+        hudbox(MaxX,MaxY);
+
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X')
         {
             // updates ao jogador
+            updatehud(MaxX, MaxY, jogador1, FLOOR, win); //HUD
             colorir(&jogador1);
-            //           distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);     ////////////////////////////////////////funcao distancia de jogador aqui///////////////////////////////////
+            //distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);     ////////////////////////////////////////funcao distancia de jogador aqui///////////////////////////////////
 
             // bomba
             if ((tecla = getch()) == 'e')
             {
-                bomba(MaxY, MaxX, mapa, jogador1, HudX);
-            }
-            // ou movimento
-            else
+                bomba(MaxY, MaxX, mapa, jogador1, MaxX);
+            }else // ou movimento
             {
                 mudarstate(&jogador1, MaxX, tecla, mapa);
             }
@@ -143,13 +132,6 @@ int main(void)
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa);
 
             refresh();
-
-            // Updates do hud #####
-            // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
-
-            mvprintw(4, HudX + 7, "JOGADOR 1");
-            mvprintw(7, HudX + 4, "POS : ( %d , %d )  ", jogador1.coorX, jogador1.coorY);
-            mvprintw(MaxHudY - 3, HudX + 6, "FLOOR ( %d )  ", FLOOR);
 
             // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
             for (int ys = 0; ys < MaxY; ys++)
