@@ -140,7 +140,7 @@ void updatehud(int MaxX, int MaxY, Player jogador1, int FLOOR, WINDOW *win)
     mvwprintw(win, MaxHudY - 7, MidHudX - 2, "4   6");
     mvwprintw(win, MaxHudY - 6, MidHudX - 2, "1 2 3");
     mvwprintw(win, MaxHudY - 4, MidHudX - 4, "BOMBS - E");
-    mvwprintw(win, MaxHudY - 2, MidHudX - 4, "QUIT - E");
+    mvwprintw(win, MaxHudY - 2, MidHudX - 4, "QUIT - Q");
 
     wrefresh(win);
 }
