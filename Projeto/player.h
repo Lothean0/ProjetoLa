@@ -1,7 +1,6 @@
 #ifndef ___PLAYER___
 #define ___PLAYER___
 #include "mapa.h"
-
 typedef struct player
 {
     int coorY;

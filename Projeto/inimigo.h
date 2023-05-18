@@ -1,7 +1,6 @@
-#ifndef ___ENIMIGO___
-#define ___ENIMIGO___
+#ifndef ___INIMIGO___
+#define ___INIMIGO___
 #include "mapa.h"
-
 typedef struct inimigo
 {
     int coorY;
@@ -11,4 +10,5 @@ typedef struct inimigo
 
 } Inimigo;
 
+void spawnenimigo( Inimigo *inimigo, int MaxY, int MaxX);
 #endif

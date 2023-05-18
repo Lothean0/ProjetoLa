@@ -5,6 +5,7 @@
 #include <time.h>
 #include "player.h"
 #include "mapa.h"
+#include "inimigo.h"
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3
@@ -25,6 +26,17 @@ void spawn(Player *jogador, int MaxY, int MaxX)
         srand(time(NULL));
         jogador->coorY = rand() % MaxY;
         jogador->coorX = rand() % MaxX;
+    }
+}
+void spawnenimigo( Inimigo *inimigo, int MaxY, int MaxX)
+{
+    while (mvinch(inimigo->coorY, inimigo->coorX) == '#' || mvinch(inimigo->coorY, inimigo->coorX) == '@' || mvinch(inimigo->coorY, inimigo->coorX) == '%')
+    {
+        srand(time(NULL));
+        inimigo->coorY = rand() % MaxY;
+        inimigo->coorX = rand() % MaxX;
+        inimigo->tipo=0;
+        inimigo->cor=Visivel;
     }
 }
 

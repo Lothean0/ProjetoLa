@@ -27,7 +27,7 @@ void colorir(Player *jogador)
 }
 
 // Visualizaçao feita com um algoritmo de shadowcasting. Basicamente a ideia e ir vendo tudo a volta do player num raio e se encontrarmos parede metemos sombra para tudo que esteja depois dela
-void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX])
+void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inimigo inimigo[], int qinimigos)
 {
     // raio de visao. esta a MaxX para que em teoria se possa ver o mapa todo
     int raio = MaxX;
@@ -68,6 +68,16 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX])
                         int verY = (int)origem_y;
                         int verX = (int)origem_x;
 
+
+                        for (int i = 0; i < qinimigos; i++)
+                        {
+                            if (inimigo[i].coorX == verX || inimigo[i].coorY == verY)
+                            {
+                                inimigo[i].cor = Visivel;
+                            }
+                            else
+                                inimigo[i].cor = Nao_Visivel;
+                        }
                         // se encontrarmos uma parede, marcamos esse local como nao visivel
                         if (mapa[verY][verX].character == '#')
                         {

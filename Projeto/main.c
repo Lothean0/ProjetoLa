@@ -7,6 +7,7 @@
 #include "player.h"
 #include "mapa.h"
 #include "menuhud.h"
+#include "inimigo.h"
 
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
@@ -90,7 +91,7 @@ int main(void)
     while (1)
     {
         MaxX -= 25; // Faz com que o mapa tenha -25 casas que a win (25 casas para o hud )
-        
+
         // geracao de mapa
         Mapa mapa[MaxY][MaxX];
         gera_mapa(MaxY, MaxX, mapa);
@@ -101,24 +102,33 @@ int main(void)
         // coloca o jogador numa posicao random do ecra
         spawn(&jogador1, MaxY, MaxX);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
+        int qinimigo = rand() % 5 + 5;
+        Inimigo inimigo[qinimigo];
+        for (int i = 0; i < qinimigo; i++)
+        {
+            spawnenimigo(&inimigo[i], MaxY, MaxX);
+            mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' | A_BOLD);
+        }
+
         int tecla;
 
-        //HUD
-        hudbox(MaxX,MaxY);
+        // HUD
+        hudbox(MaxX, MaxY);
 
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X')
         {
             // updates ao jogador
-            updatehud(MaxX, MaxY, jogador1, FLOOR, win); //HUD
+            updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
-            //distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);     ////////////////////////////////////////funcao distancia de jogador aqui///////////////////////////////////
+            // distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);     ////////////////////////////////////////funcao distancia de jogador aqui///////////////////////////////////
 
             // bomba
             if ((tecla = getch()) == 'e')
             {
                 bomba(MaxY, MaxX, mapa, jogador1, MaxX);
-            }else // ou movimento
+            }
+            else // ou movimento
             {
                 mudarstate(&jogador1, MaxX, tecla, mapa);
             }
@@ -129,21 +139,39 @@ int main(void)
             attroff(jogador1.cor);
 
             // Visao
-            FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa);
+            FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, inimigo, qinimigo);
+
+            // print inimigo
+            for (int i = 0; i < qinimigo; i++)
+            {
+                attron(inimigo[i].cor);
+                mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' | A_BOLD);
+                attroff(inimigo[i].cor);
+            }
 
             refresh();
 
             // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
+            bool print = true;
             for (int ys = 0; ys < MaxY; ys++)
             {
                 for (int xs = 0; xs < MaxX; xs++)
                 {
-                    if (ys != jogador1.coorY || xs != jogador1.coorX)
+                    for (int i = 0; i < qinimigo; i++)
+                    {
+                        if (ys == inimigo[i].coorY && xs == inimigo[i].coorX)
+                        {
+                            print=false;
+                        }
+                    }
+
+                    if ((ys != jogador1.coorY || xs != jogador1.coorX) && print)
                     {
                         attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
                         mvaddch(ys, xs, mapa[ys][xs].character);
                         attroff(COLOR_PAIR(mapa[ys][xs].cor));
                     }
+                    print=true;
                 }
             }
             refresh();
