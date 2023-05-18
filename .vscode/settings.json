@@ -5,6 +5,7 @@
         "stdio.h": "c",
         "unistd.h": "c",
         "player.h": "c",
-        "sdl_timer.h": "c"
+        "sdl_timer.h": "c",
+        "stdlib.h": "c"
     }
 }

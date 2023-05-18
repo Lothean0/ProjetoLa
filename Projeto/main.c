@@ -6,6 +6,7 @@
 // #include <SDL2/SDL.h>
 #include "player.h"
 #include "mapa.h"
+#include "startscreen.h"
 
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
@@ -60,40 +61,9 @@ int main(void)
     halfdelay(5);
 
     // start screen
-    int intermitente = 0;
-    while (getch() != ' ')
-    {
-        noecho();
-        box(win, '|', '-');
-        // ascii art
-
-        if (intermitente % 2 == 0)
-        {
-            mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "PRESS SPACE TO CONTINUE");
-        }
-        else
-        {
-            mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "                       ");
-        }
-        mvprintw((MaxY / 2) - 16, (MaxX / 2) - 53, "                                                    _..._                                                       ");
-        mvprintw((MaxY / 2) - 15, (MaxX / 2) - 53, "                                                 .-'_..._''.                .---..---.                          ");
-        mvprintw((MaxY / 2) - 14, (MaxX / 2) - 53, "/|        .--.   _..._                         .' .'      '.\\  .        .--.|   ||   |.--.   _..._              ");
-        mvprintw((MaxY / 2) - 13, (MaxX / 2) - 53, "||        |__| .'     '.   .--./)             / .'           .'|        |__||   ||   ||__| .'     '.   .--./)   ");
-        mvprintw((MaxY / 2) - 12, (MaxX / 2) - 53, "||        .--..   .-.   . /.''\\             . '            <  |        .--.|   ||   |.--..   .-.   . /.''\\    ");
-        mvprintw((MaxY / 2) - 11, (MaxX / 2) - 53, "||  __    |  ||  '   '  || |  | |            | |             | |        |  ||   ||   ||  ||  '   '  || |  | ||   ");
-        mvprintw((MaxY / 2) - 10, (MaxX / 2) - 53, "||/'__ '. |  ||  |   |  | \\`-' /             | |             | | .'''-. |  ||   ||   ||  ||  |   |  | \\`-' /    ");
-        mvprintw((MaxY / 2) - 9, (MaxX / 2) - 53, "|:/`  '. '|  ||  |   |  | /(\"'`              . '             | |/.'''. \\|  ||   ||   ||  ||  |   |  | /(\"'`     ");
-        mvprintw((MaxY / 2) - 8, (MaxX / 2) - 53, "||     | ||  ||  |   |  | \\ '---.             \\ '.          .|  /    | ||  ||   ||   ||  ||  |   |  | \\ '---.   ");
-        mvprintw((MaxY / 2) - 7, (MaxX / 2) - 53, "||\\    / '|__||  |   |  |  /''.\\             '. `._____.-'/| |     | ||__||   ||   ||__||  |   |  |  /''.\\  ");
-        mvprintw((MaxY / 2) - 6, (MaxX / 2) - 53, "|/\'..' /     |  |   |  | ||     ||              `-.______ / | |     | |    '---''---'    |  |   |  | ||     || ");
-        mvprintw((MaxY / 2) - 5, (MaxX / 2) - 53, "'  `'-'`      |  |   |  | \'. __//                        `  | '.    | '.                 |  |   |  | \'. __//  ");
-        mvprintw((MaxY / 2) - 4, (MaxX / 2) - 53, "              '--'   '--'  `'---'                            '---'   '---'                '--'   '--'  `'---'   ");
-        mvprintw((MaxY / 2) - 3, (MaxX / 2) - 53, "                                                                                                                 ");
-        intermitente += 1;
-        refresh();
-    }
-
+    startscreen(MaxX, MaxY, win);
     clear();
+
     /*
         typedef struct raio_distancia{
             char g;
@@ -171,8 +141,7 @@ int main(void)
 
             // Visao
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa);
-            
-            
+
             refresh();
 
             // Updates do hud #####
