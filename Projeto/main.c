@@ -6,27 +6,11 @@
 // #include <SDL2/SDL.h>
 #include "player.h"
 #include "mapa.h"
-#define Visivel 1
-#define Nao_Visivel 2
-#define Visto 3
-
-#define Visivel 1
-#define Nao_Visivel 2
-#define Visto 3
+#include "startscreen.h"
 
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
 Uint8 *wavBuffer;*/
-
-void spawn(Player *jogador, int MaxY, int MaxX)
-{
-    while (mvinch(jogador->coorY, jogador->coorX) == '#')
-    {
-        srand(time(NULL));
-        jogador->coorY = rand() % MaxY;
-        jogador->coorX = rand() % MaxX;
-    }
-}
 
 int main(void)
 {
@@ -77,45 +61,37 @@ int main(void)
     halfdelay(5);
 
     // start screen
-    int intermitente = 0;
-    while (getch() != ' ')
-    {
-        noecho();
-        box(win, '|', '-');
-        // ascii art
-
-        if (intermitente % 2 == 0)
-        {
-            mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "PRESS SPACE TO CONTINUE");
-        }
-        else
-        {
-            mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "                       ");
-        }
-        refresh();
-    }
-
+    startscreen(MaxX, MaxY, win);
     clear();
 
-/*
-    typedef struct raio_distancia{
-        char g;
-        int monstro;
-    }Raio_Dist;
+    /*
+        typedef struct raio_distancia{
+            char g;
+            int monstro;
+        }Raio_Dist;
 
-    void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
+        void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
+        {
+            //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
+            //Condicoes- Paredes, outros circulos e atingir a distancia maxima
+
+            if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
+            if(g->mapa[R][C].character = '#') return;                       // se for parede
+            if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
+            g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
+
+            printw("%d", mapa[R][C].distancia);
+        }
+    */
+
+    // while para refazer mapa chegando a um 'X';
+
+    // Floors armazena o floor em que o jogador esta
+    int FLOOR = 0;
+
+    while (1)
     {
-        //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
-        //Condicoes- Paredes, outros circulos e atingir a distancia maxima
-        
-        if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
-        if(g->mapa[R][C].character = '#') return;                       // se for parede
-        if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
-        g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
 
-        printw("%d", mapa[R][C].distancia);
-    }
-*/
     // HUD
     MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
     // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
@@ -123,34 +99,25 @@ int main(void)
     // int MaxHudY = MaxY - 1;
     int MaxHudX = HudX + 24;
 
-    mvhline(0, HudX, '_', 24);        // linha de cima
-    mvhline(MaxY - 1, HudX, '_', 24); // linha de baixo
-    mvvline(0, HudX, '|', MaxY);      // linha da esquerda
-    mvvline(0, MaxHudX, '|', MaxY);   // linha da direita
+        mvhline(0, HudX, '_', 24);        // linha de cima
+        mvhline(MaxY - 1, HudX, '_', 24); // linha de baixo
+        mvvline(0, HudX, '|', MaxY);      // linha da esquerda
+        mvvline(0, MaxHudX, '|', MaxY);   // linha da direita
 
-    // geracao de mapa
-    Mapa mapa[MaxY][MaxX];
+        // geracao de mapa
+        Mapa mapa[MaxY][MaxX];
+        gera_mapa(MaxY, MaxX, mapa);
+        denoiser(MaxY, MaxX, mapa);
+        gerahole(MaxY, MaxX, mapa);
+        imprime(MaxY, MaxX, mapa, win);
 
-    gera_mapa(MaxY, MaxX, mapa);
-    denoiser(MaxY, MaxX, mapa);
-    gerahole(MaxY, MaxX, mapa);
+        // coloca o jogador numa posicao random do ecra
+        spawn(&jogador1, MaxY, MaxX);
+        mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
+        int tecla;
 
-    // PRINT
-    for (int ys = 0; ys < MaxY; ys++)
-    {
-        for (int xs = 0; xs < MaxX; xs++)
-        {
-            mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-        }
-    }
-
-    // coloca o jogador numa posicao random do ecra
-    spawn(&jogador1, MaxY, MaxX);
-    mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
-
-    for (int ys = 0; ys < MaxY; ys++)
-    {
-        for (int xs = 0; xs < MaxX; xs++)
+        // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
+        while (mapa[jogador1.coorY][jogador1.coorX].character != 'X')
         {
             attron(COLOR_PAIR(Nao_Visivel));
             mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
@@ -170,63 +137,36 @@ int main(void)
 
         // updates ao jogador
         colorir(&jogador1);
-//                                  distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);
 
-        // bomba
-        if ((tecla = getch()) == 'e')
-        {
-            int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
+            // bomba
+            if ((tecla = getch()) == 'e')
+            {
+                bomba(MaxY, MaxX, mapa, jogador1, HudX);
+            }
+            // ou movimento
+            else
+            {
+                mudarstate(&jogador1, MaxX, tecla, mapa);
+            }
 
-            mapa[Ytemp][Xtemp].character = '0';
+            // print player
+            attron(jogador1.cor);
+            mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
+            attroff(jogador1.cor);
+
+            // Visao
+            FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa);
+
             refresh();
 
-            // timer da explosão
-            while (timerB < 5)
-            {
-                timerB++;
-                mvprintw(8, HudX + 7, "timerB=%d", timerB);
+            // Updates do hud #####
+            // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
 
-                // Explosão
-                if (timerB == 5)
-                {
-                    for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
-                    {
-                        for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
-                        {
-                            if (ys > 0 && xs > 0 && ys < MaxY - 1 && xs < MaxX - 1)
-                            {
-                                mapa[ys][xs].character = '.';
-                            }
-                            // else
-                            //{
-                            //     mapa[ys][xs].character = '.';
-                            // }
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            mudarstate(&jogador1, MaxX, tecla, mapa);
-        }
-        move(jogador1.coorY, jogador1.coorX);
-        attron(jogador1.cor);
-        mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
-        attroff(jogador1.cor);
-        FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa);
-        refresh();
+            mvprintw(4, HudX + 7, "JOGADOR 1");
+            mvprintw(7, HudX + 4, "POS : ( %d , %d )  ", jogador1.coorX, jogador1.coorY);
+            mvprintw(MaxHudY - 3, HudX + 6, "FLOOR ( %d )  ", FLOOR);
 
-        // Updates do hud #####
-        // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
-
-        mvprintw(4, HudX + 7, "JOGADOR 1");
-        mvprintw(7, HudX + 4, "POS : ( %d , %d )", jogador1.coorX, jogador1.coorY);
-
-        // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
-
-        {
-
+            // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
             for (int ys = 0; ys < MaxY; ys++)
             {
                 for (int xs = 0; xs < MaxX; xs++)
@@ -239,8 +179,11 @@ int main(void)
                     }
                 }
             }
+            refresh();
         }
-        refresh();
+        clear();
+        MaxX += 25;
+        FLOOR -= 1;
     }
     endwin();
     return 0;

@@ -18,6 +18,16 @@ int randomgen(int seed)
     return numero_aleatorio;
 }
 
+void spawn(Player *jogador, int MaxY, int MaxX)
+{
+    while (mvinch(jogador->coorY, jogador->coorX) == '#')
+    {
+        srand(time(NULL));
+        jogador->coorY = rand() % MaxY;
+        jogador->coorX = rand() % MaxX;
+    }
+}
+
 void gera_mapa(int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     int i, j, seed;
@@ -140,8 +150,19 @@ void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
         for (int l = (posx - 1); l <= (posx + 1); l++)
         {
             mapa[i][l].character = 'X';
-            mapa[i][l].cor = 1;
+            mapa[i][l].cor = 2;
             mapa[i][l].distancia = 0;
+        }
+    }
+}
+
+void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
+{
+    for (int ys = 0; ys < MaxY; ys++)
+    {
+        for (int xs = 0; xs < MaxX; xs++)
+        {
+            mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
         }
     }
 }

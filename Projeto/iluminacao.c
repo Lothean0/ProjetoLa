@@ -36,58 +36,63 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX])
     {
         for (int j = 0; j < MaxY; j++)
         {
-            int dy = j - player_y;
-            int dx = i - player_x;
-            int distancia = dx * dx + dy * dy;
-
-            if (mapa[j][i].cor == Visivel)
+            if (mapa[j][i].character == 'X')
             {
-                mapa[j][i].cor = Visto;
             }
-
-            // verificar se a distancia calculada esta dentro do nosso raio de visao
-            if (distancia <= raio * raio)
+            else
             {
-                // encontrar o angulo entre a celula e o jogador. a conta dentro de atan2 e o arctangente do angulo, e o atan2 calcula assim o angulo
-                // talvez possamos usar outra maneira para calcular o angulo, com o arcsen ou o arccos
-                float angulo = atan2(j - player_y, i - player_x);
+                int dy = j - player_y;
+                int dx = i - player_x;
+                int distancia = dx * dx + dy * dy;
 
-                // este vai ser o raio de luz a ser lancado pelo player. usamos + 0.5 para conseguirmos atingir todas as celulas que estejam no caminho, incluindo as diagonais
-                float origem_y = player_y + 0.5;
-                float origem_x = player_x + 0.5;
-
-                // ciclo while que vai percorrer o nosso mapa. vamos parar o ciclo quando ja tivermos percorrido o mapa todo
-                while (origem_y >= 0 && origem_x >= 0 && origem_y < MaxY && origem_x < MaxX)
+                if (mapa[j][i].cor == Visivel)
                 {
-                    // como a matriz nao trabalha com floats, temos de fazer um cast de float para int das coordenadas a verificar para que o possamos fazer
-                    int verY = (int)origem_y;
-                    int verX = (int)origem_x;
+                    mapa[j][i].cor = Visto;
+                }
 
-                    // se encontrarmos uma parede, marcamos esse local como nao visivel
-                    if (mapa[verY][verX].character == '#')
-                    {
-                        mapa[verY][verX].cor = Visivel;
-                        break;
-                    }
-                    else
-                    {
-                        mapa[verY][verX].cor = Visivel;
-                    }
+                // verificar se a distancia calculada esta dentro do nosso raio de visao
+                if (distancia <= raio * raio)
+                {
+                    // encontrar o angulo entre a celula e o jogador. a conta dentro de atan2 e o arctangente do angulo, e o atan2 calcula assim o angulo
+                    // talvez possamos usar outra maneira para calcular o angulo, com o arcsen ou o arccos
+                    float angulo = atan2(j - player_y, i - player_x);
 
-                    // Se a visiblidade da celula e nula, entao podemos interromper o raio de visao
-                    if (mapa[verY][verX].cor == Nao_Visivel)
-                    {
-                        break;
-                    }
+                    // este vai ser o raio de luz a ser lancado pelo player. usamos + 0.5 para conseguirmos atingir todas as celulas que estejam no caminho, incluindo as diagonais
+                    float origem_y = player_y + 0.5;
+                    float origem_x = player_x + 0.5;
 
-                    // Caso seja visivel, avançar com o raio de visao. incrementamos os ox e oy por sin e cos do angulo porque temos de ver tudo a nossa volta
-                    // e podemos pensar em coordenadas trigonometricas, em que o x e o cosseno e o y e o seno
-                    origem_y += sin(angulo);
-                    origem_x += cos(angulo);
+                    // ciclo while que vai percorrer o nosso mapa. vamos parar o ciclo quando ja tivermos percorrido o mapa todo
+                    while (origem_y >= 0 && origem_x >= 0 && origem_y < MaxY && origem_x < MaxX)
+                    {
+                        // como a matriz nao trabalha com floats, temos de fazer um cast de float para int das coordenadas a verificar para que o possamos fazer
+                        int verY = (int)origem_y;
+                        int verX = (int)origem_x;
+
+                        // se encontrarmos uma parede, marcamos esse local como nao visivel
+                        if (mapa[verY][verX].character == '#')
+                        {
+                            mapa[verY][verX].cor = Visivel;
+                            break;
+                        }
+                        else
+                        {
+                            mapa[verY][verX].cor = Visivel;
+                        }
+
+                        // Se a visiblidade da celula e nula, entao podemos interromper o raio de visao
+                        if (mapa[verY][verX].cor == Nao_Visivel)
+                        {
+                            break;
+                        }
+
+                        // Caso seja visivel, avançar com o raio de visao. incrementamos os ox e oy por sin e cos do angulo porque temos de ver tudo a nossa volta
+                        // e podemos pensar em coordenadas trigonometricas, em que o x e o cosseno e o y e o seno
+                        origem_y += sin(angulo);
+                        origem_x += cos(angulo);
+                    }
                 }
             }
         }
     }
-
     refresh();
 }
