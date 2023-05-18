@@ -23,7 +23,6 @@ Vetor calcvetor(int tecla)
     direcao.coorY = 0;
 
     // input da tecla
-    // int tecla = getch();
 
     switch (tecla)
     {
