@@ -7,11 +7,9 @@
 #include "player.h"
 #include "mapa.h"
 
-
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
 Uint8 *wavBuffer;*/
-
 
 int main(void)
 {
@@ -86,9 +84,7 @@ int main(void)
         mvprintw((MaxY / 2) + 14, (MaxX / 2) - 12, "||/'__ '. |  ||  |   |  | \\`-' /             | |             | | .'''-. |  ||   ||   ||  ||  |   |  | \\`-' /    ");
         mvprintw((MaxY / 2) + 15, (MaxX / 2) - 12, "|:/`  '. '|  ||  |   |  | /(\"'`              . '             | |/.'''. \\|  ||   ||   ||  ||  |   |  | /(\"'`     ");
         mvprintw((MaxY / 2) + 16, (MaxX / 2) - 12, "||     | ||  ||  |   |  | \\ '---.             \\ '.          .|  /    | ||  ||   ||   ||  ||  |   |  | \\ '---.   ");
-        mvprintw((MaxY / 2) + 17, (MaxX / 2) - 12, "||\\    / '|__||  |   |  |  /'"
-                                                   "'.\\             '. `._____.-'/| |     | ||__||   ||   ||__||  |   |  |  /'"
-                                                   "'.\\  ");
+        mvprintw((MaxY / 2) + 17, (MaxX / 2) - 12, "||\\    / '|__||  |   |  |  /''.\\             '. `._____.-'/| |     | ||__||   ||   ||__||  |   |  |  /''.\\  ");
         mvprintw((MaxY / 2) + 18, (MaxX / 2) - 12, "|/\'..' /     |  |   |  | ||     ||              `-.______ / | |     | |    '---''---'    |  |   |  | ||     || ");
         mvprintw((MaxY / 2) + 19, (MaxX / 2) - 12, "'  `'-'`      |  |   |  | \'. __//                        `  | '.    | '.                 |  |   |  | \'. __//  ");
         mvprintw((MaxY / 2) + 20, (MaxX / 2) - 12, "              '--'   '--'  `'---'                            '---'   '---'                '--'   '--'  `'---'   ");
@@ -118,6 +114,10 @@ int main(void)
     */
 
     // while para refazer mapa chegando a um 'X';
+
+    // Floors armazena o floor em que o jogador esta
+    int FLOOR = 0;
+
     while (1)
     {
 
@@ -125,7 +125,7 @@ int main(void)
         MaxX -= 25; // Faz com que o mapa tenha -20 casas que a win (20 casas para o hud )
         // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
         int HudX = MaxX;
-        // int MaxHudY = MaxY - 1;
+        int MaxHudY = MaxY - 1;
         int MaxHudX = HudX + 24;
 
         mvhline(0, HudX, '_', 24);        // linha de cima
@@ -135,27 +135,19 @@ int main(void)
 
         // geracao de mapa
         Mapa mapa[MaxY][MaxX];
-
         gera_mapa(MaxY, MaxX, mapa);
         denoiser(MaxY, MaxX, mapa);
         gerahole(MaxY, MaxX, mapa);
         imprime(MaxY, MaxX, mapa, win);
-        // PRINT
-       
+
         // coloca o jogador numa posicao random do ecra
         spawn(&jogador1, MaxY, MaxX);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
-        // int timer = 0; //inicia o timer
         int tecla;
-        // ciclo while que corre enquanto a tecla q nao e premida
-        while (mapa[jogador1.coorY][jogador1.coorX].character!='X')
+
+        // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
+        while (mapa[jogador1.coorY][jogador1.coorX].character != 'X')
         {
-
-            // Timer
-            // move(2, 2);
-            //  printw("(%d)", timer);
-            // timer++;
-
             // updates ao jogador
             colorir(&jogador1);
             //           distancia_jogador(jogador1.coorY, jogador1.coorX, 20, g);     ////////////////////////////////////////funcao distancia de jogador aqui///////////////////////////////////
@@ -205,7 +197,8 @@ int main(void)
             // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
 
             mvprintw(4, HudX + 7, "JOGADOR 1");
-            mvprintw(7, HudX + 4, "POS : ( %d , %d )", jogador1.coorX, jogador1.coorY);
+            mvprintw(7, HudX + 4, "POS : ( %d , %d )  ", jogador1.coorX, jogador1.coorY);
+            mvprintw(MaxHudY - 3, HudX + 6, "FLOOR ( %d )  ", FLOOR);
 
             // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
             for (int ys = 0; ys < MaxY; ys++)
@@ -223,7 +216,8 @@ int main(void)
             refresh();
         }
         clear();
-        MaxX+=25;
+        MaxX += 25;
+        FLOOR -= 1;
     }
     endwin();
     return 0;
