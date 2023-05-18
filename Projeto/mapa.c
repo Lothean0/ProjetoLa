@@ -150,7 +150,7 @@ void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
         for (int l = (posx - 1); l <= (posx + 1); l++)
         {
             mapa[i][l].character = 'X';
-            mapa[i][l].cor = 1;
+            mapa[i][l].cor = 2;
             mapa[i][l].distancia = 0;
         }
     }
@@ -167,7 +167,7 @@ void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
     }
 }
 
-void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX, WINDOW *win)
+void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
 {
     int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
 
