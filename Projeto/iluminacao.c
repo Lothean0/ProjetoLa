@@ -69,7 +69,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX])
                         int verX = (int)origem_x;
 
                         // se encontrarmos uma parede, marcamos esse local como nao visivel
-                        if (mapa[verY][verX].character == '#')
+                        if (mapa[verY][verX].character == '█')
                         {
                             mapa[verY][verX].cor = Visivel;
                             break;
