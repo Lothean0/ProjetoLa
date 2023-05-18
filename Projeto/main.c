@@ -6,27 +6,12 @@
 // #include <SDL2/SDL.h>
 #include "player.h"
 #include "mapa.h"
-#define Visivel 1
-#define Nao_Visivel 2
-#define Visto 3
 
-#define Visivel 1
-#define Nao_Visivel 2
-#define Visto 3
 
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
 Uint8 *wavBuffer;*/
 
-void spawn(Player *jogador, int MaxY, int MaxX)
-{
-    while (mvinch(jogador->coorY, jogador->coorX) == '#')
-    {
-        srand(time(NULL));
-        jogador->coorY = rand() % MaxY;
-        jogador->coorX = rand() % MaxX;
-    }
-}
 
 int main(void)
 {
@@ -154,16 +139,9 @@ int main(void)
         gera_mapa(MaxY, MaxX, mapa);
         denoiser(MaxY, MaxX, mapa);
         gerahole(MaxY, MaxX, mapa);
-
+        imprime(MaxY, MaxX, mapa, win);
         // PRINT
-        for (int ys = 0; ys < MaxY; ys++)
-        {
-            for (int xs = 0; xs < MaxX; xs++)
-            {
-                mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
-            }
-        }
-
+       
         // coloca o jogador numa posicao random do ecra
         spawn(&jogador1, MaxY, MaxX);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
