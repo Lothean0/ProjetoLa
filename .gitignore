@@ -5,3 +5,4 @@ jogo
 main.o
 mapa.o 
 iluminacao.o
+*.o
