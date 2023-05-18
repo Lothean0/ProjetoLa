@@ -4,5 +4,6 @@ movimento.o
 jogo
 main.o
 mapa.o 
+menuhud.o
 iluminacao.o
 *.o
