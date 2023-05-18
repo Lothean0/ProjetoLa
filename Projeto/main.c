@@ -170,7 +170,7 @@ int main(void)
         // int timer = 0; //inicia o timer
         int tecla;
         // ciclo while que corre enquanto a tecla q nao e premida
-        while (1)
+        while (mapa[jogador1.coorY][jogador1.coorX].character!='X')
         {
 
             // Timer
@@ -243,8 +243,9 @@ int main(void)
                 }
             }
             refresh();
-            if(mapa[jogador1.coorY][jogador1.coorX].character=='X') break;
         }
+        clear();
+        MaxX+=25;
     }
     endwin();
     return 0;
