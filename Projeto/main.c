@@ -126,7 +126,7 @@ int main(void)
             // bomba
             if ((tecla = getch()) == 'e')
             {
-                bomba(MaxY, MaxX, mapa, jogador1, HudX, win);
+                bomba(MaxY, MaxX, mapa, jogador1, HudX);
             }
             // ou movimento
             else
