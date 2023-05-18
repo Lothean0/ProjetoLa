@@ -124,20 +124,23 @@ void updatehud(int MaxX, int MaxY, Player jogador1, int FLOOR, WINDOW *win)
     int MidHudX = MaxHudX - 12; // meio do hud, ajuda a centrar
 
     // na coordenadaX por norma tiramos metade na length da string
-    mvwprintw(win, 4, MidHudX - 4, "JOGADOR 1");
-    mvwprintw(win, 7, MidHudX - 7, "POS : ( %d , %d ) ", jogador1.coorX, jogador1.coorY);
-    mvwprintw(win, MaxHudY - 15, MidHudX - 5, "FLOOR ( %d )  ", FLOOR);
 
-    // COMANDOS
-    mvhline(MaxHudY - 14, HudX, '_', 23);
-    mvwprintw(win, MaxHudY - 13, MidHudX - 4, "COMMANDS");
-    mvhline(MaxHudY - 12, HudX, '_', 23);
+    // INFO JOGADOR
+    mvwprintw(win, 3, MidHudX - 4, "JOGADOR 1");
+    mvwprintw(win, 5, MidHudX - 7, "POS : ( %d , %d ) ", jogador1.coorX, jogador1.coorY);
+    mvwprintw(win, 25, MidHudX - 5, "FLOOR ( %d )  ", FLOOR);
 
-    mvwprintw(win, MaxHudY - 8, MidHudX - 3, "MOVEMENT");
-    mvwprintw(win, MaxHudY - 7, MidHudX - 2, "7 8 9");
-    mvwprintw(win, MaxHudY - 6, MidHudX - 2, "4   6");
-    mvwprintw(win, MaxHudY - 5, MidHudX - 2, "1 2 3");
-    mvwprintw(win, MaxHudY - 3, MidHudX - 4, "BOMBS - E");
+    // COMANDOS / CONTROLOS
+    mvhline(MaxHudY - 15, HudX, '-', 23);
+    mvwprintw(win, MaxHudY - 14, MidHudX - 4, "COMMANDS");
+    mvhline(MaxHudY - 13, HudX, '-', 23);
+
+    mvwprintw(win, MaxHudY - 9, MidHudX - 3, "MOVEMENT");
+    mvwprintw(win, MaxHudY - 8, MidHudX - 2, "7 8 9");
+    mvwprintw(win, MaxHudY - 7, MidHudX - 2, "4   6");
+    mvwprintw(win, MaxHudY - 6, MidHudX - 2, "1 2 3");
+    mvwprintw(win, MaxHudY - 4, MidHudX - 4, "BOMBS - E");
+    mvwprintw(win, MaxHudY - 2, MidHudX - 4, "QUIT - E");
 
     wrefresh(win);
 }

@@ -7,3 +7,4 @@ mapa.o
 menuhud.o
 iluminacao.o
 *.o
+Projeto/menuhud.o
