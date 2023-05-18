@@ -92,6 +92,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX])
     {
     // casos em que queremos ir para uma parede ou algum local cujo nao podemos ir
     case '#':
+    case '%':
         break; // nestes casos o player nao mexe;
     default:
         // Fazer uma trail dos movimentos do jogador, ou seja, adicionar um . as posiçoes previas
