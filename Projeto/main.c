@@ -8,6 +8,9 @@
 #include "mapa.h"
 #include "menuhud.h"
 #include "inimigo.h"
+#define Visivel 1
+#define Nao_Visivel 2
+#define Visto 3
 
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
@@ -65,50 +68,50 @@ int main(void)
     startscreen(MaxX, MaxY, win);
     clear();
 
-/*
-    void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
-    {
-            //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
-            //Condicoes- Paredes, outros circulos e atingir a distancia maxima
-
-        if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
-        if(g->mapa[R][C].character = '#') return;                       // se for parede
-        if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
-        g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
-
-        printw("%d", mapa[R][C].distancia);
-        }
-
-
-    void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
-    {                 //  20                         30                  4     1
-
-    // fazer uma parede de cada vez
-
-        while(raio!=0)
+    /*
+        void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
         {
-            int parede_atual_x, parede_atual_y;
+                //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
+                //Condicoes- Paredes, outros circulos e atingir a distancia maxima
 
-    // faz as paredes de cima e baixo  (ง ͡❛ ͜ʖ ͡❛)ง
+            if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
+            if(g->mapa[R][C].character = '#') return;                       // se for parede
+            if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
+            g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
 
-            for (parede_atual_x = posicao_x_player - raio; (parede_atual_x = posicao_x_player + raio); parede_atual_x++)
-            {
-                mvaddch(posicao_y_player - raio, posicao_x_player, g);  // Linha superior do raio
-                mvaddch(posicao_y_player + raio, posicao_x_player, g);  // Linha inferior do raio
+            printw("%d", mapa[R][C].distancia);
             }
 
-    // faz as paredes dos lados
 
-            for (parede_atual_y = (posicao_y_player - raio); (parede_atual_y = posicao_y_player); parede_atual_y++)
+        void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
+        {                 //  20                         30                  4     1
+
+        // fazer uma parede de cada vez
+
+            while(raio!=0)
             {
-                mvaddch(parede_atual_y, posicao_x_player - raio, g);  // Coluna esquerda do raio
-                mvaddch(parede_atual_y, posicao_x_player + raio, g);  // Coluna direita do raio
-            }
+                int parede_atual_x, parede_atual_y;
 
-            raio--;
+        // faz as paredes de cima e baixo  (ง ͡❛ ͜ʖ ͡❛)ง
+
+                for (parede_atual_x = posicao_x_player - raio; (parede_atual_x = posicao_x_player + raio); parede_atual_x++)
+                {
+                    mvaddch(posicao_y_player - raio, posicao_x_player, g);  // Linha superior do raio
+                    mvaddch(posicao_y_player + raio, posicao_x_player, g);  // Linha inferior do raio
+                }
+
+        // faz as paredes dos lados
+
+                for (parede_atual_y = (posicao_y_player - raio); (parede_atual_y = posicao_y_player); parede_atual_y++)
+                {
+                    mvaddch(parede_atual_y, posicao_x_player - raio, g);  // Coluna esquerda do raio
+                    mvaddch(parede_atual_y, posicao_x_player + raio, g);  // Coluna direita do raio
+                }
+
+                raio--;
+            }
         }
-    }
-*/
+    */
 
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
@@ -131,8 +134,11 @@ int main(void)
         Inimigo inimigo[qinimigo];
         for (int i = 0; i < qinimigo; i++)
         {
+            inimigo[i].coorY=0;
+            inimigo[i].coorX=0;
+            inimigo[i].tipo = 0;
+            inimigo[i].cor = 5;
             spawnenimigo(&inimigo[i], MaxY, MaxX);
-            mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' | A_BOLD);
         }
 
         int tecla;
@@ -147,8 +153,7 @@ int main(void)
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
 
-            raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
-
+            // raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
 
             // bomba
             if ((tecla = getch()) == 'e')
@@ -167,16 +172,16 @@ int main(void)
 
             // Visao
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, inimigo, qinimigo);
-
+            refresh();
             // print inimigo
             for (int i = 0; i < qinimigo; i++)
             {
-                attron(inimigo[i].cor);
-                mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' | A_BOLD);
-                attroff(inimigo[i].cor);
+                attron(5);
+                mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' );
+                attroff(5);
             }
 
-            refresh();
+
 
             // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
             bool print = true;
@@ -188,7 +193,7 @@ int main(void)
                     {
                         if (ys == inimigo[i].coorY && xs == inimigo[i].coorX)
                         {
-                            print=false;
+                            print = false;
                         }
                     }
 
@@ -198,7 +203,7 @@ int main(void)
                         mvaddch(ys, xs, mapa[ys][xs].character);
                         attroff(COLOR_PAIR(mapa[ys][xs].cor));
                     }
-                    print=true;
+                    print = true;
                 }
             }
             refresh();

@@ -32,11 +32,9 @@ void spawnenimigo( Inimigo *inimigo, int MaxY, int MaxX)
 {
     while (mvinch(inimigo->coorY, inimigo->coorX) == '#' || mvinch(inimigo->coorY, inimigo->coorX) == '@' || mvinch(inimigo->coorY, inimigo->coorX) == '%')
     {
-        srand(time(NULL));
         inimigo->coorY = rand() % MaxY;
         inimigo->coorX = rand() % MaxX;
-        inimigo->tipo=0;
-        inimigo->cor=Visivel;
+
     }
 }
 
