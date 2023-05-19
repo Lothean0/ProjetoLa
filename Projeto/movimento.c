@@ -88,11 +88,11 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX])
 
     // mvinch como o char para onde o player quer ir. Isto e a condiçao para verificar e o movimento e possivel ou nao
     // mvinch nao funciona com cor, logo usamos .character na matriz mapa
+
     switch (mapa[pTEMP.coorY][pTEMP.coorX].character)
     {
-
     case '.':
-    case'X':
+    case 'X':
         // Fazer uma trail dos movimentos do jogador, ou seja, adicionar um . as posiçoes previas
         jogador->coorX = pTEMP.coorX;
         jogador->coorY = pTEMP.coorY;
@@ -101,7 +101,6 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX])
     default:
         break;
     }
-    mvaddch(jogador->coorY, jogador->coorX, '@' | A_BOLD);
 }
 void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
 {

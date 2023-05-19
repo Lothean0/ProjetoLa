@@ -49,13 +49,13 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                 {
                     mapa[j][i].cor = Visto;
                 }
-                /*for (int i = 0; i < qinimigos; i++)
+                for (int k = 0; k < qinimigos; k++)
                 {
-                    if (inimigo[i].cor == Visivel)
+                    if (inimigo[i].cor == 5)
                     {
                         inimigo[i].cor = Visto;
                     }
-                }*/
+                }
 
                 // verificar se a distancia calculada esta dentro do nosso raio de visao
                 if (distancia <= raio * raio)
@@ -75,15 +75,13 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                         int verY = (int)origem_y;
                         int verX = (int)origem_x;
 
-                        /*for (int i = 0; i < qinimigos; i++)
+                        for (int i = 0; i < qinimigos; i++)
                         {
                             if (inimigo[i].coorX == verX || inimigo[i].coorY == verY)
                             {
-                                inimigo[i].cor = Visivel;
+                                inimigo[i].cor = 5;
                             }
-                            else
-                                inimigo[i].cor = Visivel;
-                        }*/
+                        }
                         // se encontrarmos uma parede, marcamos esse local como nao visivel
                         if (mapa[verY][verX].character == '#')
                         {

@@ -137,7 +137,7 @@ int main(void)
             inimigo[i].coorY=0;
             inimigo[i].coorX=0;
             inimigo[i].tipo = 0;
-            inimigo[i].cor = 5;
+            inimigo[i].cor = Nao_Visivel;
             spawnenimigo(&inimigo[i], MaxY, MaxX);
         }
 
@@ -176,9 +176,9 @@ int main(void)
             // print inimigo
             for (int i = 0; i < qinimigo; i++)
             {
-                attron(5);
+                attron(COLOR_PAIR(inimigo[i].cor));
                 mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' );
-                attroff(5);
+                attroff(COLOR_PAIR(inimigo[i].cor));
             }
 
 

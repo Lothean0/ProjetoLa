@@ -21,20 +21,19 @@ int randomgen(int seed)
 
 void spawn(Player *jogador, int MaxY, int MaxX)
 {
-    while (mvinch(jogador->coorY, jogador->coorX) == '#')
+    while (mvinch(jogador->coorY, jogador->coorX) == '#' || mvinch(jogador->coorY, jogador->coorX) == 'X')
     {
         srand(time(NULL));
         jogador->coorY = rand() % MaxY;
         jogador->coorX = rand() % MaxX;
     }
 }
-void spawnenimigo( Inimigo *inimigo, int MaxY, int MaxX)
+void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX)
 {
-    while (mvinch(inimigo->coorY, inimigo->coorX) == '#' || mvinch(inimigo->coorY, inimigo->coorX) == '@' || mvinch(inimigo->coorY, inimigo->coorX) == '%')
+    while (mvinch(inimigo->coorY, inimigo->coorX) == '#' || mvinch(inimigo->coorY, inimigo->coorX) == 'X' || mvinch(inimigo->coorY, inimigo->coorX) == '@' || mvinch(inimigo->coorY, inimigo->coorX) == '%')
     {
         inimigo->coorY = rand() % MaxY;
         inimigo->coorX = rand() % MaxX;
-
     }
 }
 
