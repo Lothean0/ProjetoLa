@@ -134,8 +134,8 @@ int main(void)
         Inimigo inimigo[qinimigo];
         for (int i = 0; i < qinimigo; i++)
         {
-            inimigo[i].coorY=0;
-            inimigo[i].coorX=0;
+            inimigo[i].coorY = 0;
+            inimigo[i].coorX = 0;
             inimigo[i].tipo = 0;
             inimigo[i].cor = Nao_Visivel;
             spawnenimigo(&inimigo[i], MaxY, MaxX);
@@ -162,7 +162,7 @@ int main(void)
             }
             else // ou movimento
             {
-                mudarstate(&jogador1, MaxX, tecla, mapa);
+                mudarstate(&jogador1, MaxX, tecla, mapa, inimigo, qinimigo);
             }
 
             // print player
@@ -177,11 +177,9 @@ int main(void)
             for (int i = 0; i < qinimigo; i++)
             {
                 attron(COLOR_PAIR(inimigo[i].cor));
-                mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%' );
+                mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%');
                 attroff(COLOR_PAIR(inimigo[i].cor));
             }
-
-
 
             // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
             bool print = true;

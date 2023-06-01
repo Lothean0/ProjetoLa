@@ -76,8 +76,9 @@ Vetor calcvetor(int tecla)
 }
 
 // func que soma o vetor de ''calcvetor'' à posiçao do player depois de verificar se esta é valida
-void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX])
+void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo inimigo[], int maxinimigos)
 {
+    int move;
     // começa por pegar um vetor(input da tecla, etc...)
     Vetor direcao = calcvetor(tecla);
 
@@ -92,6 +93,20 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX])
     switch (mapa[pTEMP.coorY][pTEMP.coorX].character)
     {
     case '.':
+        move = 0;
+        for (int i = 0; i < maxinimigos; i++)
+        {
+            if (inimigo[i].coorY == pTEMP.coorY && inimigo[i].coorX == pTEMP.coorX)
+            {
+                move = 1;
+            }
+        }
+        if (move == 0)
+        {
+            jogador->coorX = pTEMP.coorX;
+            jogador->coorY = pTEMP.coorY;
+        }
+        break;
     case 'X':
         // Fazer uma trail dos movimentos do jogador, ou seja, adicionar um . as posiçoes previas
         jogador->coorX = pTEMP.coorX;
