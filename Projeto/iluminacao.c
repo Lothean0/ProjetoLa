@@ -77,7 +77,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
 
                         for (int i = 0; i < qinimigos; i++)
                         {
-                            if (inimigo[i].coorX == verX || inimigo[i].coorY == verY)
+                            if (inimigo[i].coorX == verX && inimigo[i].coorY == verY)
                             {
                                 inimigo[i].cor = 5;
                             }
