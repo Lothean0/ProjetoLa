@@ -70,7 +70,7 @@ int main(void)
     clear();
 
     /*
-        void distancia_jogador(int R,int C, int distancia, Raio_Dist *g)
+        void distancia_jogador(int R,int C, int distancia, char *g)
         {
                 //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
                 //Condicoes- Paredes, outros circulos e atingir a distancia maxima
@@ -83,36 +83,33 @@ int main(void)
             printw("%d", mapa[R][C].distancia);
             }
 
-
-        void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
-        {                 //  20                         30                  4     1
-
-        // fazer uma parede de cada vez
-
-            while(raio!=0)
-            {
-                int parede_atual_x, parede_atual_y;
+*/
+void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
+{
+    //Fazer uma parede de cada vez
+    while (raio != 0)
+    {
+        int parede_atual_x, parede_atual_y;
 
         // faz as paredes de cima e baixo  (ง ͡❛ ͜ʖ ͡❛)ง
 
-                for (parede_atual_x = posicao_x_player - raio; (parede_atual_x = posicao_x_player + raio); parede_atual_x++)
-                {
-                    mvaddch(posicao_y_player - raio, posicao_x_player, g);  // Linha superior do raio
-                    mvaddch(posicao_y_player + raio, posicao_x_player, g);  // Linha inferior do raio
-                }
+        for (parede_atual_x = posicao_x_player - raio;parede_atual_x <= posicao_x_player + raio; parede_atual_x++){
+
+            mvaddch(posicao_y_player - raio, parede_atual_x, g); // Linha superior do raio
+            mvaddch(posicao_y_player + raio, parede_atual_x, g); // Linha inferior do raio
+        }
 
         // faz as paredes dos lados
 
-                for (parede_atual_y = (posicao_y_player - raio); (parede_atual_y = posicao_y_player); parede_atual_y++)
-                {
-                    mvaddch(parede_atual_y, posicao_x_player - raio, g);  // Coluna esquerda do raio
-                    mvaddch(parede_atual_y, posicao_x_player + raio, g);  // Coluna direita do raio
-                }
+        for (parede_atual_y = posicao_y_player - raio; (parede_atual_y) <= (posicao_y_player) + raio; parede_atual_y++){
 
-                raio--;
-            }
+            mvaddch(parede_atual_y, posicao_x_player - raio, g); // Coluna esquerda do raio
+            mvaddch(parede_atual_y, posicao_x_player + raio, g); // Coluna direita do raio
         }
-    */
+
+        raio--;
+    }
+}
 
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
@@ -155,7 +152,7 @@ int main(void)
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
 
-            // raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
+            raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
 
             // bomba
             if ((tecla = getch()) == 'e')
@@ -166,7 +163,6 @@ int main(void)
             {
                 mudarstate(&jogador1, MaxX, tecla, mapa, inimigo, qinimigo);
             }
-
             // print player
             attron(jogador1.cor);
             mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
