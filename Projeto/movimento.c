@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "player.h"
 #include "mapa.h"
+#include "combate.h"
 
 typedef struct vetor
 {
@@ -83,7 +84,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
     Vetor direcao = calcvetor(tecla);
 
     // define pTEMP como o "bloco" para onde o player quer ir
-    Player pTEMP = {0, 0, 0};
+    Player pTEMP = {0, 0, 0, 0};
     pTEMP.coorX = (jogador->coorX) + (direcao.coorX);
     pTEMP.coorY = (jogador->coorY) + (direcao.coorY);
 
@@ -99,6 +100,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
             if (inimigo[i].coorY == pTEMP.coorY && inimigo[i].coorX == pTEMP.coorX)
             {
                 move = 1;
+                attack(jogador,&inimigo[i]);
             }
         }
         if (move == 0)

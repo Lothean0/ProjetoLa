@@ -47,6 +47,7 @@ int main(void)
     Player jogador1;
     jogador1.coorX = 0;
     jogador1.coorY = 0;
+    jogador1.hp = 10;
     colorir(&jogador1);
 
     // cenas do stor
@@ -138,6 +139,7 @@ int main(void)
             inimigo[i].coorX = 0;
             inimigo[i].tipo = 0;
             inimigo[i].cor = Nao_Visivel;
+            inimigo[i].hp = 10;
             spawnenimigo(&inimigo[i], MaxY, MaxX);
         }
 

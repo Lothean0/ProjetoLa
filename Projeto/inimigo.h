@@ -7,6 +7,7 @@ typedef struct inimigo
     int coorX;
     int cor;
     int tipo;
+    int hp;
 
 } Inimigo;
 

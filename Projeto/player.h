@@ -6,6 +6,7 @@ typedef struct player
     int coorY;
     int coorX;
     int cor;
+    int hp;
 
 } Player;
 
