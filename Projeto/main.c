@@ -80,6 +80,7 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
     jogador1.coorX = 0;
     jogador1.coorY = 0;
     jogador1.hp = 10;
+    jogador1.xp = 0;
     colorir(&jogador1);
 
 
@@ -127,6 +128,7 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
             if (inimigo[qinimigo - 1].hp <= 0)
             {
                 qinimigo--;
+                jogador1.xp+=5;
             }
 
             // updates ao jogador
@@ -202,6 +204,7 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
     refresh();
     while (quit!='q'||quit!='Q')
     {
+        refresh();
         quit=getchar();
         noecho();
         if (intermitente % 2 == 0)
@@ -219,7 +222,6 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
         {
             goto jogo;
         }
-        refresh();
     }
 
     //termina o jogo (carregar q na endscreen)

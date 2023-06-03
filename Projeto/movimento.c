@@ -120,7 +120,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
 }
 void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
 {
-    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY, timerB = 0;
+    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY/*, timerB = 0*/;
 
     mapa[Ytemp][Xtemp].character = '0';
     refresh();
