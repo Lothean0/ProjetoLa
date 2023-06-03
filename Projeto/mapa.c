@@ -17,18 +17,18 @@ int randomgen(int seed)
     return numero_aleatorio;
 }
 
-void spawn(Player *jogador, int MaxY, int MaxX, Mapa mapa)
+void spawn(Player *jogador, int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
-    while (mapa(jogador->coorY, jogador->coorX).character == '#' || mapa(jogador->coorY, jogador->coorX).character == 'X')
+    while (mapa[jogador->coorY][jogador->coorX].character == '#' || mapa[jogador->coorY][jogador->coorX].character == 'X')
     {
         srand(time(NULL));
         jogador->coorY = rand() % MaxY;
         jogador->coorX = rand() % MaxX;
     }
 }
-void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX, Mapa mapa)
+void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
-    while (mapa(inimigo->coorY, inimigo->coorX).character == '#' || mapa(inimigo->coorY, inimigo->coorX).character == 'X' || mapa(inimigo->coorY, inimigo->coorX).character == '@' || mapa(inimigo->coorY, inimigo->coorX).character == '%')
+    while (mapa[inimigo->coorY][inimigo->coorX].character == '#' || mapa[inimigo->coorY][inimigo->coorX].character == 'X' || mapa[inimigo->coorY][inimigo->coorX].character == '@' || mapa[inimigo->coorY][inimigo->coorX].character == '%')
     {
         inimigo->coorY = rand() % MaxY;
         inimigo->coorX = rand() % MaxX;
@@ -159,19 +159,6 @@ void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
             mapa[i][l].character = 'X';
             mapa[i][l].cor = 2;
             mapa[i][l].distancia = 0;
-        }
-    }
-}
-
-void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
-{
-    for (int ys = 0; ys < MaxY; ys++)
-    {
-        for (int xs = 0; xs < MaxX; xs++)
-        {
-            attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
-            mvaddch(ys, xs, mapa[ys][xs].character);
-            attroff(COLOR_PAIR(mapa[ys][xs].cor));
         }
     }
 }

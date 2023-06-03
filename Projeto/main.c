@@ -96,7 +96,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
         gerahole(MaxY, MaxX, mapa);
 
         // coloca o jogador numa posicao random do ecra
-        spawn(&jogador1, MaxY, MaxX, mapa[][MaxX]);
+        spawn(&jogador1, MaxY, MaxX, mapa);
         mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
         int qinimigo = rand() % 5 + 5;
         Inimigo inimigo[qinimigo];
@@ -107,7 +107,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             inimigo[i].tipo = 0;
             inimigo[i].cor = Nao_Visivel;
             inimigo[i].hp = 10;
-            spawnenimigo(&inimigo[i], MaxY, MaxX, mapa[][MaxX]);
+            spawnenimigo(&inimigo[i], MaxY, MaxX, mapa);
         }
 
         int tecla;
@@ -177,7 +177,9 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
 
                     if ((ys != jogador1.coorY || xs != jogador1.coorX) && print)
                     {
-                        imprime(MaxY, MaxX, mapa, win);
+                        attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
+                        mvaddch(ys, xs, mapa[ys][xs].character);
+                        attroff(COLOR_PAIR(mapa[ys][xs].cor));
                     }
                     print = true;
                 }
