@@ -24,32 +24,6 @@ int comparehp(const void *a, const void *b)
     return (inimigoB->hp - inimigoA->hp);
 }
 
-/*void distância(int posicao_y_player, int posicao_x_player, int raio)
-{
-    //Fazer uma parede de cada vez
-    while (raio != 0)
-    {
-        int parede_atual_x, parede_atual_y;
-
-        // faz as paredes de cima e baixo  (ง ͡❛ ͜ʖ ͡❛)ง
-
-        for (parede_atual_x = posicao_x_player - raio;parede_atual_x <= posicao_x_player + raio; parede_atual_x++){
-
-            mvprintw(posicao_y_player - raio, parede_atual_x, "%d",raio); // Linha superior do raio
-            mvprintw(posicao_y_player + raio, parede_atual_x, "%d",raio); // Linha inferior do raio
-        }
-
-        // faz as paredes dos lados
-
-        for (parede_atual_y = posicao_y_player - raio; (parede_atual_y) <= (posicao_y_player) + raio; parede_atual_y++){
-
-            mvprintw(parede_atual_y, posicao_x_player - raio, "%d",raio); // Coluna esquerda do raio
-            mvprintw(parede_atual_y, posicao_x_player + raio, "%d",raio); // Coluna direita do raio
-        }
-
-        raio--;
-    }
-}*/
 
 int main(void)
 {
@@ -108,21 +82,7 @@ jogo:
     jogador1.hp = 10;
     colorir(&jogador1);
 
-    /*
-        void distancia_jogador(int R,int C, int distancia, char *g)
-        {
-                //imprimir varios circulos com raio 1- raio 2- raio-3 raio-4 etc
-                //Condicoes- Paredes, outros circulos e atingir a distancia maxima
 
-            if(distancia > 20) return;                                      // atingiu a distancia maxima ou nao
-            if(g->mapa[R][C].character = '#') return;                       // se for parede
-            if(g->mapa[R][C].distancia <= distancia) return;                // se for outro circulo
-            g->mapa[R][C].distancia = valor;                                // passou as outras condicoes ent avanca
-
-            printw("%d", mapa[R][C].distancia);
-            }
-
-*/
 
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
@@ -174,7 +134,6 @@ jogo:
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
 
-            // raio_a_volta(jogador1.coorY, jogador1.coorX, 9);
 
             // bomba
             if ((tecla = getch()) == 'e')
