@@ -101,8 +101,17 @@ void startscreen(int MaxX, int MaxY, WINDOW *win)
 
 void game_over_screen(int MaxY, int MaxX)
 {
-    mvprintw(MaxY/2,MaxX/2,"GAME OVER");
-    mvprintw((MaxY/2)+4,MaxX/2,"PRESS Q TO QUIT");
+    mvprintw(MaxY/2-4,MaxX/2-46,"  ______    ______   __       __  ________         ______   __     __  ________  _______  ");
+    mvprintw(MaxY/2-3,MaxX/2-46," /      \\  /      \\ /  \\     /  |/        |       /      \\ /  |   /  |/        |/       \\ ");
+    mvprintw(MaxY/2-2,MaxX/2-46,"/$$$$$$  |/$$$$$$  |$$  \\   /$$ |$$$$$$$$/       /$$$$$$  |$$ |   $$ |$$$$$$$$/ $$$$$$$  |");
+    mvprintw(MaxY/2-1,MaxX/2-46,"$$ | _$$/ $$ |__$$ |$$$  \\ /$$$ |$$ |__          $$ |  $$ |$$ |   $$ |$$ |__    $$ |__$$ |");
+    mvprintw(MaxY/2-0,MaxX/2-46,"$$ |/    |$$    $$ |$$$$  /$$$$ |$$    |         $$ |  $$ |$$  \\ /$$/ $$    |   $$    $$< ");
+    mvprintw(MaxY/2+1,MaxX/2-46,"$$ |$$$$ |$$$$$$$$ |$$ $$ $$/$$ |$$$$$/          $$ |  $$ | $$  /$$/  $$$$$/    $$$$$$$  |");
+    mvprintw(MaxY/2+2,MaxX/2-46,"$$ \\__$$ |$$ |  $$ |$$ |$$$/ $$ |$$ |_____       $$ \\__$$ |  $$ $$/   $$ |_____ $$ |  $$ |");
+    mvprintw(MaxY/2+3,MaxX/2-46,"$$    $$/ $$ |  $$ |$$ | $/  $$ |$$       |      $$    $$/    $$$/    $$       |$$ |  $$ |");
+    mvprintw(MaxY/2+4,MaxX/2-46," $$$$$$/  $$/   $$/ $$/      $$/ $$$$$$$$/        $$$$$$/      $/     $$$$$$$$/ $$/   $$/ ");
+
+    mvprintw((MaxY/2)+10,MaxX/2-8,"PRESS Q TO QUIT");
 }
 
 void hudbox(int MaxX, int MaxY)
