@@ -23,7 +23,7 @@ int comparehp(const void *a, const void *b)
     return (inimigoB->hp - inimigoA->hp);
 }
 
-void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
+void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio)
 {
     //Fazer uma parede de cada vez
     while (raio != 0)
@@ -34,16 +34,16 @@ void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
 
         for (parede_atual_x = posicao_x_player - raio;parede_atual_x <= posicao_x_player + raio; parede_atual_x++){
 
-            mvaddch(posicao_y_player - raio, parede_atual_x, g); // Linha superior do raio
-            mvaddch(posicao_y_player + raio, parede_atual_x, g); // Linha inferior do raio
+            mvprintw(posicao_y_player - raio, parede_atual_x, "%d",raio); // Linha superior do raio
+            mvprintw(posicao_y_player + raio, parede_atual_x, "%d",raio); // Linha inferior do raio
         }
 
         // faz as paredes dos lados
 
         for (parede_atual_y = posicao_y_player - raio; (parede_atual_y) <= (posicao_y_player) + raio; parede_atual_y++){
 
-            mvaddch(parede_atual_y, posicao_x_player - raio, g); // Coluna esquerda do raio
-            mvaddch(parede_atual_y, posicao_x_player + raio, g); // Coluna direita do raio
+            mvprintw(parede_atual_y, posicao_x_player - raio, "%d",raio); // Coluna esquerda do raio
+            mvprintw(parede_atual_y, posicao_x_player + raio, "%d",raio); // Coluna direita do raio
         }
 
         raio--;
@@ -170,7 +170,7 @@ int main(void)
             colorir(&jogador1);
 
 
-            raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
+            raio_a_volta(jogador1.coorY, jogador1.coorX, 9);
 
             // bomba
             if ((tecla = getch()) == 'e')
