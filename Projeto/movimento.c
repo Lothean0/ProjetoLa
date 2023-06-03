@@ -83,7 +83,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
     Vetor direcao = calcvetor(tecla);
 
     // define pTEMP como o "bloco" para onde o player quer ir
-    Player pTEMP = {0, 0, 0, 0};
+    Player pTEMP = {0, 0, 0, 0, 0};
     pTEMP.coorX = (jogador->coorX) + (direcao.coorX);
     pTEMP.coorY = (jogador->coorY) + (direcao.coorY);
 
@@ -99,7 +99,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
             if (inimigo[i].coorY == pTEMP.coorY && inimigo[i].coorX == pTEMP.coorX)
             {
                 move = 1;
-                attack(jogador,&inimigo[i]);
+                attack(jogador, &inimigo[i]);
             }
         }
         if (move == 0)
@@ -120,7 +120,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
 }
 void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
 {
-    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY/*, timerB = 0*/;
+    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY /*, timerB = 0*/;
 
     mapa[Ytemp][Xtemp].character = '0';
     refresh();
@@ -134,16 +134,16 @@ void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
          Explosão
         if (timerB == 5)
         {*/
-            for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
+    for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
+    {
+        for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
+        {
+            if (ys > 0 && xs > 0 && ys < MaxY - 1 && xs < MaxX - 1 && mapa[ys][xs].character != 'X')
             {
-                for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
-                {
-                    if (ys > 0 && xs > 0 && ys < MaxY - 1 && xs < MaxX - 1 && mapa[ys][xs].character != 'X')
-                    {
-                        mapa[ys][xs].character = '.';
-                    }
-                }
+                mapa[ys][xs].character = '.';
             }
-        //}
+        }
+    }
+    //}
     //}
 }

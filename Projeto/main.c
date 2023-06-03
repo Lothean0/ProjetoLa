@@ -24,7 +24,6 @@ int comparehp(const void *a, const void *b)
     return (inimigoB->hp - inimigoA->hp);
 }
 
-
 int main(void)
 {
     /*SDL_Init(SDL_INIT_AUDIO); // Inicia o som
@@ -75,15 +74,13 @@ int main(void)
     // inicializa coisas
     Player jogador1;
 
-jogo:  //label para podermos reiniciar o jogo numa eventual morte
+jogo: // label para podermos reiniciar o jogo numa eventual morte
     // inicializa o jogador
     jogador1.coorX = 0;
     jogador1.coorY = 0;
     jogador1.hp = 10;
     jogador1.xp = 0;
     colorir(&jogador1);
-
-
 
     // FLOOR armazena o floor em que o jogador esta
     int FLOOR = 0;
@@ -97,7 +94,6 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
         gera_mapa(MaxY, MaxX, mapa);
         denoiser(MaxY, MaxX, mapa);
         gerahole(MaxY, MaxX, mapa);
-        imprime(MaxY, MaxX, mapa, win);
 
         // coloca o jogador numa posicao random do ecra
         spawn(&jogador1, MaxY, MaxX);
@@ -122,24 +118,24 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
-            distancia(MaxY, MaxX, mapa,&jogador1);
+            distancia(MaxY, MaxX, mapa, &jogador1);
             // eliminar inimigos do arrey
             qsort(inimigo, qinimigo, sizeof(Inimigo), comparehp);
             if (inimigo[qinimigo - 1].hp <= 0)
             {
                 qinimigo--;
-                jogador1.xp+=5;
+                jogador1.xp += 5;
             }
 
             // updates ao jogador
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
 
-            if ((tecla = getch()) == 'e')// bomba
+            if ((tecla = getch()) == 'e') // bomba
             {
                 bomba(MaxY, MaxX, mapa, jogador1, MaxX);
             }
-            else if (tecla == 'x')// dont mind me
+            else if (tecla == 'x') // dont mind me
             {
                 jogador1.hp = 0;
             }
@@ -181,9 +177,7 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
 
                     if ((ys != jogador1.coorY || xs != jogador1.coorX) && print)
                     {
-                        attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
-                        mvaddch(ys, xs, mapa[ys][xs].character);
-                        attroff(COLOR_PAIR(mapa[ys][xs].cor));
+                        imprime(MaxY, MaxX, mapa, win);
                     }
                     print = true;
                 }
@@ -195,36 +189,36 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
         FLOOR -= 1;
     }
 
-    //end screen (retry)
+    // end screen (retry)
     clear();
     int intermitente = 0;
-    int quit=0;
+    int quit = 0;
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
     game_over_screen(MaxY, MaxX, win);
     refresh();
-    while (quit!='q'||quit!='Q')
+    while (quit != 'q' || quit != 'Q')
     {
         refresh();
-        quit=getchar();
+        quit = getchar();
         noecho();
         if (intermitente % 2 == 0)
         {
-            mvprintw((MaxY/2)+10,MaxX/2-8,"PRESS Q TO QUIT");
-            mvprintw((MaxY/2)+12,MaxX/2-11,"PRESS R TO PLAY AGAIN");
+            mvprintw((MaxY / 2) + 10, MaxX / 2 - 8, "PRESS Q TO QUIT");
+            mvprintw((MaxY / 2) + 12, MaxX / 2 - 11, "PRESS R TO PLAY AGAIN");
         }
         else
         {
-            mvprintw((MaxY/2)+10,MaxX/2-9,"                                ");
-            mvprintw((MaxY/2)+12,MaxX/2-12,"                               ");
+            mvprintw((MaxY / 2) + 10, MaxX / 2 - 9, "                                ");
+            mvprintw((MaxY / 2) + 12, MaxX / 2 - 12, "                               ");
         }
         intermitente += 1;
-        if(quit=='r'||quit=='R')
+        if (quit == 'r' || quit == 'R')
         {
             goto jogo;
         }
     }
 
-    //termina o jogo (carregar q na endscreen)
+    // termina o jogo (carregar q na endscreen)
     clear();
     endwin();
     return 0;

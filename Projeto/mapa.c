@@ -169,18 +169,20 @@ void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            mvwprintw(win, ys, xs, "%c", mapa[ys][xs].character);
+            attron(COLOR_PAIR(mapa[ys][xs].cor)); // Da print em cada character com a sua propria cor
+            mvaddch(ys, xs, mapa[ys][xs].character);
+            attroff(COLOR_PAIR(mapa[ys][xs].cor));
         }
     }
 }
 
 void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador)
 {
-   for (int ys = 0; ys < MaxY; ys++)
+    for (int ys = 0; ys < MaxY; ys++)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            mapa[ys][xs].distancia=sqrt((ys-jogador->coorY)*(ys-jogador->coorY)+(xs-jogador->coorX)*(xs-jogador->coorX));
+            mapa[ys][xs].distancia = sqrt((ys - jogador->coorY) * (ys - jogador->coorY) + (xs - jogador->coorX) * (xs - jogador->coorX));
         }
-    } 
+    }
 }
