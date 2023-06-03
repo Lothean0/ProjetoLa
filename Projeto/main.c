@@ -74,14 +74,16 @@ int main(void)
     // inicializa coisas
     Player jogador1;
 
-jogo:
+jogo:  //label para podermos reiniciar o jogo numa eventual morte
     // inicializa o jogador
     jogador1.coorX = 0;
     jogador1.coorY = 0;
     jogador1.hp = 10;
     colorir(&jogador1);
 
-    // Floors armazena o floor em que o jogador esta
+
+
+    // FLOOR armazena o floor em que o jogador esta
     int FLOOR = 0;
 
     while (jogador1.hp > 0)
@@ -116,7 +118,6 @@ jogo:
         hudbox(MaxX, MaxY);
 
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
-
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
             distancia(MaxY, MaxX, mapa, &jogador1);
@@ -136,8 +137,7 @@ jogo:
             {
                 bomba(MaxY, MaxX, mapa, jogador1, MaxX);
             }
-            // dont mind me
-            else if (tecla == 'x')
+            else if (tecla == 'x')// dont mind me
             {
                 jogador1.hp = 0;
             }
@@ -145,6 +145,7 @@ jogo:
             {
                 mudarstate(&jogador1, MaxX, tecla, mapa, inimigo, qinimigo);
             }
+
             // print player
             attron(jogador1.cor);
             mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
@@ -153,6 +154,7 @@ jogo:
             // Visao
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, inimigo, qinimigo);
             refresh();
+
             // print inimigo
             for (int i = 0; i < qinimigo; i++)
             {
@@ -220,6 +222,7 @@ jogo:
         refresh();
     }
 
+    //termina o jogo (carregar q na endscreen)
     clear();
     endwin();
     return 0;
