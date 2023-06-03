@@ -1,14 +1,7 @@
-#ifndef ___PLAYER___
-#define ___PLAYER___
-#include "mapa.h"
-typedef struct player
-{
-    int coorY;
-    int coorX;
-    int cor;
-    int hp;
+#ifndef ___PLAYER2___
+#define ___PLAYER2___
+#include "typedef.h"
 
-} Player;
 
 void spawn(Player *jogador, int MaxY, int MaxX);
 void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo inimigo[], int maxinimigos);

@@ -3,9 +3,7 @@
 #include <ncurses.h>
 #include <math.h>
 #include <time.h>
-#include "player.h"
-#include "mapa.h"
-#include "inimigo.h"
+#include "typedef.h"
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3

@@ -1,13 +1,7 @@
 #ifndef ___STATE_H___
 #define ___STATE_H___
-#include "player.h"
-#include "inimigo.h"
-typedef struct mapa
-{
-    char character;
-    int distancia;
-    int cor;
-} Mapa;
+
+#include "typedef.h"
 
 int randomgen(int seed);
 void gera_mapa(int MaxY, int MaxX,Mapa mapa[][MaxX]);

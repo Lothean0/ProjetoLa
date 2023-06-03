@@ -3,8 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
-#include "player.h"
-#include "mapa.h"
+#include "typedef.h"
 
 // o ncurses usa ints para fazer pares de cores lolmao
 #define Visivel 1

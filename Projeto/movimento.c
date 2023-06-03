@@ -1,7 +1,6 @@
 #include <ncurses.h>
 #include <stdlib.h>
-#include "player.h"
-#include "mapa.h"
+#include "typedef.h"
 #include "combate.h"
 
 typedef struct vetor

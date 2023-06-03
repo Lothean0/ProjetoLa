@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <math.h>
-#include "player.h"
+#include "typedef.h"
 
 void startscreen(int MaxX, int MaxY, WINDOW *win)
 {

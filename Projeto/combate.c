@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <math.h>
-#include "player.h"
-#include "menuhud.h"
-#include "inimigo.h"
+#include "typedef.h"
 
 void attack(Player *player, Inimigo *inimigo1)
 {

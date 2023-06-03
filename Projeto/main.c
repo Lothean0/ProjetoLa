@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 // #include <SDL2/SDL.h>
+#include "typedef.h"
 #include "player.h"
 #include "menuhud.h"
 #include "inimigo.h"

@@ -1,6 +1,6 @@
 #ifndef ___COMBATE___
 #define ___COMBATE___
-#include "player.h"
+#include "typedef.h"
 
 void attack(Player *player, Inimigo *inimigo1);
 
