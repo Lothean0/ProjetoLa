@@ -162,7 +162,7 @@ jogo:
 
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
-            distancia(MaxY, MaxX, mapa, win, &jogador1);
+            distancia(MaxY, MaxX, mapa,&jogador1);
             // eliminar inimigos do arrey
             qsort(inimigo, qinimigo, sizeof(Inimigo), comparehp);
             if (inimigo[qinimigo - 1].hp <= 0)

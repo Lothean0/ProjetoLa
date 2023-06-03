@@ -174,13 +174,13 @@ void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win)
     }
 }
 
-void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win, Player *jogador)
+void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador)
 {
    for (int ys = 0; ys < MaxY; ys++)
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            mapa[ys][xs].distancia=((ys-jogador->coorY)*(ys-jogador->coorY)+(xs-jogador->coorX)*(xs-jogador->coorX));
+            mapa[ys][xs].distancia=sqrt((ys-jogador->coorY)*(ys-jogador->coorY)+(xs-jogador->coorX)*(xs-jogador->coorX));
         }
     } 
 }

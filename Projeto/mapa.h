@@ -9,5 +9,5 @@ void denoiser(int MaxY, int MaxX,Mapa mapa[][MaxX]);
 void FOV(int player_y, int player_x,int MaxY, int MaxX, Mapa mapa[][MaxX], Inimigo inimigo[],int qinimigos);
 void gerahole(int MaxY, int MaxX,Mapa mapa[][MaxX]);
 void imprime(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win);
-void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win, Player *jogador);
+void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador);
 #endif
