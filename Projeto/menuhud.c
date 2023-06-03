@@ -6,6 +6,9 @@
 
 void startscreen(int MaxX, int MaxY, WINDOW *win)
 {
+    //box
+    wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
+
     // ASCII ART
     mvprintw(6, 12, "                             ,--.	");
     mvprintw(4, MaxX - 56, "                                  ,-.");
@@ -72,7 +75,7 @@ void startscreen(int MaxX, int MaxY, WINDOW *win)
     mvprintw(34, MaxX - 56, "      P'");
 
     mvprintw((MaxY / 2) + 15, 15, "A102936 - > Andre Carvalho");
-    mvprintw((MaxY / 2) + 16, 15, "A102944- > Matias Goncalves");
+    mvprintw((MaxY / 2) + 16, 15, "A102944 - > Matias Goncalves");
     mvprintw((MaxY / 2) + 17, 15, "A102877 - > Simao Martins");
     mvprintw((MaxY / 2) + 18, 15, "A102942 - > Pedro Oliveira");
 
@@ -84,7 +87,6 @@ void startscreen(int MaxX, int MaxY, WINDOW *win)
     while (getch() != ' ')
     {
         noecho();
-        box(win, '|', '-');
         if (intermitente % 2 == 0)
         {
             mvprintw((MaxY / 2) + 8, (MaxX / 2) - 12, "PRESS SPACE TO CONTINUE");
@@ -99,8 +101,12 @@ void startscreen(int MaxX, int MaxY, WINDOW *win)
     }
 }
 
-void game_over_screen(int MaxY, int MaxX)
+void game_over_screen(int MaxY, int MaxX,WINDOW *win)
 {
+    //box
+    wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
+
+    //ascii art
     mvprintw(MaxY/2-4,MaxX/2-46,"  ______    ______   __       __  ________         ______   __     __  ________  _______  ");
     mvprintw(MaxY/2-3,MaxX/2-46," /      \\  /      \\ /  \\     /  |/        |       /      \\ /  |   /  |/        |/       \\ ");
     mvprintw(MaxY/2-2,MaxX/2-46,"/$$$$$$  |/$$$$$$  |$$  \\   /$$ |$$$$$$$$/       /$$$$$$  |$$ |   $$ |$$$$$$$$/ $$$$$$$  |");
@@ -112,6 +118,7 @@ void game_over_screen(int MaxY, int MaxX)
     mvprintw(MaxY/2+4,MaxX/2-46," $$$$$$/  $$/   $$/ $$/      $$/ $$$$$$$$/        $$$$$$/      $/     $$$$$$$$/ $$/   $$/ ");
 
     mvprintw((MaxY/2)+10,MaxX/2-8,"PRESS Q TO QUIT");
+    mvprintw((MaxY/2)+12,MaxX/2-11,"PRESS R TO PLAY AGAIN");
 }
 
 void hudbox(int MaxX, int MaxY)
