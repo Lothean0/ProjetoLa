@@ -180,7 +180,7 @@ void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], WINDOW *win, Player *jogad
     {
         for (int xs = 0; xs < MaxX; xs++)
         {
-            mapa[ys][xs].distancia=(int)sqrt(jogador->coorY*jogador->coorY+jogador->coorX*jogador->coorX);
+            mapa[ys][xs].distancia=((ys-jogador->coorY)*(ys-jogador->coorY)+(xs-jogador->coorX)*(xs-jogador->coorX));
         }
     } 
 }
