@@ -8,6 +8,6 @@
 
 void attack(Player *player, Inimigo *inimigo1)
 {
-    player->hp--;
+    //player->hp--;
     inimigo1->hp--;
 }

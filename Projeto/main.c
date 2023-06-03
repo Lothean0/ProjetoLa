@@ -15,6 +15,13 @@
 /*SDL_AudioSpec wavSpec;
 Uint32 wavLength;
 Uint8 *wavBuffer;*/
+int comparehp(const void *a, const void *b)
+{
+    Inimigo *inimigoA = (Inimigo *)a;
+    Inimigo *inimigoB = (Inimigo *)b;
+  
+    return (inimigoB->hp - inimigoA->hp);
+}
 
 int main(void)
 {
@@ -115,7 +122,7 @@ int main(void)
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
 
-    while (1 && jogador1.hp>=1)
+    while (jogador1.hp>0)
     {
         MaxX -= 25; // Faz com que o mapa tenha -25 casas que a win (25 casas para o hud )
 
@@ -149,9 +156,16 @@ int main(void)
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp>=1)
         {
+            qsort(inimigo,qinimigo,sizeof(Inimigo), comparehp);
+            if (inimigo[qinimigo-1].hp<=0)
+            {
+                qinimigo--;
+            }
+            
             // updates ao jogador
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
+
 
             //raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
 
