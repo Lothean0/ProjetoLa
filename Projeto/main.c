@@ -156,6 +156,7 @@ int main(void)
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp>=1)
         {
+            //eliminar inimigos do arrey
             qsort(inimigo,qinimigo,sizeof(Inimigo), comparehp);
             if (inimigo[qinimigo-1].hp<=0)
             {
