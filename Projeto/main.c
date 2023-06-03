@@ -84,7 +84,7 @@ int main(void)
             }
 
 */
-void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
+/*void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
 {
     //Fazer uma parede de cada vez
     while (raio != 0)
@@ -110,11 +110,12 @@ void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
         raio--;
     }
 }
+*/
 
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
 
-    while (1)
+    while (1 && jogador1.hp>=1)
     {
         MaxX -= 25; // Faz com que o mapa tenha -25 casas que a win (25 casas para o hud )
 
@@ -146,13 +147,13 @@ void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
         hudbox(MaxX, MaxY);
 
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
-        while (mapa[jogador1.coorY][jogador1.coorX].character != 'X')
+        while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp>=1)
         {
             // updates ao jogador
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
 
-            raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
+            //raio_a_volta(jogador1.coorY, jogador1.coorX, 5, '1');
 
             // bomba
             if ((tecla = getch()) == 'e')
@@ -207,7 +208,16 @@ void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio, char g)
         clear();
         MaxX += 25;
         FLOOR -= 1;
+        
     }
+    int quit = 0;
+    while (quit != 'q')
+    {
+        quit = getch();
+        game_over_screen(MaxY, MaxX);
+        refresh();
+    }
+    clear();
     endwin();
     return 0;
 }

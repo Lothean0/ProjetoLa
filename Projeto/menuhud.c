@@ -99,6 +99,12 @@ void startscreen(int MaxX, int MaxY, WINDOW *win)
     }
 }
 
+void game_over_screen(int MaxY, int MaxX)
+{
+    mvprintw(MaxY/2,MaxX/2,"GAME OVER");
+    mvprintw((MaxY/2)+4,MaxX/2,"PRESS Q TO QUIT");
+}
+
 void hudbox(int MaxX, int MaxY)
 {
     // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
