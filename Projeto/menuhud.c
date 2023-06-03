@@ -75,7 +75,7 @@ void startscreen(int MaxX, int MaxY, WINDOW *win)
     mvprintw(34, MaxX - 56, "      P'");
 
     mvprintw((MaxY / 2) + 15, 15, "A102936 - > Andre Carvalho");
-    mvprintw((MaxY / 2) + 16, 15, "A102944- > Matias Goncalves");
+    mvprintw((MaxY / 2) + 16, 15, "A102944 - > Matias Goncalves");
     mvprintw((MaxY / 2) + 17, 15, "A102877 - > Simao Martins");
     mvprintw((MaxY / 2) + 18, 15, "A102942 - > Pedro Oliveira");
 
