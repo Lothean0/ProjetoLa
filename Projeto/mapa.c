@@ -17,18 +17,18 @@ int randomgen(int seed)
     return numero_aleatorio;
 }
 
-void spawn(Player *jogador, int MaxY, int MaxX)
+void spawn(Player *jogador, int MaxY, int MaxX, Mapa mapa)
 {
-    while (mvinch(jogador->coorY, jogador->coorX) == '#' || mvinch(jogador->coorY, jogador->coorX) == 'X')
+    while (mapa(jogador->coorY, jogador->coorX).character == '#' || mapa(jogador->coorY, jogador->coorX).character == 'X')
     {
         srand(time(NULL));
         jogador->coorY = rand() % MaxY;
         jogador->coorX = rand() % MaxX;
     }
 }
-void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX)
+void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX, Mapa mapa)
 {
-    while (mvinch(inimigo->coorY, inimigo->coorX) == '#' || mvinch(inimigo->coorY, inimigo->coorX) == 'X' || mvinch(inimigo->coorY, inimigo->coorX) == '@' || mvinch(inimigo->coorY, inimigo->coorX) == '%')
+    while (mapa(inimigo->coorY, inimigo->coorX).character == '#' || mapa(inimigo->coorY, inimigo->coorX).character == 'X' || mapa(inimigo->coorY, inimigo->coorX).character == '@' || mapa(inimigo->coorY, inimigo->coorX).character == '%')
     {
         inimigo->coorY = rand() % MaxY;
         inimigo->coorX = rand() % MaxX;

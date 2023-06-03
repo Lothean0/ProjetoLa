@@ -2,5 +2,5 @@
 #define ___INIMIGO2___
 #include "typedef.h"
 
-void spawnenimigo( Inimigo *inimigo, int MaxY, int MaxX);
+void spawnenimigo( Inimigo *inimigo, int MaxY, int MaxX, Mapa mapa);
 #endif
