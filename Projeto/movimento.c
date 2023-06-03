@@ -126,15 +126,15 @@ void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
     mapa[Ytemp][Xtemp].character = '0';
     refresh();
 
-    // timer da explosão
+    /* timer da explosão
     while (timerB < 5)
     {
         timerB++;
         mvprintw(8, HudX + 7, "timerB=%d", timerB);
 
-        // Explosão
+         Explosão
         if (timerB == 5)
-        {
+        {*/
             for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
             {
                 for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
@@ -145,6 +145,6 @@ void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
                     }
                 }
             }
-        }
-    }
+        //}
+    //}
 }
