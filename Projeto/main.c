@@ -77,13 +77,6 @@ int main(void)
     SDL_FreeWAV(wavBuffer);
     SDL_Quit();*/
 
-    // inicializa o jogador
-    Player jogador1;
-    jogador1.coorX = 0;
-    jogador1.coorY = 0;
-    jogador1.hp = 10;
-    colorir(&jogador1);
-
     // cenas do stor
     cbreak();
     noecho();
@@ -103,6 +96,16 @@ int main(void)
     startscreen(MaxX, MaxY, win);
     clear();
 
+    //inicializa coisas
+    Player jogador1;
+
+    jogo:
+    // inicializa o jogador
+    jogador1.coorX = 0;
+    jogador1.coorY = 0;
+    jogador1.hp = 10;
+    colorir(&jogador1);
+
     /*
         void distancia_jogador(int R,int C, int distancia, char *g)
         {
@@ -118,8 +121,6 @@ int main(void)
             }
 
 */
-
-
 
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
@@ -156,6 +157,7 @@ int main(void)
         hudbox(MaxX, MaxY);
 
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
+        
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp>=1)
         {
             //eliminar inimigos do arrey
@@ -176,6 +178,11 @@ int main(void)
             if ((tecla = getch()) == 'e')
             {
                 bomba(MaxY, MaxX, mapa, jogador1, MaxX);
+            }
+            //dont mind me
+            else if(tecla == 'x')
+            {
+                jogador1.hp = 0;
             }
             else // ou movimento
             {
@@ -231,6 +238,11 @@ int main(void)
     while (quit != 'q')
     {
         quit = getch();
+        //Go again no jogo
+        if(quit == 'r' || quit == 'R')
+        {
+            goto jogo;
+        }
         game_over_screen(MaxY, MaxX);
         refresh();
     }
