@@ -93,6 +93,7 @@ int main(void)
     halfdelay(5);
 
     // start screen
+    wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
     startscreen(MaxX, MaxY, win);
     clear();
 
@@ -234,18 +235,36 @@ int main(void)
         FLOOR -= 1;
         
     }
-    int quit = 0;
-    while (quit != 'q')
+
+    //end screen (retry)
+    clear();
+    int intermitente = 0;
+    int quit=0;
+    wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
+    game_over_screen(MaxY, MaxX, win);
+    refresh();
+    while (quit!='q'||quit!='Q')
     {
-        quit = getch();
-        //Go again no jogo
-        if(quit == 'r' || quit == 'R')
+        quit=getchar();
+        noecho();
+        if (intermitente % 2 == 0)
+        {
+            mvprintw((MaxY/2)+10,MaxX/2-8,"PRESS Q TO QUIT");
+            mvprintw((MaxY/2)+12,MaxX/2-11,"PRESS R TO PLAY AGAIN");
+        }
+        else
+        {
+            mvprintw((MaxY/2)+10,MaxX/2-9,"                                ");
+            mvprintw((MaxY/2)+12,MaxX/2-12,"                               ");
+        }
+        intermitente += 1;
+        if(quit=='r'||quit=='R')
         {
             goto jogo;
         }
-        game_over_screen(MaxY, MaxX);
         refresh();
     }
+
     clear();
     endwin();
     return 0;
