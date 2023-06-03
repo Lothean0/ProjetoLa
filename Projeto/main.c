@@ -5,9 +5,9 @@
 #include <time.h>
 // #include <SDL2/SDL.h>
 #include "player.h"
-#include "mapa.h"
 #include "menuhud.h"
 #include "inimigo.h"
+#include "mapa.h"
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3
@@ -19,11 +19,11 @@ int comparehp(const void *a, const void *b)
 {
     Inimigo *inimigoA = (Inimigo *)a;
     Inimigo *inimigoB = (Inimigo *)b;
-  
+
     return (inimigoB->hp - inimigoA->hp);
 }
 
-void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio)
+/*void distância(int posicao_y_player, int posicao_x_player, int raio)
 {
     //Fazer uma parede de cada vez
     while (raio != 0)
@@ -48,7 +48,7 @@ void raio_a_volta(int posicao_y_player, int posicao_x_player, int raio)
 
         raio--;
     }
-}
+}*/
 
 int main(void)
 {
@@ -96,10 +96,10 @@ int main(void)
     startscreen(MaxX, MaxY, win);
     clear();
 
-    //inicializa coisas
+    // inicializa coisas
     Player jogador1;
 
-    jogo:
+jogo:
     // inicializa o jogador
     jogador1.coorX = 0;
     jogador1.coorY = 0;
@@ -125,7 +125,7 @@ int main(void)
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
 
-    while (jogador1.hp>0)
+    while (jogador1.hp > 0)
     {
         MaxX -= 25; // Faz com que o mapa tenha -25 casas que a win (25 casas para o hud )
 
@@ -157,30 +157,30 @@ int main(void)
         hudbox(MaxX, MaxY);
 
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
-        
-        while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp>=1)
+
+        while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
-            //eliminar inimigos do arrey
-            qsort(inimigo,qinimigo,sizeof(Inimigo), comparehp);
-            if (inimigo[qinimigo-1].hp<=0)
+            distancia(MaxY, MaxX, mapa, win, &jogador1);
+            // eliminar inimigos do arrey
+            qsort(inimigo, qinimigo, sizeof(Inimigo), comparehp);
+            if (inimigo[qinimigo - 1].hp <= 0)
             {
                 qinimigo--;
             }
-            
+
             // updates ao jogador
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
 
-
-            raio_a_volta(jogador1.coorY, jogador1.coorX, 9);
+            // raio_a_volta(jogador1.coorY, jogador1.coorX, 9);
 
             // bomba
             if ((tecla = getch()) == 'e')
             {
                 bomba(MaxY, MaxX, mapa, jogador1, MaxX);
             }
-            //dont mind me
-            else if(tecla == 'x')
+            // dont mind me
+            else if (tecla == 'x')
             {
                 jogador1.hp = 0;
             }
@@ -232,14 +232,13 @@ int main(void)
         clear();
         MaxX += 25;
         FLOOR -= 1;
-        
     }
     int quit = 0;
     while (quit != 'q')
     {
         quit = getch();
-        //Go again no jogo
-        if(quit == 'r' || quit == 'R')
+        // Go again no jogo
+        if (quit == 'r' || quit == 'R')
         {
             goto jogo;
         }
