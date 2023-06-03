@@ -201,7 +201,7 @@ jogo:  //label para podermos reiniciar o jogo numa eventual morte
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
     game_over_screen(MaxY, MaxX, win);
     refresh();
-    while ((quit=getchar())!='q')
+    while ((quit=getch())!='q')
     {
         
         if (intermitente % 2 == 0)
