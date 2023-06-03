@@ -24,7 +24,6 @@ int comparehp(const void *a, const void *b)
     return (inimigoB->hp - inimigoA->hp);
 }
 
-
 int main(void)
 {
     /*SDL_Init(SDL_INIT_AUDIO); // Inicia o som
@@ -82,8 +81,6 @@ jogo:
     jogador1.hp = 10;
     colorir(&jogador1);
 
-
-
     // Floors armazena o floor em que o jogador esta
     int FLOOR = 0;
 
@@ -122,7 +119,7 @@ jogo:
 
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
-            distancia(MaxY, MaxX, mapa,&jogador1);
+            distancia(MaxY, MaxX, mapa, &jogador1);
             // eliminar inimigos do arrey
             qsort(inimigo, qinimigo, sizeof(Inimigo), comparehp);
             if (inimigo[qinimigo - 1].hp <= 0)
@@ -133,7 +130,6 @@ jogo:
             // updates ao jogador
             updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
             colorir(&jogador1);
-
 
             // bomba
             if ((tecla = getch()) == 'e')
@@ -195,29 +191,29 @@ jogo:
         FLOOR -= 1;
     }
 
-    //end screen (retry)
+    // end screen (retry)
     clear();
+    noecho();
     int intermitente = 0;
-    int quit=0;
+    int quit = 0;
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
     game_over_screen(MaxY, MaxX, win);
     refresh();
-    while (quit!='q'||quit!='Q')
+    while ((quit=getchar())!='q')
     {
-        quit=getchar();
-        noecho();
+        
         if (intermitente % 2 == 0)
         {
-            mvprintw((MaxY/2)+10,MaxX/2-8,"PRESS Q TO QUIT");
-            mvprintw((MaxY/2)+12,MaxX/2-11,"PRESS R TO PLAY AGAIN");
+            mvprintw((MaxY / 2) + 10, MaxX / 2 - 8, "PRESS Q TO QUIT");
+            mvprintw((MaxY / 2) + 12, MaxX / 2 - 11, "PRESS R TO PLAY AGAIN");
         }
         else
         {
-            mvprintw((MaxY/2)+10,MaxX/2-9,"                                ");
-            mvprintw((MaxY/2)+12,MaxX/2-12,"                               ");
+            mvprintw((MaxY / 2) + 10, MaxX / 2 - 9, "                                ");
+            mvprintw((MaxY / 2) + 12, MaxX / 2 - 12, "                               ");
         }
         intermitente += 1;
-        if(quit=='r'||quit=='R')
+        if (quit == 'r' || quit == 'R')
         {
             goto jogo;
         }
