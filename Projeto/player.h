@@ -3,7 +3,7 @@
 #include "typedef.h"
 
 
-void spawn(Player *jogador, int MaxY, int MaxX, Mapa mapa);
+void spawn(Player *jogador, int MaxY, int MaxX, Mapa mapa[][MaxX]);
 void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo inimigo[], int maxinimigos);
 void colorir(Player *jogador);
 void inicializar_cor(void);
