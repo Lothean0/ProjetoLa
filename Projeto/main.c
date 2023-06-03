@@ -197,12 +197,12 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
     int quit = 0;
     wborder(win, '#', '#', '#', '#', '#', '#', '#', '#');
     game_over_screen(MaxY, MaxX, win);
+    noecho();
     refresh();
-    while (quit != 'q' || quit != 'Q')
+    while ((quit = getch()) != 'q')
     {
         refresh();
-        quit = getchar();
-        noecho();
+
         if (intermitente % 2 == 0)
         {
             mvprintw((MaxY / 2) + 10, MaxX / 2 - 8, "PRESS Q TO QUIT");
