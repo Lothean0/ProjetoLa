@@ -87,6 +87,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
 
     while (jogador1.hp > 0)
     {
+        int ciclos = 0;
         MaxX -= 25; // Faz com que o mapa tenha -25 casas que a win (25 casas para o hud )
 
         // geracao de mapa
@@ -154,9 +155,11 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             // Visao
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, inimigo, qinimigo);
             refresh();
+            if (ciclos % 3)
+            {
+                moveenimigos(inimigo, qinimigo, MaxY, MaxX, mapa, &jogador1);
+            }
 
-            moveenimigos(inimigo, qinimigo, MaxY, MaxX, mapa,&jogador1);
-            
             // print inimigo
             for (int i = 0; i < qinimigo; i++)
             {
@@ -187,6 +190,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                 }
             }
             refresh();
+            ciclos++;
         }
         clear();
         MaxX += 25;

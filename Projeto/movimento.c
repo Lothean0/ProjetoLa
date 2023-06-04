@@ -101,7 +101,7 @@ void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxY, int MaxX, Mapa mapa
 
         if (pontoprox.coorY == jogador->coorY && pontoprox.coorX == jogador->coorX)
         {
-            attack(jogador, &inimigo[i]);
+            attacki(jogador);
         }
         else
         {
@@ -141,7 +141,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
             if (inimigo[i].coorY == pTEMP.coorY && inimigo[i].coorX == pTEMP.coorX)
             {
                 move = 1;
-                attack(jogador, &inimigo[i]);
+                attack(&inimigo[i]);
             }
         }
         if (move == 0)

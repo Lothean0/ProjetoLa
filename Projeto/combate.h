@@ -2,6 +2,7 @@
 #define ___COMBATE___
 #include "typedef.h"
 
-void attack(Player *player, Inimigo *inimigo1);
+void attack(Inimigo *inimigo1);
+void attacki(Player *player);
 
 #endif
