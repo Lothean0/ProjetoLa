@@ -13,5 +13,4 @@ void attack(Inimigo *inimigo1, Player *player)
 void attacki(Player *player, int floor)
 {
     player->hp -= abs(floor) + 1;
-    // inimigo1->hp--;
 }
