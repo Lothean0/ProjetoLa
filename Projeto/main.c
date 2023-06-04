@@ -118,7 +118,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
-            //da update na distancia dos enimigos
+            // da update na distancia dos enimigos
             distancia(MaxY, MaxX, mapa, &jogador1);
 
             // eliminar inimigos do arrey
@@ -146,7 +146,6 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                 mudarstate(&jogador1, MaxX, tecla, mapa, inimigo, qinimigo);
             }
 
-
             // print player
             attron(jogador1.cor);
             mvaddch(jogador1.coorY, jogador1.coorX, '@' | A_BOLD);
@@ -156,6 +155,8 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, inimigo, qinimigo);
             refresh();
 
+            moveenimigos(inimigo, qinimigo, MaxY, MaxX, mapa,&jogador1);
+            
             // print inimigo
             for (int i = 0; i < qinimigo; i++)
             {
@@ -163,8 +164,6 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                 mvaddch(inimigo[i].coorY, inimigo[i].coorX, '%');
                 attroff(COLOR_PAIR(inimigo[i].cor));
             }
-
-            // colorirm(mapa[jogador1.coorY][jogador1.coorX]);
             bool print = true;
             for (int ys = 0; ys < MaxY; ys++)
             {
@@ -187,7 +186,6 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                     print = true;
                 }
             }
-            moveenimigos(inimigo, qinimigo, MaxY, MaxX, mapa);
             refresh();
         }
         clear();

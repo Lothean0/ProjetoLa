@@ -75,21 +75,22 @@ Vetor calcvetor(int tecla)
     return direcao;
 }
 
-void moveenimigos(Inimigo *inimigo, int qinimigo, int MaxY, int MaxX, Mapa mapa[][MaxX])
+void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador)
 {
-    for(int i=0; i<qinimigo; i++) //ciclo q passa por todos os inimigos vivos
+    for (int i = 0; i < qinimigo; i++) // ciclo q passa por todos os inimigos vivos
     {
-        Vetor pontoprox; //define um vetor temporario como a posiçao inicial
+        Vetor pontoprox; // define um vetor temporario como a posiçao inicial
         pontoprox.coorY = inimigo[i].coorY;
         pontoprox.coorX = inimigo[i].coorX;
-        for (int x=MaxX-1; x<=MaxX+1; x++)
+        for (int x = inimigo[i].coorX - 1; x <= inimigo[i].coorX + 1; x++)
         {
-            for(int y=MaxY-1; y<=MaxY+1; y++)
+            for (int y = inimigo[i].coorY - 1; y <= inimigo[i].coorY + 1; y++)
             {
                 char chartemp = mapa[y][x].character;
-                //compara posiçao mais proxima com as posiçoes á volta do player e encontra a maix prox
-                if(chartemp != '#' && chartemp != 'X' && chartemp != '%' && chartemp != '@'){
-                    if(mapa[y][x].distancia<=mapa[pontoprox.coorY][pontoprox.coorX].distancia)
+
+                if (chartemp != '#' && chartemp != 'X')
+                {
+                    if (mapa[y][x].distancia <= mapa[pontoprox.coorY][pontoprox.coorX].distancia)
                     {
                         pontoprox.coorY = y;
                         pontoprox.coorX = x;
@@ -97,12 +98,24 @@ void moveenimigos(Inimigo *inimigo, int qinimigo, int MaxY, int MaxX, Mapa mapa[
                 }
             }
         }
-        //muda a pos de cada inimigo para a mais proxima das 9 posiçoes
-        inimigo[i].coorY = pontoprox.coorY;
-        inimigo[i].coorX = pontoprox.coorX;
+
+        if (pontoprox.coorY == jogador->coorY && pontoprox.coorX == jogador->coorX)
+        {
+            attack(jogador, &inimigo[i]);
+        }
+        else
+        {
+            for (int j = 0; j < qinimigo; j++)
+            {
+                if (inimigo[j].coorX != pontoprox.coorX && inimigo[j].coorY != pontoprox.coorY)
+                { // muda a pos de cada inimigo para a mais proxima das 9 posiçoes
+                    inimigo[i].coorY = pontoprox.coorY;
+                    inimigo[i].coorX = pontoprox.coorX;
+                }
+            }
+        }
     }
 }
-
 
 // func que soma o vetor de ''calcvetor'' à posiçao do player depois de verificar se esta é valida
 void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo inimigo[], int maxinimigos)
