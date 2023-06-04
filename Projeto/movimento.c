@@ -105,14 +105,9 @@ void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxX, Mapa mapa[][MaxX], 
         }
         else
         {
-            for (int j = 0; j < qinimigo; j++)
-            {
-                if (inimigo[j].coorX != pontoprox.coorX && inimigo[j].coorY != pontoprox.coorY)
-                { // muda a pos de cada inimigo para a mais proxima das 9 posiçoes
-                    inimigo[i].coorY = pontoprox.coorY;
-                    inimigo[i].coorX = pontoprox.coorX;
-                }
-            }
+            // muda a pos de cada inimigo para a mais proxima das 9 posiçoes
+            inimigo[i].coorY = pontoprox.coorY;
+            inimigo[i].coorX = pontoprox.coorX;
         }
     }
 }
@@ -163,10 +158,6 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
 void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1)
 {
     int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY;
-
-    mapa[Ytemp][Xtemp].character = '0';
-    refresh();
-
     for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
     {
         for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)

@@ -151,7 +151,8 @@ void updatehud(int MaxX, int MaxY, Player jogador1, int FLOOR, WINDOW *win, int 
     mvwprintw(win, 3, MidHudX - 4, "JOGADOR 1");
     mvwprintw(win, 5, MidHudX - 7, "POS : ( %d , %d ) ", jogador1.coorX, jogador1.coorY);
     mvwprintw(win, 7, MidHudX - 4, "HP : ( %d ) ", jogador1.hp);
-    mvwprintw(win, 9, MidHudX - 6, "ENEMIES : ( %d ) ", qinimigos);
+    mvwprintw(win, 9, MidHudX - 4, "LV : ( %d ) ", jogador1.lv);
+    mvwprintw(win, 11, MidHudX - 6, "ENEMIES : ( %d ) ", qinimigos);
     mvwprintw(win, 25, MidHudX - 5, "FLOOR ( %d )  ", FLOOR);
 
     // COMANDOS / CONTROLOS
