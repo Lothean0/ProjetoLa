@@ -137,7 +137,7 @@ void hudbox(int MaxX, int MaxY)
 // Updates do hud #####
 // Posiçao base da box do hud é (HudY, HudX) Posiçao Max (MaxHudY, MaxHudX)
 
-void updatehud(int MaxX, int MaxY, Player jogador1, int FLOOR, WINDOW *win)
+void updatehud(int MaxX, int MaxY, Player jogador1, int FLOOR, WINDOW *win, int qinimigos)
 {
     // int HudY = 0; // posiçoes do hud (canto sup esquerdo)
     int HudX = MaxX + 1;
@@ -151,6 +151,7 @@ void updatehud(int MaxX, int MaxY, Player jogador1, int FLOOR, WINDOW *win)
     mvwprintw(win, 3, MidHudX - 4, "JOGADOR 1");
     mvwprintw(win, 5, MidHudX - 7, "POS : ( %d , %d ) ", jogador1.coorX, jogador1.coorY);
     mvwprintw(win, 7, MidHudX - 4, "HP : ( %d ) ", jogador1.hp);
+    mvwprintw(win, 9, MidHudX - 6, "ENEMIES : ( %d ) ", qinimigos);
     mvwprintw(win, 25, MidHudX - 5, "FLOOR ( %d )  ", FLOOR);
 
     // COMANDOS / CONTROLOS

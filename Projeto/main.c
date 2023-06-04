@@ -118,7 +118,9 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
         // ciclo while que corre enquanto a tecla q nao e premida ou enquanto estamos no mesmo floor
         while (mapa[jogador1.coorY][jogador1.coorX].character != 'X' && jogador1.hp >= 1)
         {
+            //da update na distancia dos enimigos
             distancia(MaxY, MaxX, mapa, &jogador1);
+
             // eliminar inimigos do arrey
             qsort(inimigo, qinimigo, sizeof(Inimigo), comparehp);
             if (inimigo[qinimigo - 1].hp <= 0)
@@ -128,7 +130,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             }
 
             // updates ao jogador
-            updatehud(MaxX, MaxY, jogador1, FLOOR, win); // HUD
+            updatehud(MaxX, MaxY, jogador1, FLOOR, win, qinimigo); // HUD
             colorir(&jogador1);
 
             if ((tecla = getch()) == 'e') // bomba
@@ -143,6 +145,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             {
                 mudarstate(&jogador1, MaxX, tecla, mapa, inimigo, qinimigo);
             }
+
 
             // print player
             attron(jogador1.cor);
@@ -184,6 +187,7 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                     print = true;
                 }
             }
+            moveenimigos(inimigo, qinimigo, MaxY, MaxX, mapa);
             refresh();
         }
         clear();
