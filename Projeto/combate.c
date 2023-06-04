@@ -4,14 +4,14 @@
 #include <math.h>
 #include "typedef.h"
 
-void attack(Inimigo *inimigo1)
+void attack(Inimigo *inimigo1, Player *player)
 {
-    //player->hp--;
-    inimigo1->hp--;
+
+    inimigo1->hp -= (player->lv + 1);
 }
 
-void attacki(Player *player)
+void attacki(Player *player, int floor)
 {
-    player->hp--;
-    //inimigo1->hp--;
+    player->hp -= abs(floor) + 1;
+    // inimigo1->hp--;
 }

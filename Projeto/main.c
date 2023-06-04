@@ -80,11 +80,12 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
     jogador1.coorY = 0;
     jogador1.hp = 10;
     jogador1.xp = 0;
+    jogador1.lv = 0;
     colorir(&jogador1);
 
     // FLOOR armazena o floor em que o jogador esta
     int FLOOR = 0;
-
+    int maxhp = 10;
     while (jogador1.hp > 0)
     {
         int ciclos = 0;
@@ -107,10 +108,9 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             inimigo[i].coorX = 0;
             inimigo[i].tipo = 0;
             inimigo[i].cor = Nao_Visivel;
-            inimigo[i].hp = 10;
+            inimigo[i].hp = abs(FLOOR)*2+10;
             spawnenimigo(&inimigo[i], MaxY, MaxX, mapa);
         }
-
         int tecla;
 
         // HUD
@@ -129,14 +129,19 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                 qinimigo--;
                 jogador1.xp += 5;
             }
-
+            if (jogador1.xp >= 20)
+            {
+                jogador1.lv++;
+                jogador1.xp -= 20;
+            }
+            maxhp = (jogador1.lv * 5) + 10;
             // updates ao jogador
             updatehud(MaxX, MaxY, jogador1, FLOOR, win, qinimigo); // HUD
             colorir(&jogador1);
 
             if ((tecla = getch()) == 'e') // bomba
             {
-                bomba(MaxY, MaxX, mapa, jogador1, MaxX);
+                bomba(MaxY, MaxX, mapa, jogador1);
             }
             else if (tecla == 'x') // dont mind me
             {
@@ -155,9 +160,9 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
             // Visao
             FOV(jogador1.coorY, jogador1.coorX, MaxY, MaxX, mapa, inimigo, qinimigo);
             refresh();
-            if (ciclos % 3)
+            if (ciclos % 3 == 0)
             {
-                moveenimigos(inimigo, qinimigo, MaxY, MaxX, mapa, &jogador1);
+                moveenimigos(inimigo, qinimigo, MaxX, mapa, &jogador1, FLOOR);
             }
 
             // print inimigo
@@ -190,6 +195,15 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
                 }
             }
             refresh();
+            if (ciclos % 10 == 0 && jogador1.hp <= maxhp)
+            {
+                jogador1.hp++;
+                if (jogador1.hp > maxhp)
+                {
+                    jogador1.hp = maxhp;
+                }
+            }
+
             ciclos++;
         }
         clear();

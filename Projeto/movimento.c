@@ -75,7 +75,7 @@ Vetor calcvetor(int tecla)
     return direcao;
 }
 
-void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador)
+void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxX, Mapa mapa[][MaxX], Player *jogador, int floor)
 {
     for (int i = 0; i < qinimigo; i++) // ciclo q passa por todos os inimigos vivos
     {
@@ -101,7 +101,7 @@ void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxY, int MaxX, Mapa mapa
 
         if (pontoprox.coorY == jogador->coorY && pontoprox.coorX == jogador->coorX)
         {
-            attacki(jogador);
+            attacki(jogador, floor);
         }
         else
         {
@@ -125,7 +125,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
     Vetor direcao = calcvetor(tecla);
 
     // define pTEMP como o "bloco" para onde o player quer ir
-    Player pTEMP = {0, 0, 0, 0, 0};
+    Player pTEMP = {0, 0, 0, 0, 0, 0};
     pTEMP.coorX = (jogador->coorX) + (direcao.coorX);
     pTEMP.coorY = (jogador->coorY) + (direcao.coorY);
 
@@ -141,7 +141,7 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
             if (inimigo[i].coorY == pTEMP.coorY && inimigo[i].coorX == pTEMP.coorX)
             {
                 move = 1;
-                attack(&inimigo[i]);
+                attack(&inimigo[i], jogador);
             }
         }
         if (move == 0)
@@ -160,22 +160,13 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
         break;
     }
 }
-void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
+void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1)
 {
-    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY /*, timerB = 0*/;
+    int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY;
 
     mapa[Ytemp][Xtemp].character = '0';
     refresh();
 
-    /* timer da explosão
-    while (timerB < 5)
-    {
-        timerB++;
-        mvprintw(8, HudX + 7, "timerB=%d", timerB);
-
-         Explosão
-        if (timerB == 5)
-        {*/
     for (int ys = Ytemp - 1; ys <= Ytemp + 1; ys++)
     {
         for (int xs = Xtemp - 1; xs <= Xtemp + 1; xs++)
@@ -186,6 +177,4 @@ void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1, int HudX)
             }
         }
     }
-    //}
-    //}
 }

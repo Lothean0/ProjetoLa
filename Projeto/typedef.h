@@ -7,6 +7,7 @@ typedef struct player
     int cor;
     int hp;
     int xp;
+    int lv;
 } Player;
 #endif
 

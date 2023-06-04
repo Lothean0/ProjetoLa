@@ -3,5 +3,5 @@
 #include "typedef.h"
 
 void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX, Mapa mapa[][MaxX]);
-void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador);
+void moveenimigos(Inimigo inimigo[], int qinimigo, int MaxX, Mapa mapa[][MaxX], Player *jogador, int floor);
 #endif
