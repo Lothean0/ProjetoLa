@@ -163,6 +163,8 @@ void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
     }
 }
 
+// calcular a distancia de acordo com a norma
+
 void distancia(int MaxY, int MaxX, Mapa mapa[][MaxX], Player *jogador)
 {
     for (int ys = 0; ys < MaxY; ys++)
