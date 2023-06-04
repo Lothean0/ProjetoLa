@@ -106,7 +106,6 @@ jogo: // label para podermos reiniciar o jogo numa eventual morte
         {
             inimigo[i].coorY = 0;
             inimigo[i].coorX = 0;
-            inimigo[i].tipo = 0;
             inimigo[i].cor = Nao_Visivel;
             inimigo[i].hp = abs(FLOOR)*2+10;
             spawnenimigo(&inimigo[i], MaxY, MaxX, mapa);
