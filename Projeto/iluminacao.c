@@ -5,11 +5,12 @@
 #include <stdio.h>
 #include "typedef.h"
 
-// o ncurses usa ints para fazer pares de cores lolmao
+// o ncurses usa ints para fazer pares de cores
 #define Visivel 1
 #define Nao_Visivel 2
 #define Visto 3
 
+//funcao auxiliar para inicializar as nossas cores
 void inicializar_cor(void)
 {
     start_color();
@@ -20,6 +21,7 @@ void inicializar_cor(void)
     init_pair(5, COLOR_RED, COLOR_BLACK);
 }
 
+//funcao para colorir o jogador com uma cor diferente
 void colorir(Player *jogador)
 {
     jogador->cor = COLOR_PAIR(4);
@@ -40,6 +42,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
             }
             else
             {
+                //os inteiros que dao a distancia em y,x e no total
                 int dy = j - player_y;
                 int dx = i - player_x;
                 int distancia = dx * dx + dy * dy;
@@ -48,6 +51,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                 {
                     mapa[j][i].cor = Visto;
                 }
+                //ver se os inimigos sao visiveis e marcar se sao e marcar como ja vistos tambem 
                 for (int k = 0; k < qinimigos; k++)
                 {
                     if (inimigo[i].cor == 5)
@@ -74,6 +78,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                         int verY = (int)origem_y;
                         int verX = (int)origem_x;
 
+                        //loop para marcar os inimigos como visiveis. como eles n fazem parte do mapa, temos de ter um loop separado
                         for (int i = 0; i < qinimigos; i++)
                         {
                             if (inimigo[i].coorX == verX && inimigo[i].coorY == verY)
@@ -81,7 +86,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                                 inimigo[i].cor = 5;
                             }
                         }
-                        // se encontrarmos uma parede, marcamos esse local como nao visivel
+                        // se encontrarmos uma parede, marcamos esse local como nao visivel e interrompemos o raio de visao(marcamos tudo depois dessa parede como sombra)
                         if (mapa[verY][verX].character == '#')
                         {
                             mapa[verY][verX].cor = Visivel;
@@ -89,6 +94,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                         }
                         else
                         {
+                            //se nao tiver parede marcar como visivel e continuar o raio
                             mapa[verY][verX].cor = Visivel;
                         }
 
@@ -107,5 +113,6 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
             }
         }
     }
+    //atualizar a screen
     refresh();
 }
