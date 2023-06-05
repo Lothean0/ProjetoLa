@@ -45,7 +45,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                 //os inteiros que dao a distancia em y,x e no total
                 int dy = j - player_y;
                 int dx = i - player_x;
-                int distancia = dx * dx + dy * dy;
+                //int distancia = dx * dx + dy * dy;
 
                 if (mapa[j][i].cor == Visivel)
                 {
@@ -61,7 +61,7 @@ void FOV(int player_y, int player_x, int MaxY, int MaxX, Mapa mapa[][MaxX], Inim
                 }
 
                 // verificar se a distancia calculada esta dentro do nosso raio de visao
-                if (distancia <= raio * raio)
+                if (mapa[dy][dx].distancia <= raio * raio)
                 {
                     // encontrar o angulo entre a celula e o jogador. a conta dentro de atan2 e o arctangente do angulo, e o atan2 calcula assim o angulo
                     // talvez possamos usar outra maneira para calcular o angulo, com o arcsen ou o arccos
