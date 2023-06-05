@@ -26,6 +26,7 @@ void spawn(Player *jogador, int MaxY, int MaxX, Mapa mapa[][MaxX])
         jogador->coorX = rand() % MaxX;
     }
 }
+
 void spawnenimigo(Inimigo *inimigo, int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     while (mapa[inimigo->coorY][inimigo->coorX].character == '#' || mapa[inimigo->coorY][inimigo->coorX].character == 'X' || mapa[inimigo->coorY][inimigo->coorX].character == '@' || mapa[inimigo->coorY][inimigo->coorX].character == '%')
@@ -142,6 +143,7 @@ void denoiser(int MaxY, int MaxX, Mapa mapa[][MaxX])
     }
 }
 
+//gera os X pra mudar de Floor
 void gerahole(int MaxY, int MaxX, Mapa mapa[][MaxX])
 {
     int posx = 0;

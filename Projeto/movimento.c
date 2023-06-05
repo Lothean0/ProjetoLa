@@ -155,6 +155,8 @@ void mudarstate(Player *jogador, int MaxX, int tecla, Mapa mapa[][MaxX], Inimigo
         break;
     }
 }
+
+//coloca '.' no arrey do mapa num 3x3 á volta do player
 void bomba(int MaxY, int MaxX, Mapa mapa[][MaxX], Player jogador1)
 {
     int Xtemp = jogador1.coorX, Ytemp = jogador1.coorY;
